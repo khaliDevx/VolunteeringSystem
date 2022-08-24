@@ -1,0 +1,30 @@
+
+
+
+    <% @problems.each do |problem| %>
+         <% if (problem.image.attached?) %>
+            <%=image_tag(url_for(problem.image))%>
+            <% else %>
+              <p>no image</p>
+          <% end %>
+        <%= form_for(accept_path) do |f| %>
+                    <br>
+                    <%= f.label :required_volunteer, "Required_volunteer" %>
+                    <%= f.number_field (:required_volunteer) %>
+                    <br>
+                     <%= hidden_field_tag(:problem_id, params[:problem_id],value:problem.id) %>
+                <%=f.fields_for(@billOfMaterial) do |b|%>
+                    <%=b.label :cost, "Cost" %>
+                    <%= number_field_tag(:cost, params[:cost]) %>
+                    <%=b.label :quantity, "Quantity"%>
+                    <%=number_field_tag(:quantity, params[:quantity])%>
+                     <label > Category </label>
+                    <%= collection_select(:material, :category_id, Category.all, :id, :name ,class: "form-control")  %>
+                    <br>
+                    <label>Material</label>
+                    <%= collection_select(:bill_of_material, :material_id, Material.all, :id, :name ,class: "form-control")  %>
+              <%end%>
+                <button class="btn btn-primary d-block btn-user w-100" type="submit">Accept</button>
+            </div>
+        <% end %>
+    <% end %>

@@ -1,0 +1,176 @@
+*{
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+    }
+    .body{
+	display: flex;
+    flex-flow: column nowrap;
+
+    }
+    .container{
+	display: flex;
+    flex-flow: column nowrap;
+	// justify-content: center;
+	// align-items: center;
+	// align-items: center;
+    // padding: 20px;
+    // background-color: cornflowerblue;
+    }
+    .container-form{
+    display: flex;
+    flex-flow: column nowrap;
+	  align-items: flex-start;
+    padding: 40px;
+    width: 500px;
+    height: auto;
+    border-radius: 10px;
+    background-color: #fff;
+    }
+    #frame{
+    border-radius: 10px;
+    margin-left: -15px;
+    margin-right: 20px;
+    }
+    .custom-file{
+    width: 250px;
+    margin-left: 0px;
+    }
+    .choosephoto{
+    display: flex;
+	align-items: center;
+	flex-flow: row nowrap;
+	justify-content: space-between;
+    width: 300px;
+    height: auto;
+    margin-bottom: 40px;
+    }
+    .issueInfo{
+    height: auto;
+    background-color: #fff;
+
+    }
+    .issueInfoParts{
+    display: flex;
+	flex-flow: row nowrap;
+	justify-content: space-between;
+    margin-bottom: 20px;
+    width: auto;
+    }
+    .issueInfoParts label{
+    margin-right: 20px;
+    }
+    .issueInfoParts select{
+    width: 300px;
+    }
+    .result{
+    border: none;
+    border-radius: 5px;
+    height: 40px;
+    width: 200px;
+    color: rgb(22, 22, 22);
+    background-color: #999;
+    text-align: center;
+    }
+    .btn2{
+    border: none;
+    border-radius: 3px;
+    outline: none;
+    color: rgb(22, 22, 22);
+    height: 40px;
+    width: 130px;
+    background-color: #999;
+    }
+    .h2{
+        color: red;
+        font-size: 15px;
+    }
+
+    .add-new{
+        margin: 10px;
+        padding: 10px;
+        border: none;
+        background-color: rgba(241, 241, 241, 0.39);
+        border-radius: 5px;
+        color: #333;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        width: 65%;
+    }
+    .add-container{
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: center;
+        justify-self: start;
+    }
+    .add-new-btn{
+        width: auto;
+        height: auto;
+        margin: 10px;
+        padding: 5px;
+        float: right;
+        width: 20%;
+    }
+    .add-new-input{
+        width: 75%;
+        height: 35px;
+        float: left;
+        border-radius: 5px;
+        border: 0.5px #ddd solid;
+    }
+    .input-btn-add{
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: center;
+        overflow: hidden;
+        width: 60%;
+        height: auto;
+        float: right;
+    }
+    .add-material-city{
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-between;
+        align-items: center;
+        justify-items: center;
+        width: 100%;
+        height: auto;
+    }
+    .add-material-city label{
+        padding-top: 5px;
+        margin-left: 30px;
+    }
+    .add-governorate-category{
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-around;
+        align-items: center;
+        width: 100%;
+        height: auto;
+        margin: 15px;
+    }
+    .add-governorate-category label{
+        padding-top: 5px;
+        margin-right: 50px;
+    }
+    .select-governorate-category label{
+        padding-top: 5px;
+        margin-right: 50px;
+    }
+    .select-governorate-category select{
+        width: 60%;
+        height: 35px;
+        float: right;
+        border-radius: 5px;
+        border: 0.5px #ddd solid;
+    }
+    .select-governorate-category{
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-around;
+        align-items: center;
+        width: 100%;
+        height: auto;
+        margin: 15px;
+    }
+
+

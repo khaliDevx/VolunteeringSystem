@@ -1,0 +1,2 @@
+class JoinIssue < ApplicationRecord
+end

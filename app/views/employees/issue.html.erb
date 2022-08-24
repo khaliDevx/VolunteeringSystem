@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<body id="page-top"class=body>
+    <div id="wrapper">
+       
+        <div class="d-flex flex-column" id="content-wrapper">
+            <%# <div id="content"> %>
+                    <div class="container-fluid">
+                
+                <div class="container-fluid">
+                    <div class="d-sm-flex justify-content-between align-items-center mb-4">
+                        <h3 class="text-dark mb-0">Dashboard</h3>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <h1>Issues</h1>
+                            
+                            
+                            
+                            <div class="container">
+
+                                <div class="row">
+                            
+                                        
+                                <% @problems.each do |problem| %>
+
+
+                                    <form action=/pass method=post class="col-md-4" >
+
+                                        <input type='hidden' name='authenticity_token' value="<%= form_authenticity_token%>">
+                                        <div class="blog-card blog-card-blog">
+                                            <div class="blog-card-image">
+                                                <a href="#">  
+                                                    <% if (problem.image.attached?) %>
+                                                       <%=image_tag(url_for(problem.image))%>
+                                                       <% else %>
+                                                         <p>no image</p>
+                                                    <% end %> </a>
+                                                <div class="ripple-cont"></div>
+                                            </div>
+                                            <div class="blog-table">
+                                                <h6 class="blog-category blog-text-success">
+                                                    <%@cat=Category.where(:id=>problem.category_id)%>
+
+                                                        <% @cat.each do |cat| %> 
+                                                            <i class="far fa-newspaper"></i> <%=cat.name%>
+                                                        <% end %>   
+                                                </h6>
+                                                <div>
+                                                    <h4 class="blog-card-caption">Location:</h4>
+                                                    <div>
+                                                        <span>Governorate:</span>
+                                                        <%@city=City.where(:id=>problem.city_id)%>
+                                                        <% @city.each do |city| %>
+                                                             <%@gover=Governorate.where(:id=>city.governorate_id)%>
+                                                             <% @gover.each do |gover| %>
+                                                             <span><%=gover.name%></span>
+                                                             <%end%>
+                                                        <% end %>
+                                                    </div>
+                                                    <div>
+                                                        <span>City:</span>
+                                                        <% @city.each do |city| %>
+                                                            <span><%=city.name%></span>
+                                                        <%end%>
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <h4 class="blog-card-caption">Description</h4>
+                                                    <p class="blog-card-description">
+                                                        <%=problem.desciption %>
+                                                    </p>
+                                                </div>
+                                                <div>
+                                                    <h4 class="blog-card-caption">Submitted by:</h4>
+                                                    <div>
+                                                        <span>user:</span>
+                                                        <%@user=User.where(:id=>problem.user_id)%>
+                                                        
+                                                        <% @user.each do |user| %>
+                                                            <%x=user.first_name%>
+                                                            <%y=user.last_name%>
+                                                            <span > <%= link_to "#{x} #{y}", :class=>"link-dark" %></span>
+                                                        <% end %>
+                                                        
+                                                    </div>
+                                                </div>
+                                                <input type='hidden' name='pass[id]'value="<%=problem.id%>">
+                                                <input type='hidden' name='pass[status]'value="pass">
+                                                <input type=submit value=Pass class="btn btn-primary d-block btn-user w-100">
+                                                <br>
+                                                <%= link_to 'Destroy', problem, method: :delete, data: { confirm: 'Are you sure?' },class:"btn btn-danger d-block btn-user w-100" %>
+                                            </div>
+
+                                        </div>
+                                    </form>
+
+                                <%end%>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          
+        </div>
+        <a class="border rounded d-inline scroll-to-top" href="" style="margin-right: 60px;">
+            <i class="fas fa-angle-up"></i>
+        </a>
+        <a  class="border rounded d-inline scroll-to-top"href="/submit_issue">
+        <button class="btn btn-primary add-issue fa fa-plus" type="button" data-toggle="modal" data-target="#submit_issue" ></button>
+        </a>
+    </div>
+    
+    <div id="submit_issue" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+      
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Modal Header</h4>
+            </div>
+            <div class="modal-body">
+              <p>Some text in the modal.</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+      
+        </div>
+    </div>
+   
+</body>
+
+</html>

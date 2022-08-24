@@ -1,0 +1,23 @@
+{
+    "short_name": "FixIt",
+    "name": "Management of voluntary fixing system",
+    "icons": [
+        {
+            "src": "/assets/img/fixit.jpg",
+            "type": "image/jpeg",
+            "sizes": "736x552",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "/assets/img/fixit.jpg",
+            "type": "image/jpeg",
+            "sizes": "736x552",
+            "purpose": "any maskable"
+        }
+    ],
+    "start_url": "login.html",
+    "background_color": "#2eb8e6",
+    "theme_color": "#2eb8e6",
+    "display": "fullscreen",
+    "orientation": "portrait"
+}

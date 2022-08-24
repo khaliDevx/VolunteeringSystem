@@ -1,0 +1,300 @@
+body {
+	background-color: #fafafa;
+	padding: 60px;
+	font-family: 'Droid Sans', sans-serif;
+}
+
+a {
+	text-decoration: none;
+}
+
+.instagram-card span {
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.instagram-card {
+	background: #ffffff;
+	border: 1px solid #cacaca;
+	border-radius: 12px;
+	width: 100%;
+	max-width: 600px;
+	margin: auto;
+}
+
+.intagram-card-image {
+	position: relative;
+	width: auto;
+	height: auto;
+}
+
+.intagram-card-image img {
+	width: 100%;
+	height: auto;
+}
+
+.instagram-card-header {
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: space-between;
+	align-items: center;
+	padding: 0 0 15px 0;
+	margin-bottom: 5px;
+	border-bottom: 0.3px solid #a0a0a0;
+	height: 50px;
+}
+
+.instagram-card-user-image {
+	border-radius: 50%;
+	width: 40px;
+	height: 40px;
+	vertical-align: middle;
+}
+
+.instagram-card-time {
+	float: right;
+	width: 80px;
+	padding-top: 10px;
+	text-align: right;
+	color: #999;
+}
+
+.instagram-card-user-name {
+	margin-left: 10px;
+	font-weight: bold;
+	color: #262626;
+}
+
+.instagram-card-content {
+	padding: 20px;
+}
+
+.likes {
+	font-weight: bold;
+}
+
+.instagram-card-content-user {
+	font-weight: bold;
+	color: #262626;
+}
+
+.hashtag {
+	color: #003569;
+}
+
+.comments {
+	color: #999;
+}
+
+.user-comment {
+	color: #003569;
+}
+
+.instagram-card-footer {
+	padding: 0;
+	display: flex;
+	align-items: center;
+}
+
+hr {
+	border: none;
+	border-bottom: 1px solid #ccc;
+	margin-top: 30px;
+	margin-bottom: 0px;
+
+}
+
+.footer-action-icons {
+	font-size: 16px;
+	color: #ccc;
+}
+
+.comments-input {
+	border: none;
+	outline: none;
+	margin-left: 10px;
+	width: 100%;
+}
+
+.blog-card-blog .blog-card-caption {
+	margin-top: 5px
+}
+
+.blog-card-caption {
+	font-weight: 500;
+	font-size: 1.6em;
+	font-family: "Roboto Slab", "Times New Roman", serif
+}
+
+.blog-card-caption, .blog-card-caption a {
+	color: #333;
+	text-decoration: none
+}
+
+.blog-category {
+	position: relative;
+	line-height: 0;
+	margin: 15px 0
+}
+
+.blog-card-description {
+	color: #444;
+	font: 0.9em sans-serif;
+}
+
+.blog-text-success {
+	color: #6f6f6f !important
+}
+
+.blog-table {
+	margin-bottom: 0;
+	padding: 20px;
+}
+
+.issue_info_parts {
+	margin-bottom: 20px;
+}
+
+.post_cmt {
+	border-style: none !important;
+}
+
+#view_cmt {
+	outline: none;
+	border: none;
+	color: #7f7f7f;
+	font-size: 0.8em;
+	background: none;
+	margin: 0 0 3px 0;
+}
+
+.issue_date {
+	padding-left: 4px;
+	color: #7f7f7f;
+	font-size: 0.7em;
+	margin: 0;
+}
+
+.three-dots {
+	padding-right: 10px;
+	outline: none;
+	border: none;
+	background: none;
+}
+
+/* The Modal (background) */
+.modal {
+	display: none;
+	/* Hidden by default */
+	position: fixed;
+	/* Stay in place */
+	z-index: 1;
+	/* Sit on top */
+	padding-top: 100px;
+	/* Location of the box */
+	left: 0;
+	top: 0;
+	width: auto;
+	/* Full width */
+	height: auto;
+	/* Full height */
+	overflow: auto;
+	/* Enable scroll if needed */
+	background-color: rgb(0, 0, 0);
+	/* Fallback color */
+	background-color: rgba(0, 0, 0, 0.4);
+	/* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+	width: 280px !important;
+}
+.modal-content2 {
+	width: 600px !important;
+}
+.modal-style{
+	position: relative;
+	display: flex;
+	flex-flow: column nowrap;
+	align-items: center;
+	justify-content: center;
+	justify-items: center;
+	background-color: #fefefe;
+	margin: auto;
+	padding: 0;
+	border: 1px solid #888;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	-webkit-animation-name: animatetop;
+	-webkit-animation-duration: 0.4s;
+	animation-name: animatetop;
+	animation-duration: 0.4s
+}
+
+/* Add Animation */
+@-webkit-keyframes animatetop {
+	from {
+		top: -300px;
+		opacity: 0
+	}
+
+	to {
+		top: 0;
+		opacity: 1
+	}
+}
+
+@keyframes animatetop {
+	from {
+		top: -300px;
+		opacity: 0
+	}
+
+	to {
+		top: 0;
+		opacity: 1
+	}
+}
+
+.modal-body {
+	padding: 2px 16px;
+	display: flex;
+	flex-flow: column nowrap;
+	/* align-items: center; */
+	/* justify-content: center;
+	justify-items: center; */
+	width: 100%;
+	height: auto;
+	border-radius: 8px;
+}
+
+.menu {
+	outline: none;
+	border: none;
+	background: none;
+	border-bottom: 0.3px solid #6f6f6f;
+	margin-bottom: 0.5px;
+	padding: 6px;
+	width: 100%;
+}
+.comments-card{
+	display: flex;
+	flex-flow: column nowrap;
+	margin: 0;
+	width: 100%;
+	height: auto;
+	border-radius: 8px;
+}
+.cmt{
+	display: flex;
+	flex-flow: row nowrap;
+	align-items: center;
+	padding: 0;
+	margin: 5px 0 5px 0;
+}
+.users-comments{
+	display: flex;
+	flex-flow: column nowrap;
+	justify-content: left;
+	width: 100%;
+	height: 350px;
+}

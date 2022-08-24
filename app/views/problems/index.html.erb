@@ -1,0 +1,73 @@
+
+<p id="notice"><%= notice %></p>
+<%= link_to  "log out", "log_out" %>
+<%= form_tag problems_path, :method =>'get' do%>
+ <%@gover=Governorate.all%>
+  <%# <%=text_field_tag :search, params[:search]%> %>
+  
+      
+  
+  
+  <% @gover.each do |go| %>
+    
+    <% end %>
+    
+  
+<%# <%= select_tag :search,   options_from_collection_for_select(Governorate.all.order(:name), :id, :name, params[:search]), id: "different_option_value_html", onchange: "this.form.submit();", include_blank: "Which status ?"%> %>
+
+
+  <%= submit_tag "Search"%>
+<%end%>
+
+<h1><%=@x%></h1>
+
+<%= form_tag problems_path, :method =>'get' do%>
+    <%=text_field_tag :first_name, params[:search], class:" form-control-sm", placeholder:"Search"%>
+    <%= select_tag :id,   options_from_collection_for_select(Governorate.all.order(:name), :id, :name, params[:id]), id: "different_option_value_html", onchange: "this.form.submit();", include_blank: "Which status ?"%>
+    <%= submit_tag "city"%>
+<%end%>
+<select>
+
+<% @city.each do |c| %>
+<option>
+  <%=c.name%>
+
+</option>
+<% end %>
+</select>
+<h1>Problems</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+  
+    <% @problems.each do |problem| %>
+      <tr>
+      <td>
+          <%= problem.desciption%>
+      </td>
+      <td>
+      <% if (problem.image.attached?) %>
+        <%=image_tag(url_for(problem.image))%>
+        <% else %>
+          <p>no image</p>
+      <% end %>
+     
+      </td>
+      
+        <td><%= link_to 'Show', problem %></td>
+        <td><%= link_to 'Edit', edit_problem_path(problem) %></td>
+        <td><%= link_to 'Destroy', problem, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Problem', new_problem_path %>

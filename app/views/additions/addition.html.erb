@@ -1,0 +1,72 @@
+
+ <%= stylesheet_link_tag 'submit_issue'%>
+
+<body>
+    <div class="add-container">
+        <form action=/gover method=POST class="border container-form add-new">
+            <input type='hidden' name='authenticity_token' value="<%= form_authenticity_token%>">
+            <div class="add-governorate-category">
+                <label>Add new Governorate</label>
+                <div class="input-btn-add">
+                    <input class="add-new-input" type=text name=gover[name]>
+                    <input class="btn btn-primary add-new-btn" type=submit>
+                </div>
+            </div>
+        </form>
+        <form action=/city method=POST class="border container-form add-new">
+            <input type='hidden' name='authenticity_token' value="<%= form_authenticity_token%>">
+            <div class="select-governorate-category">
+                <label>Select Governorate</label>
+                <select class = "form-select" name=city[governorate_id]>
+                    <option ></option>
+                    <% @gover.each do |go| %>
+                        <option value=<%=go.id%>><%=go.name%></option>
+                    <% end %>
+                </select>
+            </div>
+
+            <div class="add-material-city">
+                <label>Add City</label>
+                <div class="input-btn-add">
+                    <input class="add-new-input" type=text name=city[name]>
+                    <input class="btn btn-primary add-new-btn" type=submit>
+                </div>
+            </div>
+
+        </form>
+    </div>
+     <div class="add-container">
+        <form action=/cat method=POST class="border container-form add-new">
+            <input type='hidden' name='authenticity_token' value="<%= form_authenticity_token%>">
+            <div class = "add-governorate-category">
+                <label>Add new category</label>
+                <div class="input-btn-add">
+                    <input class ="add-new-input" type=text name=cat[name]>
+                    <input class="btn btn-primary add-new-btn" type=submit>
+                </div>
+            </div>
+        </form>
+
+        <form action=/mat method=POST class="border container-form add-new">
+            <input type='hidden' name='authenticity_token' value="<%= form_authenticity_token%>">
+            <div class="select-governorate-category">
+                <label>Select Category</label>
+                <select  class = "form-select" name=mat[category_id]>
+                    <option></option>
+                    <% @cat.each do |cat| %>
+                        <option value=<%=cat.id%>><%=cat.name%></option>
+                    <% end %>
+                </select>
+            </div>
+
+            <div class = "add-material-city">
+                <label>Add Material</label>
+                <div class="input-btn-add">
+                    <input class="add-new-input" type=text name=mat[name]>
+                    <input class="btn btn-primary add-new-btn" type=submit>
+                </div>
+            </div>
+
+        </form>
+    </div>
+<body>

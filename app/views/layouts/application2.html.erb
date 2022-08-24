@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html>
+  <head>
+     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>FixIt</title>
+
+    <meta name="theme-color" content="#2eb8e6">
+    <img rel="icon" type="image/jpeg" sizes="736x552" href="assets/img/fixit.jpg">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet"href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
+    <link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css">
+    <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/fonts/fontawesome5-overrides.min.css">
+    <link rel="stylesheet" href="assets/css/styles.min.css">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body class=body>
+    <div id="wrapper">
+        <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0">
+            <div class="container-fluid d-flex flex-column p-0">
+                <a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
+                    <div class="sidebar-brand-icon rotate-n-15">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <div class="sidebar-brand-text mx-3">
+                        <span>FixIt</span>
+                    </div>
+                </a>
+                <hr class="sidebar-divider my-0">
+                <ul class="navbar-nav text-light" id="accordionSidebar">
+                <%us=User.where(:id=>session[:user_id],:user_type=>"Employee")%>
+                <%if us.present?%>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/issue">
+                            <i class="fas fa-tachometer-alt"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <%else%>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="index">
+                            <i class="fas fa-tachometer-alt"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <%end%>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/profile">
+                            <i class="fas fa-user"></i>
+                            <span>Profile</span>
+                        </a>
+                    </li>
+                    <%@employee= User.where(:id=>session[:user_id],:user_type=>"Employee")%>
+                    <%if @employee.present?%>
+                        <li class="nav-item">
+                            <a class="nav-link" href="users">
+                                <i class="fas fa-table"></i>
+                                <span>Users</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="new_user">
+                                <i class="fas fa-user-circle"></i>
+                                <span>Register</span>
+                            </a>
+                        </li>
+
+
+                         <li class="nav-item"> <a class="nav-link" href="/addition">
+                    <i class="fas fa-plus "></i><span>ِAdditions</span>
+                        </a>
+                    </li>
+                     <li class="nav-item">
+                            <a class="nav-link" href="/issue">
+                                <i class="fas fa-camera"></i>
+                                <span>Submitted_issues</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/index">
+                                <i class="fas fa-camera"></i>
+                                <span>Passed_issues</span>
+                            </a>
+                        </li>
+                    <%end%>
+                    <li class="nav-item">
+                            <a class="nav-link" href="/confirmed_issue">
+                                <i class="fas fa-camera"></i>
+                                <span>Confirmed_issues</span>
+                            </a>
+                    </li>
+                    <li class="nav-item">
+                            <a class="nav-link" href="/accept_status">
+                                <i class="fas fa-camera"></i>
+                                <span>Accepted_issues</span>
+                            </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/help">
+                            <i class="fas fa-question-circle "></i>
+                            <span>Help</span>
+                        </a>
+                    </li>
+                </ul>
+                <div class="text-center d-none d-md-inline">
+                    <button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button>
+                </div>
+            </div>
+        </nav>
+        <div class="d-flex flex-column" id="content-wrapper">
+            <div id="content">
+                <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top">
+                    <div class="container-fluid">
+                        <button class="btn btn-link d-md-none rounded-circle me-3" id="sidebarToggleTop" type="button">
+                            <i class="fas fa-bars"></i>
+                        </button>
+                        <form class="d-none d-sm-inline-block me-auto ms-md-3 my-2 my-md-0 mw-100 navbar-search">
+                            <div class="input-group">
+                                <input class="bg-light form-control border-0 small" type="text"
+                                    placeholder="Search for ...">
+                                <button class="btn btn-primary py-0" type="button">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </form>
+                        <ul class="navbar-nav flex-nowrap ms-auto">
+                            <li class="nav-item dropdown d-sm-none no-arrow">
+                                <a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown"
+                                    href="#">
+                                    <i class="fas fa-search"></i>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-end p-3 animated--grow-in"
+                                    aria-labelledby="searchDropdown">
+                                    <form class="me-auto navbar-search w-100">
+                                        <div class="input-group">
+                                            <input class="bg-light form-control border-0 small" type="text"
+                                                placeholder="Search for ...">
+                                            <div class="input-group-append">
+                                                <button class="btn btn-primary py-0" type="button">
+                                                    <i class="fas fa-search"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown no-arrow mx-1">
+                                <div class="nav-item dropdown no-arrow">
+                                    <a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown"
+                                        href="#">
+                                        <span class="badge bg-danger badge-counter"></span>
+                                        <i class="fas fa-bell fa-fw"></i>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-end dropdown-list animated--grow-in">
+                                        <h6 class="dropdown-header">alerts center</h6>
+                                        <a class="dropdown-item d-flex align-items-center" href="#">
+                                            <div class="me-3">
+                                                <div class="bg-primary icon-circle">
+                                                    <i class="fas fa-file-alt text-white"></i>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <span class="small text-gray-500">December 12, 2021</span>
+                                                <p>A new monthly report is ready to download!</p>
+                                            </div>
+                                        </a>
+                                        <a class="dropdown-item d-flex align-items-center" href="#">7
+                                            <div class="me-3">
+                                                <div class="bg-success icon-circle">
+                                                    <i class="fas fa-donate text-white"></i>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <span class="small text-gray-500">December 7, 2021</span>
+                                                <p>$290.29 has been spent to support some issues!</p>
+                                            </div>
+                                        </a>
+                                        <a class="dropdown-item d-flex align-items-center" href="#">
+                                            <div class="me-3">
+                                                <div class="bg-warning icon-circle">
+                                                    <i class="fas fa-exclamation-triangle text-white"></i>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <span class="small text-gray-500">December 2, 2021</span>
+                                                <p>there are 3 new support requests</p>
+                                            </div>
+                                        </a>
+                                        <a class="dropdown-item text-center small text-gray-500" href="#">Show All
+                                            Alerts</a>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown no-arrow mx-1">
+                                <div class="nav-item dropdown no-arrow">
+                                    <a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown"
+                                        href="#">
+                                        <span class="badge bg-danger badge-counter"></span>
+                                        <i class="fas fa-envelope fa-fw"></i>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-end dropdown-list animated--grow-in">
+                                        <h6 class="dropdown-header">alerts center</h6>
+                                        <a class="dropdown-item d-flex align-items-center" href="#">
+                                            <div class="dropdown-list-image me-3">
+                                                <img class="rounded-circle" src="assets/img/avatars/avatar4.jpeg">
+                                                <div class="bg-success status-indicator"></div>
+                                            </div>
+                                            <div class="fw-bold">
+                                                <div class="text-truncate">
+                                                    <span>Hi there! I am wondering if you can help me with a problem
+                                                        I've been having.</span>
+                                                </div>
+                                                <p class="small text-gray-500 mb-0">S. Omer Salem - 58m</p>
+                                            </div>
+                                        </a>
+                                        <a class="dropdown-item d-flex align-items-center" href="#">
+                                            <div class="dropdown-list-image me-3">
+                                                <img class="rounded-circle" src="assets/img/avatars/avatar2.jpeg">
+                                                <div class="status-indicator"></div>
+                                            </div>
+                                            <div class="fw-bold">
+                                                <div class="text-truncate">
+                                                    <span>you have to finish the issue you accepted last month!</span>
+                                                </div>
+                                                <p class="small text-gray-500 mb-0">E. Ali Ahmed - 1d</p>
+                                            </div>
+                                        </a>
+                                        <a class="dropdown-item d-flex align-items-center" href="#">
+                                            <div class="dropdown-list-image me-3">
+                                                <img class="rounded-circle" src="assets/img/avatars/avatar3.jpeg">
+                                                <div class="bg-warning status-indicator"></div>
+                                            </div>
+                                            <div class="fw-bold">
+                                                <div class="text-truncate">
+                                                    <span>Last month's report looks great, I am very happy with the
+                                                        progress so far, keep up the good work!</span>
+                                                </div>
+                                                <p class="small text-gray-500 mb-0">E. Omer Ahmed - 2d</p>
+                                            </div>
+                                        </a>
+                                        <a class="dropdown-item text-center small text-gray-500" href="#">Show All
+                                            Alerts</a>
+                                    </div>
+                                </div>
+                                <div class="shadow dropdown-list dropdown-menu dropdown-menu-end"
+                                    aria-labelledby="alertsDropdown"></div>
+                            </li>
+                            <div class="d-none d-sm-block topbar-divider"></div>
+                            <li class="nav-item dropdown no-arrow">
+                                <div class="nav-item dropdown no-arrow">
+                                    <a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown"
+                                        href="#">
+
+                                        <% @user = User.where(:id=>session[:user_id]) %>
+                                            <% @user.each do |user| %>
+
+
+                                                <span class="d-none d-lg-inline me-2 text-gray-600 small"><%=user.first_name%><br><%=user.last_name%></span>
+                                            <% end %>
+                                        <img class="border rounded-circle img-profile" <%=image_tag('avatar.png')%>
+                                    </a>
+
+                                    <div class="dropdown-menu shadow dropdown-menu-end animated--grow-in">
+                                        <a class="dropdown-item" href="/profile">
+                                            <i class="fas fa-user fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Profile
+                                        </a>
+
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="log_out">
+                                            <i
+                                                class="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Logout
+                                        </a>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+                <div class="container-fluid">
+    <%= yield %>
+    <footer class="bg-white sticky-footer">
+                <div class="container my-auto">
+                    <div class="text-center my-auto copyright"><span>Copyright © FixIt2022</span></div>
+                </div>
+    </footer>
+    <script>
+            var modal = document.getElementById("accept-form");
+
+            var btn = document.getElementById("btn-accept");
+
+
+            btn.onclick = function () {
+                document.body.style.overflow = 'hidden';
+                modal.style.display = "block";
+            }
+            window.onclick = function (event) {
+                if (event.target == modal) {
+                    document.body.style.overflow = 'visible';
+                    modal.style.display = "none";
+                }
+            }
+            // Denotes total number of rows
+            var rowIdx = 0;
+            // jQuery button click event to add a row
+            $('#addBtn').on('click', function () {
+                // Adding a row inside the tbody.
+                $('#materials-list').append(`<tr id="R${++rowIdx}">
+                    <td class="row-index text-center">
+                        <input type="text">
+                    </td>
+                    <td class="row-index text-center">
+                        <input type="text">
+                    </td>
+                    <td class="row-index text-center">
+                        <input type="text">
+                    </td>
+                    <td class="row-index text-center">
+                        <input type="text">
+                    </td>
+                    <td class="text-center">
+                        <button class="btn btn-danger remove"
+                        type="button">Remove</button>
+                        </td>
+                    </tr>`);
+            });
+            // jQuery button click event to remove a row.
+	        $('#materials-list').on('click', '.remove', function () {
+
+	        	// Getting all the rows next to the row
+	        	// containing the clicked button
+	        	var child = $(this).closest('tr').nextAll();
+
+	        	// Iterating across all the rows
+	        	// obtained to change the index
+	        	child.each(function () {
+
+	        	// Getting <tr> id.
+	        	var id = $(this).attr('id');
+
+	        	// Getting the <p> inside the .row-index class.
+	        	var idx = $(this).children('.row-index').children('p');
+
+	        	// Gets the row number from <tr> id.
+	        	var dig = parseInt(id.substring(1));
+
+	        	// Modifying row index.
+	        	idx.html(`Row ${dig - 1}`);
+
+	        	// Modifying row id.
+	        	$(this).attr('id', `R${dig - 1}`);
+	        	});
+
+	        	// Removing the current row.
+	        	$(this).closest('tr').remove();
+
+	        	// Decreasing total number of rows by 1.
+	        	rowIdx--;
+	        });
+      function preview() {
+      frame.src = URL.createObjectURL(event.target.files[0]);
+      }
+    !function () {
+
+        "use strict";
+        var e = document.querySelector(".sidebar"), o = document.querySelectorAll("#sidebarToggle, #sidebarToggleTop");
+        if (e) { e.querySelector(".collapse");
+        var t = [].slice.call(document.querySelectorAll(".sidebar .collapse")).map((function (e) {
+            return new bootstrap.Collapse(e, { toggle: !1 })
+        }));
+        for (var l of o) l.addEventListener("click", (function (o) {
+            if (document.body.classList.toggle("sidebar-toggled"), e.classList.toggle("toggled"), e.classList.contains("toggled"))
+            for (var l of t) l.hide() })); window.addEventListener("resize", (function () {
+                if (Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0) < 768)
+                for (var e of t) e.hide() }))
+            }
+            var n = document.querySelector("body.fixed-nav .sidebar");
+            n && n.on("mousewheel DOMMouseScroll wheel", (function (e) {
+                if (Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0) > 768) {
+                    var o = e.originalEvent, t = o.wheelDelta || -o.detail; this.scrollTop += 30 * (t < 0 ? 1 : -1), e.preventDefault() } }));
+                    var i = document.querySelector(".scroll-to-top"); i && window.addEventListener("scroll", (function () {
+                        var e = window.pageYOffset; i.style.display = e > 100 ? "block" : "none" }))
+    }();
+</script>
+  </body>
+</html>

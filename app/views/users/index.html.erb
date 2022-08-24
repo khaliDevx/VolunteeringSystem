@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+ <%= stylesheet_link_tag 'index'%>
+<head>
+</head>
+
+<body id="page-top" class=body>                   
+ 
+   
+        <div id="wrapper">
+                <div class="container-fluid">
+                    <div class="d-sm-flex justify-content-between align-items-center mb-4">
+                        <h3 class="text-dark mb-0">Dashboard</h3>
+                    </div>
+                    <div class=status>
+                        <%# <%= form_tag '/index', :method =>'get' do%> 
+                          <%# <%=text_field_tag :search, params[:search] %> 
+                          <%# <%= select_tag :search,  options_for_select(["Submitted", "Passed","Accepted","Confirmed"], params[:search]), id: "different_option_value_html", onchange: "this.form.submit();", include_blank: "Which status ?",class:"form-select form-select "%> 
+                          <%# <%= submit_tag "Search"%>
+                          <%# <%end%> 
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <h1>Issues</h1>
+                            <div class="container">
+
+                            
+
+                                <% @problems.each do |problem| %>
+                                        <div class="instagram-card shadow-sm p-3 mb-5 bg-white rounded">
+                                            <div class="instagram-card-header">
+                                              <div>
+                                                <% @user.each do |user| %>
+                                                    <img  class="instagram-card-user-image"<%=image_tag('avatar.png')%>
+                                                    <span class="instagram-card-user-name"><%=user.first_name%> <%=user.last_name%></span>
+                                                <%end%>
+                                              </div>
+                                              <button id="myBtn" class="three-dots fa fa-ellipsis-h"></button>
+                                            </div>
+
+                                            <div class="intagram-card-image">
+                                            <% if (problem.image.attached?) %>
+                                              <%=image_tag(url_for(problem.image))%>
+                                              <% else %>
+                                                <p>no image</p>
+                                            <% end %>
+                                              <%# <img src="issues-logo.jpg" /> %>
+                                            </div>
+
+                                            <div class="blog-table">
+                                              <% @category=Category.where(:id=>problem.category_id)%>
+                                              <% @category.each do |category| %>
+                                                    <div class="blog-category blog-text-success issue_info_parts">
+                                                        <%= category.name%>
+                                                    </div>
+                                              <% end %>
+                                              <div class="issue_info_parts">
+                                                <h4 class="blog-card-caption">Location:</h4>
+                                                <div class="blog-card-description">
+                                                  <span>Governorate:</span>
+                                                  <%@city=City.where(:id=>problem.city_id)%>
+                                                  <% @city.each do |city| %>
+                                                    <%@gove=Governorate.where(:id=>city.governorate_id)%>
+                                                  <% @gove.each do |gove| %>
+                                                    <span><%=gove.name%></span>
+                                                   <% end %>
+                                                  <% end %>
+
+                                                </div>
+                                                <div class="blog-card-description">
+                                                  <span>City:</span>
+                                                  <% @city.each do |city| %>
+                                                    <span><%=city.name%></span>
+                                                  <%end%>
+                                                </div>
+                                              </div>
+                                              
+                                              <div class="issue_info_parts">
+                                                <h4 class="blog-card-caption">Description</h4>
+                                                <p class="blog-card-description">
+                                                  <%=problem.desciption%>
+                                                </p>
+                                              </div>
+                                              <div class="issue_info_parts">
+                                                <h4 class="blog-card-caption">Status</h4>
+                                                <p class="blog-card-description"><%=problem.status%></p>
+
+                                              </div >
+                                              <div class="issue_info_parts">
+                                                <h4 class="blog-card-caption">Submitted by:</h4>
+                                                <div class="blog-card-description">
+                                                  <span>user:</span>
+                                                  <%@submiter=User.where(:id=> problem.user_id)%>
+                                                  <% @submiter.each do |user| %>
+                                                    <span><%=user.first_name%> <%=user.last_name%></span>
+                                                  <% end %>
+                                                </div>
+                                                <div>
+                                                </div>
+                                              </div>
+                                              <button id="view_cmt">View all <span id=number-cmt><%=Coment.where(:problem_id=>problem.id).count%></span> comments</button>
+                                              <div class="issue_date"><span class="issue_date"><%=problem.created_at.to_date%></span> </div>
+                                            </div>
+                                            <div id="modal">
+                                                <div class='modal-content2 modal-style'>
+                                                    <div class='modal-body'>
+                                                            <div class="instagram-card-header">
+                                                              <div>
+                                                                <img src="insta_me.jpeg" class="instagram-card-user-image" />
+                                                                <span class="instagram-card-user-name">khalid99io</span>
+                                                              </div>
+                                                            </div>
+                                                            <div class="users-comments">
+                                                              <div class="cmt">
+                                                                <img src="insta_me.jpeg" class="instagram-card-user-image" />
+                                                                <div class="instagram-card-user-name">khalid99io</div>
+                                                                <div class="cmt-txt">This is real issue!</div>
+                                                              </div>
+                                                            </div>
+                                                            <div class="instagram-card-footer">
+                                                              <a class="footer-action-icons" href="#"><i class="fa fa-heart-o"></i></a>
+                                                              <input class="comments-input blog-text-success" id="enter-comment" type="text" placeholder="Add a comment..." />
+                                                              <button class="btn btn-outline-info post_cmt" id="post-comment">Post</button>
+                                                            </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                                <%if @employee.present?%>
+                                                    <form action='/confirm_issue' method="POST">
+                                                        <input type='hidden' name='authenticity_token' value="<%= form_authenticity_token%>">
+                                                        <input type='hidden' name='confirm_issue[id]' value="<%=problem.id%>">
+                                                        <button class='btn btn-primary'name=confirm_issue[status] value=Confirmed>Confirm</button>
+                                                        <%= link_to 'Destroy', problem, method: :delete, data: { confirm: 'Are you sure?' },class:"btn btn-danger " %>
+                                                    </form>
+                                                <%else%>
+                                                    <form action='/confirm' method="POST">
+                                                        <input type='hidden' name='authenticity_token' value="<%= form_authenticity_token%>">
+                                                        <input type='hidden' name='confirm[problem_id]' value="<%=problem.id%>">
+                                                        <button class='btn btn-primary'name=confirm[confirmed] value=true>Confirm</button>
+                                                        <button  class='btn btn-primary'name=confirm[confirmed] value=false>Un_confirm</button>
+                                                    </form>
+                                                <%end%>
+                                            <form action=/feed method=POST>
+                                                 <input type='hidden' name='authenticity_token' value="<%= form_authenticity_token%>">
+                                                 <input type='hidden' name='feed[problem_id]' value="<%=problem.id%>">
+                                                <div class="instagram-card-footer">
+                                                  <a class="footer-action-icons" href=""><i class="fa fa-heart-o"></i></a>
+                                                  <input name=feed[comment] class="comments-input blog-text-success" id="enter-comment" type="text" placeholder="Add a comment..." />
+                                                  <button class="btn btn-outline-info post_cmt" id="post-comment" onclick="post" >Post</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    <%end%>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <%# <footer class="bg-white sticky-footer">
+                <div class="container my-auto">
+                    <div class="text-center my-auto copyright">
+                        <span>Copyright © FixIt2022</span>
+                    </div>
+                </div>
+            </footer> %>
+        <a class="border rounded d-inline scroll-to-top" href="" style="margin-right: 60px;">
+            <i class="fas fa-angle-up"></i>
+        </a>
+    <a class="border rounded d-inline scroll-to-top" href="/submit_issue">
+        <button class="btn btn-primary add-issue fa fa-plus" type="button" data-toggle="modal" data-target="#submit_issue"></button>
+    <a>
+    <%# <div id="submit_issue" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+      
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Modal Header</h4>
+            </div>
+            <div class="modal-body">
+              <p>Some text in the modal.</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+      
+        </div>
+    </div> %>
+   <script>
+    post(e){
+      e.preventDefault()
+    }
+    var modal = document.getElementById("modal");
+
+    let btn2 = document.getElementById("view_cmt");
+
+    btn2.onclick = function () {
+    modal.style.display = "block";
+    document.body.style.overflow = "hidden"
+    }
+
+    function success() {
+      if (document.getElementById("enter-comment").value === "") {
+        document.getElementById('post-comment').disabled = true;
+      }
+      else{
+        document.getElementById('post-comment').disabled = false;
+
+      }
+    }
+  </script>
+</body>
+
+</html>

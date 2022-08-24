@@ -1,0 +1,84 @@
+<html>
+ <%= stylesheet_link_tag 'submit_issue'%>
+<style> </style>
+<body id="page-top"class=body>
+<h1>Issues</h1>
+
+<%# <div class="border container-form"> %>
+<%= form_with(model: problem ,class:"border container-form form_issue") do |form| %>
+  <% if problem.errors.any? %>
+    <div id="error_explanation">
+      <h2 class=h2><%= pluralize(problem.errors.count, "error") %> pleases enter the image</h2>
+
+      <ul>
+        <% problem.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+    <div class="choosephoto">
+      <img id="frame" class="img-fluid" width="80px" height="150px" name="image" <%=image_tag('image-preview2.png')%>
+        <div class="custom-file">
+          <div class="mb-5">
+          <div class="form-label custom-file-input" id="formFile" onchange="preview()"><%= form.file_field :image %></div>
+          <label class="custom-file-label">Choose Image</label>
+          </div>
+        </div>
+    </div>
+  <div>
+  </div>
+          <div class="issueInfo">
+              <div class="issueInfoParts">
+                   <label>State</label>
+                   <select  class="form-select form-select" for="floatinginput" placeholder="HGsOFT" >
+                        <option ></option>
+                        <%@gover=Governorate.all%>
+                        <% @gover.each do |go| %>
+                          <option value="<%= go.id%>">
+                              <%=go.name%>
+                          </option>
+                        <% end %>
+                    </select>
+                   
+              </div>
+              
+              <div class="issueInfoParts">
+                 <label>City</label>
+                
+                  <select class="form-select form-select"name="problem[city_id]"  for="floatinginput" placeholder="city"  required>
+                      <option ></option>
+                       <% @city.each do |ct| %>
+                          <option value="<%=ct.id%>">
+                               <%=ct.name%>
+                          </option>
+                      <% end %>
+                  </select>
+              </div>
+              <div class="issueInfoParts">
+                 <label > Category </label>
+                 <%@cat=Category.all%>
+                  <select class="form-select form-select" name="problem[category_id]" for="floatinginput" placeholder="category"  required>
+                      <option ></option>
+                      <% @cat.each do |ct| %>
+                          <option value="<%=ct.id%>">
+                               <%=ct.name%>
+                          </option>
+                      <% end %>
+                  </select>
+              </div>
+          </div>
+          <div class="issueInfoParts">
+            <label>Description</label>
+            <%= form.text_area :desciption, label: "desciption",class:"form-control" ,placeholder:"Add description..." ,rows:"5" ,cols:"30" %>
+          </div>
+          <div class="issueInfoParts">
+            <button id="getPositionButton" class="btn2">Add Geolocation</button>
+            <div class="geolocation result"></div>
+          </div>
+        <button class="btn btn-primary" type="submit">Submit Issue</button>
+ 
+  <% end %>
+
+</body>
+</html>

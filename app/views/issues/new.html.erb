@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<style>
+    *{
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+.container{
+	display: flex;
+    flex-flow: column nowrap;
+	justify-content: center;
+	align-items: center;
+	align-items: center;
+    padding: 20px;
+    background-color: cornflowerblue;
+}
+.container-form{
+    display: flex;
+    flex-flow: column nowrap;
+	align-items: flex-start;
+    padding: 40px;
+    width: 500px;
+    height: auto;
+    border-radius: 10px;
+    background-color: #fff; 
+}
+#frame{
+    border-radius: 10px;
+    margin-left: -15px;
+    margin-right: 20px;
+}
+.custom-file{
+    width: 250px;
+    margin-left: 0px;
+}
+.choosephoto{
+    display: flex;
+	align-items: center;
+	flex-flow: row nowrap;
+	justify-content: space-between;
+    width: 300px;
+    height: auto;
+    margin-bottom: 40px;
+}
+.issueInfo{
+    height: auto;
+    background-color: #fff; 
+
+}
+.issueInfoParts{
+    display: flex;
+	flex-flow: row nowrap;
+	justify-content: space-between;
+    margin-bottom: 20px;
+    width: auto;
+}
+.issueInfoParts label{
+    margin-right: 20px;
+}
+.issueInfoParts select{
+    width: 300px;
+}
+.result{
+    border: none;
+    border-radius: 5px;
+    height: 40px;
+    width: 200px;
+    color: rgb(22, 22, 22);
+    background-color: #999;
+    text-align: center;
+}
+.btn2{
+    border: none;
+    border-radius: 3px;
+    outline: none;
+    color: rgb(22, 22, 22);
+    height: 40px;
+    width: 130px;
+    background-color: #999;
+}
+</style>
+<body class="container">
+  <form class="border container-form">
+    <div class="choosephoto">
+      <img id="frame" src="image-preview2.png" class="img-fluid" width="80px" height="150px" />
+      <div class="custom-file">
+        <div class="mb-5">
+          <input class="form-label custom-file-input" type="file" id="formFile" onchange="preview()">
+          <label class="custom-file-label">Choose Image</label>
+        </div>
+      </div>
+    </div>
+    <div class="issueInfo">
+      <div class="issueInfoParts">
+        <label>State</label>
+        <select class="form-control" placeholder="State" required>
+          <option selected>Open this select menu</option>
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+        </select>
+      </div>
+      <div class="issueInfoParts">
+        <label>City</label>
+        <select class="form-control" placeholder="City" required>
+          <option selected>Open this select menu</option>
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+        </select>
+      </div>
+
+      <div class="issueInfoParts">
+        <label>Category</label>
+        <select class="form-control" placeholder="Category" required>
+          <option selected>Open this select menu</option>
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+        </select>
+      </div>
+      
+      <div class="issueInfoParts">
+        <label>Description</label>
+        <textarea class="form-control" placeholder="Add description..." rows="5" cols="30"
+          name="description"></textarea>
+      </div>
+
+      <div class="issueInfoParts">
+        <button id="getPositionButton" class="btn2">Add Geolocation</button>
+        <div class="geolocation result"></div>
+      </div>
+    </div>
+
+    <button class="btn btn-primary" type="submit">Submit Issue</button>
+  </form>
+</body>
+
+</html>

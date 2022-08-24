@@ -1,0 +1,8 @@
+<p id="notice"><%= notice %></p>
+<% if (@problem.image.attached?) %>
+        <%=image_tag(url_for(@problem.image))%>
+        <% else %>
+          <p>no image</p>
+      <% end %>
+<%= link_to 'Edit', edit_problem_path(@problem) %> |
+<%= link_to 'Back', problems_path %>

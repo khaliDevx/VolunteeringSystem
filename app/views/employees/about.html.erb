@@ -1,0 +1,51 @@
+    
+    <body>
+    <table class="table my-0" id="dataTable">
+     <br>
+            <%# <form action=/select method=POST> %>
+                    <%# <input type='hidden' name='authenticity_token' value="<%= form_authenticity_token%>"> %>
+                    <button id="select" <%@x =value="Submitted"%>>Submitted</button>
+                    <button class="select" <%@x =value="Passed"%>>Passed</button>
+                    <button class="select" value=Submitted>Submitted</button>
+            <%# # </form> %>
+            <br>
+            <%@problems = Problem.with_attached_image.where(:status=>@x)%>
+
+            <thead>
+                <tr>
+                    <th>image</th>
+                    <th>catogery</th>
+                    <th>State</th>
+                    <th>City</th>
+                    <th> Status</th>
+                    <th>Submitted by</th>
+                </tr>
+            </thead>
+            <tbody>
+                 <tr>
+                    <% @problems.each do |problem| %>
+                        <td>
+                             <% if (problem.image.attached?) %>
+                                <%=image_tag(url_for(problem.image))%>
+                            <% else %>
+                                 <p>no image</p>
+                            <% end %></td>
+                        <td ><%=problem.user_id%></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    <% end %>
+
+                 </tr>
+            
+            </tbody>
+            <script>
+                var btn = document.getElementById("select");
+                btn.onclick = function () {
+                    document.getElementById("inputt").val() = "Submitted";
+                    document.getElementById("ve").text(getElementById("inputt").val())
+                }
+                
+            </script>
+</body>

@@ -1,0 +1,2 @@
+class Accept < ApplicationRecord
+end

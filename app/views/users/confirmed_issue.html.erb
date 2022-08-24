@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+ <%= stylesheet_link_tag 'index'%>
+<head>
+  \
+</head>
+
+<body id="page-top" class=body>
+
+                            <%# <div id="menus" class="modal"> 
+                                <div class="modal-content modal-style">
+                                    <div class="modal-body">
+                                        <button class="menu">option1</button>
+                                        <button class="menu">option2</button>
+                                        <button class="menu">option3</button>
+                                        <button class="menu">option4</button>
+                                        <button class="menu">option5</button>
+                                    </div>
+                                </div>
+                            </div> %>
+                                <div id="modal" class="modal1">
+                                        <div class="instagram-card-header">
+                                          <div>
+                                            <img src="insta_me.jpeg" class="instagram-card-user-image" />
+                                            <span class="instagram-card-user-name">khalid99io</span>
+                                          </div>
+                                        </div>
+                                        <div class="users-comments">
+                                          <div class="cmt">
+                                            <img src="insta_me.jpeg" class="instagram-card-user-image" />
+                                            <div class="instagram-card-user-name">khalid99io</div>
+                                            <div class="cmt-txt">This is real issue!</div>
+                                          </div>
+                                        </div>
+                                        <div class="instagram-card-footer">
+                                          <a class="footer-action-icons" href="#"><i class="fa fa-heart-o"></i></a>
+                                          <input class="comments-input blog-text-success" id="enter-comment" type="text" placeholder="Add a comment..." />
+                                          <button class="btn btn-outline-info post_cmt" id="post-comment">Post</button>
+                                        </div>
+                                </div>
+  </div>
+        <div id="wrapper">
+       
+          <div class="container-fluid">
+                    <div class="row">
+                        <div class="col">
+                            <h1>Issues</h1>
+                            <div class="container">
+
+                                <% @user.each do |user| %>
+                                    <%@problems = Problem.where(:status=>"Confirmed").with_attached_image%>
+                                <%end%>
+                                <% @problems.each do |problem| %>
+                                         
+                                        <div class="instagram-card shadow-sm p-3 mb-5 bg-white rounded">
+                                            <div class="instagram-card-header">
+                                              <div>
+                                                <% @user.each do |user| %>
+                                                    <img  class="instagram-card-user-image"<%=image_tag('avatar.png')%>
+                                                    <span class="instagram-card-user-name"><%=user.first_name%> <%=user.last_name%></span>
+                                                <%end%>
+                                              </div>
+                                              <button id="myBtn" class="three-dots fa fa-ellipsis-h"></button>
+                                            </div>
+
+                                            <div class="intagram-card-image">
+                                                <% if (problem.image.attached?) %>
+                                                    <%=image_tag(url_for(problem.image))%>
+                                                <% else %>
+                                                      <p>no image</p>
+                                                <% end %>
+                                            </div>
+
+                                            <div class="blog-table">
+                                              <% @category=Category.where(:id=>problem.category_id)%>
+                                              <% @category.each do |category| %>
+                                                    <div class="blog-category blog-text-success issue_info_parts">
+                                                        <%= category.name%>
+                                                    </div>
+                                              <% end %>
+                                              <div class="issue_info_parts">
+                                                <h4 class="blog-card-caption">Location:</h4>
+                                                <div class="blog-card-description">
+                                                     <span>Governorate:</span>
+                                                      <%@city=City.where(:id=>problem.city_id)%>
+                                                            <% @city.each do |city| %>
+                                                                <%@gove=Governorate.where(:id=>city.governorate_id)%>
+                                                                <% @gove.each do |gove| %>
+                                                                  <span><%=gove.name%></span>
+                                                            <% end %>
+                                                     <% end %>
+                                                </div>
+                                                <div class="blog-card-description">
+                                                  <span>City:</span>
+                                                  <% @city.each do |city| %>
+                                                    <span><%=city.name%></span>
+                                                  <%end%>
+                                                </div>
+                                              </div>
+                                              
+                                              <div class="issue_info_parts">
+                                                <h4 class="blog-card-caption">Description</h4>
+                                                <p class="blog-card-description">
+                                                  <%=problem.desciption%>
+                                                </p>
+                                              </div>
+                                              <div class="issue_info_parts">
+                                                <h4 class="blog-card-caption">Status</h4>
+                                                <p class="blog-card-description"><%=problem.status%></p>
+
+                                              </div >
+                                              <div class="issue_info_parts">
+                                                <h4 class="blog-card-caption">Submitted by:</h4>
+                                                <div class="blog-card-description">
+                                                  <span>user:</span>
+                                                  <%@submiter=User.where(:id=> problem.user_id)%>
+                                                  
+                                                  <% @submiter.each do |user| %>
+                                                    <span><%=user.first_name%> <%=user.last_name%></span>
+                                                  <% end %>
+                                                </div>
+                                              </div>
+
+                                              <button id="view_cmt">View all <span>111</span> comments</button>
+                                              <div class="issue_date"><span class="issue_date"><%=problem.created_at.to_date%></span> </div>
+                                            </div>
+                                           
+                                            <button class="btn btn-primary" id="btn-accept">Accept</button>
+                                            
+                                            <div id="accept-form" class="accept-modal">
+                                              <div class="modal-content-accept">
+                                                <div class="modal-body-accept">
+                                                    <div>
+                                                        <div>Number of needed volunteers:</div>
+                                                        <form action=/accept method=POST>
+                                                          <input type='hidden' name='authenticity_token' value="<%= form_authenticity_token%>">
+                                                          <input type=number name=accept[required_volunteer]>
+
+                                                    </div>
+                                                    <div>
+                                                        <div>Materials:</div>
+                                                        <div class="table-responsive">
+                                                          <table class="table table-bordered">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <td class="text-center">Name</td>
+                                                                        <td class="text-center">Cost</td>
+                                                                        <td class="text-center">Quantity</td>
+                                                                        <td class="text-center">Total</td>
+                                                                        <td class="text-center"></td>
+                                                                        <td><button class="btn btn-md btn-primary" id="addBtn" type="button">+</button></td>
+                                                                    </tr>
+                                                                </thead>
+                                                                      <tbody id="materials-list">
+                                                                        <tr>
+                                                                            
+                                                                            <td class="row-index text-center">
+                                                                                <%= select_tag :material_id,   options_from_collection_for_select(Material.all.order(:name), :id, :name, params[:material_id]),include_blank: "Which status ?"%>
+
+                                                                            </td>
+                                                                            <td class="row-index text-center">
+                                                                                <%= number_field_tag(:cost, params[:cost]) %>
+                                                                              <%= hidden_field_tag(:problem_id, params[:problem_id],value:problem.id) %>
+
+                                                                            </td>
+                                                                            <td class="row-index text-center">
+                                                                              <%=number_field_tag(:quantity, params[:quantity])%>
+                                                                            </td>
+                                                                            <td class="row-index text-center">
+                                                                              <input type=number name=accept[totale_cost]>
+                                                                            </td>
+                                                                            <td class="text-center">
+                                                                                <button class="btn btn-danger remove"
+                                                                                type="button">Remove</button>
+                                                                            </td>
+                                                                           
+                                                                        </tr> 
+                                                                      </tbody>
+                                                          </table>
+                                                            <input type=submit value=accept>
+                                                          </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                <%end%>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <a class="border rounded d-inline scroll-to-top" href="" style="margin-right: 60px;">
+            <i class="fas fa-angle-up"></i>
+        </a>
+    </div>
+    <a class="border rounded d-inline scroll-to-top" href="/submit_issue">
+        <button class="btn btn-primary add-issue fa fa-plus" type="button" data-toggle="modal" data-target="#submit_issue"></button>
+    <a> 
+</body>
+
+</html>

@@ -1,0 +1,2 @@
+class BillOfMaterial < ApplicationRecord
+end

@@ -1,0 +1,102 @@
+<html>
+ <%= stylesheet_link_tag 'join'%>
+    
+    <body>
+        <%@problems.each do |problem|%>
+            <div class="join-container">
+                <div class="join-issue-details">
+                      <div class="join-issue-info">
+                          <h6 class="blog-category blog-text-success">
+                                <%@cat=Category.where(:id=>problem.category_id)%>
+                                <%@cat.each do |cat|%>
+                                    <i class="far fa-newspaper"></i> <%=cat.name%> Issue
+                                <%end%>
+                          </h6>
+                          <div>
+                              <h4 class="blog-card-caption">Location:</h4>
+                              <%@city=City.where(:id=>problem.city_id)%>
+                              <%@city.each do |city|%>
+                                    <%@gover=Governorate.where(:id=>city.governorate_id)%>
+                                <%end%>
+                              <div>
+                                  <span>Governorate:</span>
+                                  <%@gover.each do |go|%>
+                                    <span><%=go.name%></span>
+                                  <%end%>
+                              </div>
+                              <div>
+                                  <span>City:</span>
+                                    <%@city.each do |city|%>
+                                        <span><%=city.name%></span>
+                                    <%end%>
+                                  
+                              </div>
+                          </div>
+                          <div>
+                              <h4 class="blog-card-caption">Description</h4>
+                              <p class="blog-card-description">
+                                    <%=problem.desciption%>
+                              </p>
+                          </div>
+                          <div>
+                              <h4 class="blog-card-caption">Submitted by:</h4>
+                              <div>
+                                    <%user=User.where(:id=>problem.user_id)%>
+                                    <%user.each do |u|%>
+                                        <span><%=u.first_name%> <%=u.last_name%></span>
+                                    <%end%>
+                              </div>
+                          </div>
+                          <div>
+                              <h4 class="blog-card-caption">Supervisor Volunteer:</h4>
+                              <div>
+                                    <%accept=Accept.where(:problem_id=>problem.id)%>
+                                    <%accept.each do |acc|%>
+                                        <%user=User.where(:id=>acc.user_id)%>
+                                    <%end%>
+                                    <%user.each do |u|%>
+                                        <span><%=u.first_name%> <%=u.last_name%></span>
+                                    <%end%>
+                                    
+                              </div>
+                          </div>
+                          <% if flash[:success].present?%>
+                                <div id="flash-notice" style="border:1px solid red; color: red ;padding=:10px">
+                                <%=flash[:success]%>
+                                </div>
+                            <%end%>
+                      </div>
+                        <% if flash[:error].present?%>
+                                <div id="flash-notice" style="border:1px solid red; color: red ;padding=:10px">
+                                <%=flash[:error]%>
+                                </div>
+                        <%end%>
+                        <%join=JoinIssue.where(:user_id=>session[:user_id])%>
+                        <%join_user=JoinIssue.where(:problem_id=>problem.id ,:user_id=>session[:user_id])%>
+                        <%if join_user.present?%>
+                            <input style="width:100px" type=submit class='btn btn-outline-info' value=Joined disabled>
+                        <%elsif join.present?%>
+                                <input style="width:auto" type=submit class='btn btn-outline-info' value='you had recently joined another issue' disabled>
+
+                        <%else%>
+                            <form action=/join_issue method=POST>
+                                  <input type='hidden' name='authenticity_token' value="<%= form_authenticity_token%>">
+                                  <input type=hidden name=join_issue[problem_id] value=<%=problem.id%>>
+                                  <%@accept=Accept.where(:problem_id=>problem.id)%>
+                                  <%@accept.each do |acc|%>
+                                      <%if acc.required_volunteer == JoinIssue.where(:problem_id=>problem.id).count%>
+                                          <input  style="width:100px"type=submit class='btn btn-outline-info' value=Join disabled>
+                                      <%else%>
+                                          <input style="width:100px"  type=submit class='btn btn-outline-info ' value= Join>
+                                      <%end%>
+                                  <%end%>
+                            </form>
+                        <%end%>
+                </div>
+                  <div class="join-issue-img">
+                        <%= image_tag(problem.image)  %>
+                  </div>
+            </div>
+        <%end%>
+    </body>
+</html>
