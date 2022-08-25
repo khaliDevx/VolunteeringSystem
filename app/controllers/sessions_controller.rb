@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-
+    layout'login_signup'
     #  before_action :confirm, except: [:login, :log_in]
     def new
         @city=City.all
