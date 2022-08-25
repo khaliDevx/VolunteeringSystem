@@ -1,20 +1,20 @@
 class EmployeesController < ApplicationController
-  layout 'application2'
-  
+  layout 'application'
+
   before_action :set_bass ,only: [:bass]
   # before_action :set_user ,only: [:edit]
   # before_action :confirm_employee_type, except: [:new, :create]
 
   def index
-    @user = User.where(:id=>session[:user_id]) 
+    @user = User.where(:id=>session[:user_id])
     @users=User.volunteer.where(["first_name LIKE ?","%#{params[:first_name]}%"])
 
   end
-  
-  # def new 
-    
+
+  # def new
+
   # end
-  # def create 
+  # def create
   #   user=User.new(login_params)
   #   user.user_type="Volunteer"
   #   user.employee_id=session[:user_id]
@@ -27,7 +27,7 @@ class EmployeesController < ApplicationController
   #           redirect_to '/new_user'
   #       end
   # end
-  def block 
+  def block
     @user=User.find_by(id: update_params[:id])
     @user.accountstatu=false
     if @user.update(update_params)
@@ -54,7 +54,7 @@ class EmployeesController < ApplicationController
 
   end
   def issue
-    @user = User.where(:id=>session[:user_id]) 
+    @user = User.where(:id=>session[:user_id])
     @problems = Problem.order("id DESC").issue_submitted.with_attached_image
   end
   def confirm
@@ -80,25 +80,25 @@ class EmployeesController < ApplicationController
       @user = User.find(params[:id])
      end
      def problem_params
-      params.require(:problem).permit(:image, :cordinates,  :status, :desciption, :governorate_id, :category_id,:city_id,:user_id)  
+      params.require(:problem).permit(:image, :cordinates,  :status, :desciption, :governorate_id, :category_id,:city_id,:user_id)
      end
      def update_params
-      params.require(:block).permit(:accountstatu,:id)  
+      params.require(:block).permit(:accountstatu,:id)
 
      end
      def active_params
-      params.require(:active).permit(:accountstatu,:id)  
+      params.require(:active).permit(:accountstatu,:id)
 
      end
      def pass_params
-      params.require(:pass).permit(:status,:id)  
+      params.require(:pass).permit(:status,:id)
      end
      def confirm_params
-      params.require(:confirm_issue).permit(:status,:id)  
+      params.require(:confirm_issue).permit(:status,:id)
      end
     #  def select_params
-    #   params.require(:select).permit(:status)  
+    #   params.require(:select).permit(:status)
     #  end
-     
-  
+
+
 end

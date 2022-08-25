@@ -26,6 +26,6 @@ class ApplicationController < ActionController::Base
             redirect_to "/index"
         end
     end
-    
+
 end
 
