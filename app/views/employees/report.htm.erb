@@ -169,11 +169,11 @@
                                 <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link"
                                         aria-expanded="false" data-bs-toggle="dropdown" href="#">
                                          <% @user.each do |user| %>
-
-
+                                                
+                                            
                                             <span class="d-none d-lg-inline me-2 text-gray-600 small"><%=user.first_name%><br><%=user.last_name%></span>
                                             <% end %>
-
+                                       
                                         <img class="border rounded-circle img-profile"<%=image_tag('avatar.png')%>
                                         </a>
                                     <div class="dropdown-menu shadow dropdown-menu-end animated--grow-in"><a
@@ -236,15 +236,15 @@
                                                             <input type='hidden' name='authenticity_token' value="<%= form_authenticity_token%>">
                                                             <input type='hidden' name='block[accountstatu]' value=false>
                                                             <input type='hidden' name='block[id]' value=<%=user.id%>>
-                                                            <input type=submit value=Block class="btn btn-primary btn-user">
+                                                            <input type=submit value=Block class="btn btn-primary d-block btn-user">
                                                         </form>
                                                         <form action='/active' method='POST'>
                                                             <input type='hidden' name='authenticity_token' value="<%= form_authenticity_token%>">
                                                             <input type='hidden' name='active[accountstatu]' value=true>
                                                             <input type='hidden' name='active[id]' value=<%=user.id%>>
-                                                            <input type=submit value=Active class="btn btn-primary btn-user">
+                                                            <input type=submit value=Active class="btn btn-primary d-block btn-user">
                                                         </form>
-
+                                                     
                                                      </td>
                                                      <td>6<br></td>
                                                  </tr>

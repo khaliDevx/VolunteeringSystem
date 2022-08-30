@@ -4,6 +4,7 @@
      flex-flow: column nowrap;
 
     }
+    
 h1 {
     text-align: center;
     margin-bottom: 50px;
@@ -130,16 +131,7 @@ a {
 }
 
 .fixit-logo {
-    border-radius: 70px;
-    width: 140px;
-    height: 140px;
-    margin-bottom: 20px;
-}
-.p-5{
-    display: flex;
-    flex-flow: column nowrap;
-    align-items: center;
-    justify-items: center;
+    margin-left: 100px
 }
 @import url(https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i);
 
@@ -2585,7 +2577,7 @@ textarea.form-control-lg {
     -moz-appearance: none;
     appearance: none;
     -webkit-print-color-adjust: exact;
-    color-adjust: exact;
+    color-adjust: exact
 }
 
 .form-check-input[type=checkbox] {

@@ -4,6 +4,134 @@
 <head>
 </head>
 
+
+ <%
+=begin%>
+ <style>
+
+
+  .container{
+    /* display: flex; */
+    align-items: center;
+    justify-content: center;
+    
+    /* min-height: 660px; */
+    /* width: 100%; */
+    /* background-color: rgb(99, 97, 97); */
+    /* background-size: cover;
+    background-position: center; */
+  }
+  #open {
+  	outline: none;
+  	border: none;
+  	color: #7f7f7f;
+  	font-size: 0.8em;
+  	background: none;
+  	margin: 0 0 3px 0;
+  }
+
+
+  .model-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100%;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: rgba(0,0,0,.3);
+    transform: scale(0);
+    
+  }
+
+  .model-container .model{
+  height: 50%;
+  width: 50%;
+  margin: 0 10px;
+  padding: 20px;
+  background: #fff;
+  border-radius: 5px;
+  text-align: center;
+  position: relative;
+
+  }
+
+  .model-container .model .fa-times{
+  position: absolute; 
+  top: 15px;
+  right: 15px;  
+  font-size: 25px; 
+  cursor: pointer;
+  color: #333;
+  }
+  .instagram-card-header {
+  	display: flex;
+  	flex-flow: row nowrap;
+  	justify-content: space-between;
+  	align-items: center;
+  	padding: 0 0 15px 0;
+  	margin-bottom: 5px;
+  	border-bottom: 0.3px solid #a0a0a0;
+  	height: 50px;
+  }
+  .instagram-card-user-image {
+  	border-radius: 50%;
+  	width: 40px;
+  	height: 40px;
+  	vertical-align: middle;
+  }
+  .instagram-card-user-name {
+  	margin-left: 20px;
+  	font-weight: bold;
+  	color: #262626;
+  }
+  .users-comments{
+  	display: flex;
+  	flex-flow: column nowrap;
+  	justify-content: left;
+  	width: 100%;
+  	height: 350px;
+  }
+  .cmt{
+  	display: flex;
+  	flex-flow: row nowrap;
+  	align-items: center;
+  	padding: 0;
+  	margin: 5px 0 5px 0;
+  }
+  .instagram-card-footer {
+  	padding: 0;
+  	display: flex;
+  	align-items: center;
+  }
+  .footer-action-icons {
+  	font-size: 16px;
+  	color: #ccc;
+  }
+  .modal-content2 {
+  	width: 600px !important;
+  }
+  .cmt-txt{
+  	margin-left: 20px;
+
+  }
+  .blog-text-success {
+  	color: #6f6f6f !important
+  }
+  .post_cmt {
+  	border-style: none !important;
+  }
+  .comments-input {
+  	border: none;
+  	outline: none;
+  	margin-left: 10px;
+  	width: 100%;
+  }
+</style>  
+<%
+=end%>
+
 <body id="page-top" class=body>                   
  
    
@@ -31,7 +159,18 @@
                                             <div class="instagram-card-header">
                                               <div>
                                                 <% @user.each do |user| %>
-                                                    <img  class="instagram-card-user-image"<%=image_tag('avatar.png')%>
+                                                    <%if @photos= Photo.where(:user_id=>user.id).present?%>
+				                                            	<%@photos= Photo.where(:user_id=>user.id)%>
+				                                            	<% @photos.each do |photo| %>
+      	                                            				<% if (photo.image.attached?) %>
+      	                                            				  <%=image_tag(url_for(photo.image),class:'instagram-card-user-image')%>
+      	                                            				<% else %>
+                                                                		<%=image_tag('avatar.png',class:'instagram-card-user-image')%> 
+      	                                            				<% end %>
+				                                            	 <% end %>
+				                                             <% else %>
+                                                                <%=image_tag('avatar.png',class:'instagram-card-user-image')%> 
+				                                             <% end %>
                                                     <span class="instagram-card-user-name"><%=user.first_name%> <%=user.last_name%></span>
                                                 <%end%>
                                               </div>
@@ -80,6 +219,8 @@
                                                 <p class="blog-card-description">
                                                   <%=problem.desciption%>
                                                 </p>
+                                                <%=@x=problem.id%>
+                                                
                                               </div>
                                               <div class="issue_info_parts">
                                                 <h4 class="blog-card-caption">Status</h4>
@@ -92,39 +233,84 @@
                                                   <span>user:</span>
                                                   <%@submiter=User.where(:id=> problem.user_id)%>
                                                   <% @submiter.each do |user| %>
-                                                    <span><%=user.first_name%> <%=user.last_name%></span>
+                                                    <span > <%= link_to "#{user.first_name} #{user.last_name}",personal_page_user_path(user),:class=>"link-dark" %></span>
                                                   <% end %>
                                                 </div>
                                                 <div>
                                                 </div>
                                               </div>
-                                              <button id="view_cmt">View all <span id=number-cmt><%=Coment.where(:problem_id=>problem.id).count%></span> comments</button>
+                                              <div class="container">
+                                                
+                                                <button id="open<%=@x%>"class=open>View all <span id=number-cmt><%=Coment.where(:problem_id=>problem.id).count%></span> comments</button>
+                                              
+                                               
+                                              </div>
+                                                <div class="model-container" >
+                                                        <div class="model">
+                                                            <div class="instagram-card-header">
+                                                          <div>
+                                                          <%@user.each do |user|%>
+                                                              <%if @photos= Photo.where(:user_id=>user.id).present?%>
+				                                                          	<%@photos= Photo.where(:user_id=>user.id)%>
+				                                                          	<% @photos.each do |photo| %>
+      	                                                          				<% if (photo.image.attached?) %>
+      	                                                          				  <%=image_tag(url_for(photo.image),class:'instagram-card-user-image')%>
+      	                                                          				<% else %>
+                                                                             		<%=image_tag('avatar.png',class:'instagram-card-user-image')%> 
+      	                                                          				<% end %>
+				                                                          	 <% end %>
+				                                                      <% else %>
+                                                                    <%=image_tag('avatar.png',class:'instagram-card-user-image')%> 
+				                                                      <% end %>
+                                                            
+                                                              <span class="instagram-card-user-name"><%=user.first_name%> <%=user.last_name%></span>
+                                                            <%end%>
+                                                          </div>
+                                                        </div>
+                                                          <%@comments=Coment.where(:problem_id=>@x).order("id DESC")%>
+                                                            <%@comments.each do |com|%>
+                                                                  <div class="users-comments">
+                                                                    <div class="cmt">
+                                                                      <%user = User.where(:id=>com.user_id)%>
+                                                                      <%user.each do |user|%>
+                                                                          <%if @photos = Photo.where(:user_id=>user.id).present?%>
+				                                                          	          <%@photos = Photo.where(:user_id=>user.id)%>
+				                                                          	          <% @photos.each do |photo| %>
+      	                                                          				        <% if (photo.image.attached?) %>
+      	                                                          				          <%=image_tag(url_for(photo.image),class:'instagram-card-user-image')%>
+      	                                                          				        <% else %>
+                                                                                     		<%=image_tag('avatar.png',class:'instagram-card-user-image')%> 
+      	                                                          				        <% end %>
+				                                                          	          <% end %>
+				                                                                    <% else %>
+                                                                                  <%=image_tag('avatar.png',class:'instagram-card-user-image')%> 
+				                                                                    <% end %> 
+                                                                          <div class="instagram-card-user-name"><%=user.first_name%> <%=user.last_name%></div>
+                                                                      <%end%>
+                                                                          <div class="cmt-txt"><%=com.comment%></div>
+                                                                    </div>
+                                                                  </div>
+                                                            <%end%>
+                                                        <div class="instagram-card-footer">
+                                                          <form action=/feed method=POST>
+                                                             <input type='hidden' name='authenticity_token' value="<%= form_authenticity_token%>">
+                                                             <input type='hidden' name='feed[problem_id]' value="<%=problem.id%>">
+                                                            <div class="instagram-card-footer">
+                                                              <input name=feed[comment] class="comments-input blog-text-success" id="enter-comment" type="text" placeholder="Add a comment..." />
+                                                              <input type=submit class="btn btn-outline-info post_cmt btn-post" id="post-comment" value=Post >
+                                                            </div>
+                                                          </form>
+                                                        </div>
+
+                                                         <i class="fas fa-times close"></i>
+
+                                                    </div>
+
+                                                </div>
+                                              
                                               <div class="issue_date"><span class="issue_date"><%=problem.created_at.to_date%></span> </div>
                                             </div>
-                                            <div id="modal">
-                                                <div class='modal-content2 modal-style'>
-                                                    <div class='modal-body'>
-                                                            <div class="instagram-card-header">
-                                                              <div>
-                                                                <img src="insta_me.jpeg" class="instagram-card-user-image" />
-                                                                <span class="instagram-card-user-name">khalid99io</span>
-                                                              </div>
-                                                            </div>
-                                                            <div class="users-comments">
-                                                              <div class="cmt">
-                                                                <img src="insta_me.jpeg" class="instagram-card-user-image" />
-                                                                <div class="instagram-card-user-name">khalid99io</div>
-                                                                <div class="cmt-txt">This is real issue!</div>
-                                                              </div>
-                                                            </div>
-                                                            <div class="instagram-card-footer">
-                                                              <a class="footer-action-icons" href="#"><i class="fa fa-heart-o"></i></a>
-                                                              <input class="comments-input blog-text-success" id="enter-comment" type="text" placeholder="Add a comment..." />
-                                                              <button class="btn btn-outline-info post_cmt" id="post-comment">Post</button>
-                                                            </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                           
                                                 <%if @employee.present?%>
                                                     <form action='/confirm_issue' method="POST">
                                                         <input type='hidden' name='authenticity_token' value="<%= form_authenticity_token%>">
@@ -136,8 +322,15 @@
                                                     <form action='/confirm' method="POST">
                                                         <input type='hidden' name='authenticity_token' value="<%= form_authenticity_token%>">
                                                         <input type='hidden' name='confirm[problem_id]' value="<%=problem.id%>">
-                                                        <button class='btn btn-primary'name=confirm[confirmed] value=true>Confirm</button>
-                                                        <button  class='btn btn-primary'name=confirm[confirmed] value=false>Un_confirm</button>
+                                                        <div>
+                                                            <button name=confirm[confirmed] value=true><i class="far fa-thumbs-up"></i></button>
+                                                            <span><%=Confirm.where(:problem_id=>problem.id,:confirmed=>true).count%></span>
+                                                        </div>
+                                                        <div>
+                                                          <button name=confirm[confirmed] value=false><i class="far fa-thumbs-down"></i></button>
+                                                            <span><%=Confirm.where(:problem_id=>problem.id,:confirmed=>false).count%></span>
+
+                                                        </div>
                                                     </form>
                                                 <%end%>
                                             <form action=/feed method=POST>
@@ -157,61 +350,28 @@
                     </div>
                 </div>
             </div>
-            <%# <footer class="bg-white sticky-footer">
-                <div class="container my-auto">
-                    <div class="text-center my-auto copyright">
-                        <span>Copyright © FixIt2022</span>
-                    </div>
-                </div>
-            </footer> %>
+           
         <a class="border rounded d-inline scroll-to-top" href="" style="margin-right: 60px;">
             <i class="fas fa-angle-up"></i>
         </a>
     <a class="border rounded d-inline scroll-to-top" href="/submit_issue">
         <button class="btn btn-primary add-issue fa fa-plus" type="button" data-toggle="modal" data-target="#submit_issue"></button>
     <a>
-    <%# <div id="submit_issue" class="modal fade" role="dialog">
-        <div class="modal-dialog">
-      
-          <!-- Modal content-->
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal">&times;</button>
-              <h4 class="modal-title">Modal Header</h4>
-            </div>
-            <div class="modal-body">
-              <p>Some text in the modal.</p>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
-          </div>
-      
-        </div>
-    </div> %>
-   <script>
-    post(e){
-      e.preventDefault()
-    }
-    var modal = document.getElementById("modal");
+    
+   <script >
+        $(function(){
+    $('#open87').click(function(){
+    $('.model-container').delay(2000).css('transform',' scale(1)')
+    });
+     $('#open90').click(function(){
+    $('.model-container').delay(2000).css('transform',' scale(1)')
+    });
 
-    let btn2 = document.getElementById("view_cmt");
-
-    btn2.onclick = function () {
-    modal.style.display = "block";
-    document.body.style.overflow = "hidden"
-    }
-
-    function success() {
-      if (document.getElementById("enter-comment").value === "") {
-        document.getElementById('post-comment').disabled = true;
-      }
-      else{
-        document.getElementById('post-comment').disabled = false;
-
-      }
-    }
-  </script>
+    $('body').on('click','.close',function(){
+        $('.model-container').css('transform',' scale(0)')
+        });
+});
+    </script>
 </body>
 
 </html>

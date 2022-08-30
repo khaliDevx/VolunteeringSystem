@@ -1,0 +1,83 @@
+
+
+.chatbar {
+	
+	padding: 20px 5px 0;
+	margin-right: 0;
+	// font-weight: bold;
+	color:rgb(255, 255, 255);
+    background-color: #4e73df;
+    padding-bottom: 30px;
+
+}
+.header{
+    text-align: left;
+}
+.skip{
+    float: right;
+    padding-bottom: 30px;
+    color:white;
+    
+}
+.row {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-ms-flex-wrap: wrap;
+	flex-wrap: wrap;
+	margin-right: -15px;
+	margin-left: -15px;
+}
+.picture-profile {
+	width: 50%;
+	height:50%;
+	margin: auto;
+    margin-top: 3%;
+    text-align: left;
+    float: left;
+    padding: 0;
+    padding-bottom: 50px;
+    
+
+}
+
+.profile-pic {
+	
+	background-size: contain;
+	background-repeat: no-repeat;
+	height: 20%;
+	width: 30%;
+	margin-left: 80%;
+   border-radius: 50%;
+
+}
+.camera{
+    
+    color: #4e73df;
+}
+.btn-camera{
+   width: 40px;
+   height: 40px;
+   position: absolute;
+   padding: 5px;
+   margin-left: 40%;
+   border-radius: 50%;
+   
+
+}
+.info{
+    margin-top: 300px;
+   
+}
+.span{
+    margin-right: 80%;
+}
+label{
+    font-size: large;
+}
+.bnt-save {
+    margin-left: 90%;
+   border-radius: 40%;
+
+}
+

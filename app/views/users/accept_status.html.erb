@@ -1,6 +1,12 @@
 <html>
  <%= stylesheet_link_tag 'join'%>
-    
+
+<style>
+
+
+
+</style>
+
     <body>
         <%@problems.each do |problem|%>
             <div class="join-container">
@@ -42,8 +48,8 @@
                               <h4 class="blog-card-caption">Submitted by:</h4>
                               <div>
                                     <%user=User.where(:id=>problem.user_id)%>
-                                    <%user.each do |u|%>
-                                        <span><%=u.first_name%> <%=u.last_name%></span>
+                                    <%user.each do |user|%>
+                                        <span > <%= link_to "#{user.first_name} #{user.last_name}",personal_page_user_path(user),:class=>"link-dark" %></span>
                                     <%end%>
                               </div>
                           </div>
@@ -54,23 +60,57 @@
                                     <%accept.each do |acc|%>
                                         <%user=User.where(:id=>acc.user_id)%>
                                     <%end%>
-                                    <%user.each do |u|%>
-                                        <span><%=u.first_name%> <%=u.last_name%></span>
+                                    <%user.each do |user|%>
+                                        <span > <%= link_to "#{user.first_name} #{user.last_name}",personal_page_user_path(user),:class=>"link-dark" %></span>
                                     <%end%>
                                     
                               </div>
                           </div>
-                          <% if flash[:success].present?%>
-                                <div id="flash-notice" style="border:1px solid red; color: red ;padding=:10px">
-                                <%=flash[:success]%>
-                                </div>
-                            <%end%>
-                      </div>
-                        <% if flash[:error].present?%>
+                        
+                    </div>
+                     <div class="container">
+                        <button id="support" class='btn btn-outline-info'>Support</button>
+                       
+                    </div>
+                    <div class="model-container">
+                        <div class="model">
+                            <i class="fas fa-home"></i>
+                            <h3>support Box</h3>
+                            <p>welcome Ali Bin_Dohri </p>
+                            <h3>choos what you want to support</h3>
+                            <div class=main>
+                              <button id=ass class=off>Money</button>
+                              <button id=on class=on>Matt</button>
+
+                            </div>
+                            <div class=money>
+                                <form>
+                                  <input type=number class="sel ">
+                                  <select class="sel">
+                                    <option>$<option>
+                                  </select>
+                                  <button class="btn-money">Support</button>
+                                <form>
+                            </div>
+                           <div class="matt">
+                              <form>
+                                <select class="form-control w-50">
+                                  <option>light<option>
+                                </select>
+                                <input type=number class="form-control w-50" value=>
+                                <button  value=>Support</button>
+
+                              </form>
+                            </div>
+                              <i class="fas fa-times close"></i>
+                        </div>
+                    </div>
+                        <% if flash[:error_join].present?%>
                                 <div id="flash-notice" style="border:1px solid red; color: red ;padding=:10px">
                                 <%=flash[:error]%>
                                 </div>
                         <%end%>
+                        
                         <%join=JoinIssue.where(:user_id=>session[:user_id])%>
                         <%join_user=JoinIssue.where(:problem_id=>problem.id ,:user_id=>session[:user_id])%>
                         <%if join_user.present?%>
@@ -98,5 +138,40 @@
                   </div>
             </div>
         <%end%>
+          </div>
+        <a class="border rounded d-inline scroll-to-top" href="" style="margin-right: 60px;">
+            <i class="fas fa-angle-up"></i>
+        </a>
+    </div>
+    <a class="border rounded d-inline scroll-to-top" href="/submit_issue">
+        <button class="btn btn-primary add-issue fa fa-plus" type="button" data-toggle="modal" data-target="#submit_issue"></button>
+    <a> 
+         <script>
+        $(function(){
+    $('#support').click(function(){
+    $('.model-container').delay(2000).css('transform',' scale(1)')
+    });
+    $('body').on('click','.close',function(){
+        $('.model-container').css('transform',' scale(0)')
+        });
+        
+});
+$('.off').click(function(){
+          $('.matt').hide()
+          $('.money').show()
+          $('.off').delay(2000).css('background','#fff')
+          $('.on').delay(2000).css('background','#4d90fe')
+
+        });
+$('.on').click(function(){
+  $('.matt').show()
+  $('.money').hide()
+  $('.on').delay(5000).css('background','#fff')
+  $('.off').delay(5000).css('background','#4d90fe')
+
+
+})
+
+
+    </script>
     </body>
-</html>

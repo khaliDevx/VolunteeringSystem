@@ -1,62 +1,131 @@
- <%= stylesheet_link_tag 'faq'%>
+<style>
+ 
 
-<div class="faq_area section_padding_130" id="faq">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-12 col-sm-8 col-lg-6">
-                <!-- Section Heading-->
-                <div class="section_heading text-center wow fadeInUp" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
-                    <h3><span>Frequently </span> Asked Questions</h3>
-                    <p>Appland is completely creative, lightweight, clean &amp; super responsive app landing page.</p>
-                    <div class="line"></div>
+</style>
+ <%= stylesheet_link_tag 'help'%>
+
+<body>
+        <div class="layer" id="index2">
+            <div class="questionsContainer">
+                <div id="questionTitle">
+                    Frequently Asked Questions
                 </div>
+                <div class="questions">
+                    <div class="question-info">
+                        <div class="question">
+                            <span>What Is Fix It System?</span> <span class="open">+</span>
+                        </div>
+                        <div id="info1" class="info">
+                            Netflix is a streaming service that offers a wide variety of award-winning TV shows,
+                            movies, anime, documentaries, and more on thousands of internet-connected devices.
+                        </div>
+                    </div>
+                    <div class="question-info">
+                        <div class="question">
+                            <span>How much does Netflix cost?</span> <span class="open">+</span>
+                        </div>
+                        <div id="info2" class="info">
+                            Watch Netflix on your smartphone, tablet, Smart TV, laptop, or streaming device,
+                            all for one fixed monthly fee. Plans range from USD7.99 to USD11.99 a month.
+                            No extra costs, no contracts.
+                        </div>
+                    </div>
+                    <div class="question-info">
+                        <div class="question">
+                            <span>Where can I watch?</span> <span class="open" id="open3">+</span>
+                        </div>
+                        <div class="info" id="info3">
+                            Watch anywhere, anytime, on an unlimited number of devices.
+                            Sign in with your Netflix account to watch instantly on the web
+                            at netflix.com from your personal computer or on any internet-connected
+                            device that offers the Netflix app, including smart TVs, smartphones,
+                            tablets, streaming media players and game consoles.                        
+                        </div>
+                    </div>
+                    <div class="question-info">
+                        <div class="question" >
+                            <span>What can I watch on Netflix?</span> <span class="open" id="open4">+</span>
+                        </div>
+                        <div class="info" id="info4">
+                            Netflix has an extensive library of feature films,
+                            documentaries, TV shows, anime, award-winning Netflix originals,
+                            and more. Watch as much as you want, anytime you want.
+                        </div>
+                    </div>
+                    <div class="question-info">
+                        <div class="question">
+                            <span>How do I cancel?</span> <span class="open" id="open5">+</span>
+                        </div>
+                        <div class="info" id="info5">
+                            Netflix is flexible. There are no pesky contracts and no commitments.
+                            You can easily cancel your account online in two clicks.
+                            There are no cancellation fees – start or stop your account anytime.
+                        </div>
+                    </div>
+                    
+                </div>   
             </div>
         </div>
-        <div class="row justify-content-center">
-            <!-- FAQ Area-->
-            <div class="col-12 col-sm-10 col-lg-8">
-                <div class="accordion faq-accordian" id="faqAccordion">
-                    <div class="card border-0 wow fadeInUp" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
-                        <div class="card-header" id="headingOne">
-                            <h6 class="mb-0 collapsed" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">How can I install this app?<span class="lni-chevron-up"></span></h6>
-                        </div>
-                        <div class="collapse" id="collapseOne" aria-labelledby="headingOne" data-parent="#faqAccordion">
-                            <div class="card-body">
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto quidem facere deserunt sint animi sapiente vitae suscipit.</p>
-                                <p>Appland is completely creative, lightweight, clean &amp; super responsive app landing page.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card border-0 wow fadeInUp" data-wow-delay="0.3s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInUp;">
-                        <div class="card-header" id="headingTwo">
-                            <h6 class="mb-0 collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">The apps isn't installing?<span class="lni-chevron-up"></span></h6>
-                        </div>
-                        <div class="collapse" id="collapseTwo" aria-labelledby="headingTwo" data-parent="#faqAccordion">
-                            <div class="card-body">
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto quidem facere deserunt sint animi sapiente vitae suscipit.</p>
-                                <p>Appland is completely creative, lightweight, clean &amp; super responsive app landing page.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card border-0 wow fadeInUp" data-wow-delay="0.4s" style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInUp;">
-                        <div class="card-header" id="headingThree">
-                            <h6 class="mb-0 collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">Contact form isn't working?<span class="lni-chevron-up"></span></h6>
-                        </div>
-                        <div class="collapse" id="collapseThree" aria-labelledby="headingThree" data-parent="#faqAccordion">
-                            <div class="card-body">
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto quidem facere deserunt sint animi sapiente vitae suscipit.</p>
-                                <p>Appland is completely creative, lightweight, clean &amp; super responsive app landing page.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Support Button-->
-                <div class="support-button text-center d-flex align-items-center justify-content-center mt-4 wow fadeInUp" data-wow-delay="0.5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInUp;">
-                    <i class="lni-emoji-sad"></i>
-                    <p class="mb-0 px-2">Can't find your answers?</p>
-                    <a href="#"> Contact us</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+        <script>
+              $(document).ready(function(){    
+    $('.question-info').click(function(){
+        $(this).children('.info').slideToggle()
+        $(this).find('.open').toggleClass('opened')
+    })
+
+    $('.dot1').click(function(){
+        $('.page1').show(350);
+        $('.page2').hide(350);
+        $('.page3').hide(350);
+    });
+
+    $('.dot2').click(function(){
+        $('.page2').show(350);
+        $('.page1').hide(350);
+        $('.page3').hide(350);
+    });
+
+    $('.dot3').click(function(){
+        $('.page3').show(350);
+        $('.page1').hide(350);
+        $('.page2').hide(350);
+    });
+
+    $('.posters').click(function(){
+        $('.box').removeClass('hide')
+        $('.box').addClass('show')
+        $('#bigimg').attr('src', $(this).attr('src'))
+    })
+
+    
+    $('.smallimg').mouseover(function(){
+        $(this).css('opacity', '1')
+    })
+    $('.smallimg').mouseleave(function(){
+        $(this).css('opacity', '0.8')
+    })
+    $('.smallimg').click(function(){
+        if($('#bigimg').attr('src') != $(this).attr('src')){
+            $(this).animate({
+                opacity: "0.3"
+            },300)
+            $(this).animate({
+                opacity: "1"
+            },300)
+           
+            $('#bigimg').animate({
+                width: "0",
+                hight: "0",
+                opacity: "0"
+            },300).attr('src', $(this).attr('src'))
+            $('#bigimg').animate({
+                width: "300px",
+                hight: "450px",
+                opacity: "1"
+            },300)
+        }
+       
+    })
+})
+        </script>
+  </body>

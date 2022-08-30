@@ -1,0 +1,2 @@
+class Meassage < ApplicationRecord
+end

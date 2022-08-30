@@ -21,7 +21,7 @@ class ProblemsController < ApplicationController
 
   # GET /problems/new
   def new
-
+    
     @problem = Problem.new
     @x=params[:id]
     @city=City.all
@@ -33,7 +33,7 @@ class ProblemsController < ApplicationController
 
   # POST /problems or /problems.json
   def create
-    user=User.find_by(:id=>session[:user_id])
+    user=User.find_by(:id=>session[:user_id]) 
     if user.accountstatu==false
       redirect_to new_problem_path
     else
@@ -54,12 +54,12 @@ class ProblemsController < ApplicationController
         end
       end
     end
-
+   
   end
 
   # PATCH/PUT /problems/1 or /problems/1.json
   def update
-    user=User.find_by(:id=>session[:user_id])
+    user=User.find_by(:id=>session[:user_id]) 
     respond_to do |format|
       if @problem.update(problem_params)
         if user.user_type=="Employee"
@@ -78,7 +78,7 @@ class ProblemsController < ApplicationController
 
   # DELETE /problems/1 or /problems/1.json
   def destroy
-    user=User.find_by(:id=>session[:user_id])
+    user=User.find_by(:id=>session[:user_id]) 
     @problem.destroy
     if user.user_type=="Employee"
     respond_to do |format|
@@ -91,18 +91,20 @@ class ProblemsController < ApplicationController
           format.json { head :no_content }
         end
     end
-
+    
   end
-  def confirm
-      # user=User.where(:id=>session[:user_id])
-      confirm=Confirm.new(confirm_prams)
-     if user=Confirm.find_by(:problem_id=>confirm_prams[:problem_id])
-      Confirm.where(:problem_id=>confirm_prams[:problem_id]).update(:confirmed=>confirm_prams[:confirmed])
+  def confirm 
+      user=User.where(:id=>session[:user_id])
 
+      confirm=Confirm.new(confirm_prams)
+     if user=Confirm.find_by(:problem_id=>confirm_prams[:problem_id],:user_id=>session[:user_id])
+      Confirm.where(:problem_id=>confirm_prams[:problem_id]).update(:confirmed=>confirm_prams[:confirmed])
+      redirect_to '/index'
      else
         confirm.user_id=session[:user_id]
-        if confirm.save
-            redirect_to '/index'
+        if confirm.save 
+            redirect_to'/index'
+           
         end
      end
 
@@ -116,8 +118,8 @@ class ProblemsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def problem_params
-
-     params.require(:problem).permit(:image, :cordinates,  :status, :desciption, :governorate_id, :category_id,:city_id,:user_id)
+      
+     params.require(:problem).permit(:image, :cordinates,  :status, :desciption, :governorate_id, :category_id,:city_id,:user_id)  
 
     end
     def confirm_prams

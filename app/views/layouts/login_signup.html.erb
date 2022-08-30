@@ -1,38 +1,83 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
+     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <meta name="theme-color" content="#2eb8e6">
     <title>FixIt</title>
-    <%= favicon_link_tag 'favicon.ico' %>
-
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-    <link rel="manifest" href="manifest.json">
-    <link rel="stylesheet"href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
-    <link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css">
-    <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
-    <link rel="stylesheet" href="assets/fonts/fontawesome5-overrides.min.css">
-    <link rel="stylesheet" href="assets/css/styles.min.css">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body class=body>
+  <body id="page-top">
 
     <%= yield %>
-    <footer class="bg-white sticky-footer">
-                <div class="container my-auto">
-                    <div class="text-center my-auto copyright"><span>Copyright © FixIt2022</span></div>
-                </div>
-    </footer>
+<%# <script>
+
+  // var modal = document.getElementById("menus");
+    var modal = document.getElementById("modal");
+
+    // var btn = document.getElementById("myBtn");
+    var btn2 = document.getElementById("view_cmt");
+
+
+    // btn.onclick = function () {
+    //   modal.style.display = "block";
+    //   document.body.style.overflow = 'hidden';
+    // }
+
+    btn2.onclick = function () {
+      modal.classList.remove("modal1");
+      modal.classList.remove("modal2");
+      document.body.style.overflow = 'hidden';
+    }
+
+    // window.onclick = function (event) {
+    //   // if (event.target == modal) {
+    //   //   document.body.style.overflow = 'visible';
+    //   //   modal.style.display = "none";
+    //   // }
+    //   if (event.target == modal) {
+    //     document.body.style.overflow = 'visible';
+    //     modal.style.display = "none";
+    //   }
+    // }
+    function success() {
+      if (document.getElementById("enter-comment").value === "") {
+        document.getElementById('post-comment').disabled = true;
+      }
+      else{
+        document.getElementById('post-comment').disabled = false;
+
+      }
+    }
+      function preview() {
+      frame.src = URL.createObjectURL(event.target.files[0]);
+      }
+    !function () {
+
+        "use strict";
+        var e = document.querySelector(".sidebar"), o = document.querySelectorAll("#sidebarToggle, #sidebarToggleTop");
+        if (e) { e.querySelector(".collapse"); 
+        var t = [].slice.call(document.querySelectorAll(".sidebar .collapse")).map((function (e) { 
+            return new bootstrap.Collapse(e, { toggle: !1 }) 
+        }));
+        for (var l of o) l.addEventListener("click", (function (o) { 
+            if (document.body.classList.toggle("sidebar-toggled"), e.classList.toggle("toggled"), e.classList.contains("toggled")) 
+            for (var l of t) l.hide() })); window.addEventListener("resize", (function () {
+                if (Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0) < 768) 
+                for (var e of t) e.hide() })) 
+            } 
+            var n = document.querySelector("body.fixed-nav .sidebar"); 
+            n && n.on("mousewheel DOMMouseScroll wheel", (function (e) { 
+                if (Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0) > 768) { 
+                    var o = e.originalEvent, t = o.wheelDelta || -o.detail; this.scrollTop += 30 * (t < 0 ? 1 : -1), e.preventDefault() } })); 
+                    var i = document.querySelector(".scroll-to-top"); i && window.addEventListener("scroll", (function () { 
+                        var e = window.pageYOffset; i.style.display = e > 100 ? "block" : "none" })) 
+    }();
+</script> %>
   </body>
 </html>

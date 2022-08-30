@@ -1,140 +1,231 @@
-<!DOCTYPE html>
-<html>
+
 <style>
-    *{
-	box-sizing: border-box;
-	margin: 0;
-	padding: 0;
+
+*{
+    /* margin: 0;
+    padding: 0; */
+    /* box-sizing: border-box; */
+    transition: all.2s linear;
+    /* text-transform: capitalize; */
+    
 }
 .container{
-	display: flex;
-    flex-flow: column nowrap;
-	justify-content: center;
-	align-items: center;
-	align-items: center;
-    padding: 20px;
-    background-color: cornflowerblue;
-}
-.container-form{
     display: flex;
-    flex-flow: column nowrap;
-	align-items: flex-start;
-    padding: 40px;
-    width: 500px;
-    height: auto;
-    border-radius: 10px;
-    background-color: #fff; 
+    align-items: center;
+    justify-content: center;
+ 
 }
-#frame{
-    border-radius: 10px;
-    margin-left: -15px;
-    margin-right: 20px;
-}
-.custom-file{
-    width: 250px;
-    margin-left: 0px;
-}
-.choosephoto{
-    display: flex;
-	align-items: center;
-	flex-flow: row nowrap;
-	justify-content: space-between;
-    width: 300px;
-    height: auto;
-    margin-bottom: 40px;
-}
-.issueInfo{
-    height: auto;
-    background-color: #fff; 
-
-}
-.issueInfoParts{
-    display: flex;
-	flex-flow: row nowrap;
-	justify-content: space-between;
-    margin-bottom: 20px;
-    width: auto;
-}
-.issueInfoParts label{
-    margin-right: 20px;
-}
-.issueInfoParts select{
-    width: 300px;
-}
-.result{
-    border: none;
-    border-radius: 5px;
-    height: 40px;
-    width: 200px;
-    color: rgb(22, 22, 22);
-    background-color: #999;
-    text-align: center;
-}
-.btn2{
-    border: none;
-    border-radius: 3px;
+/* #support{
+    height: 50px;
+    width: 180px;
+    /* background: #fff; */
+    /* color: #333; */
+    /* font-size: 25px; */
+    cursor: pointer;
+    letter-spacing: 2px;
     outline: none;
-    color: rgb(22, 22, 22);
-    height: 40px;
-    width: 130px;
-    background-color: #999;
+    border: none;
+    /* box-shadow: 0 3px 5px rgba(0,0,0,3); */
+} */
+#support:hover{
+    letter-spacing: 4px;
+    opacity: 0.8;
 }
+.model-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100%;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: rgba(0,0,0,.3);
+    transform: scale(0);
+}
+.model-container .model{
+height: 400px;
+width: 50%;
+margin: 0 10px;
+padding: 20px;
+background: #fff;
+border-radius: 5px;
+text-align: center;
+position: relative;
+
+}
+.fa-home
+{
+    font-size: 30px;
+    color: #4d90fe;
+    padding-bottom: 50px;
+    /* margin: 10px 0; */
+    top: 15px;
+
+    float:left;
+    transform: rotate(-0.10turn);
+   
+}
+.model-container .model h3{
+color:#333;
+font-size: 25px;
+}
+.model-container .model p{
+    color: #666;
+    margin: 20px 0;
+}
+.model-container .model button{
+    width: 100px;
+    height: 50px;
+    /* background: #4d90fe; */
+    outline: none;
+    border: none;
+    border-radius: 50px;
+    font-size: 17px;
+    cursor: pointer;
+    /* margin-top:35%; */
+    float:left;
+
+    
+}
+button{
+    background: #4d90fe;
+
+}
+.model-container .model button:hover{
+opacity: .8;
+}
+.model-container .model .fa-times{
+position: absolute; 
+top: 15px;
+right: 15px;  
+font-size: 25px; 
+cursor: pointer;
+color: #333;
+
+}
+.fa-toggle-off{
+    margin-right:100%;
+    font-size: 40px;
+    background: #4d90fe;
+}
+.matt{
+  /* transform: scale(1); */
+}
+.money{
+   /* transform: scale(0); */
+   display:none;
+    margin-right:50%;
+    float:left;
+    margin-left:0;
+   
+   
+}
+.sel{
+    display: inline;
+    width: auto;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #858796;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #d1d3e2;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border-radius: .35rem;
+}
+
+div .main{
+  padding-bottom:50px
+}
+.off{
+  width: 50px;
+  height:20px;
+  border-radius: 50px;
+  cursor: pointer;
+  background: #4d90fe;
+
+}
+.on{
+  width: 50px;
+  height:20px;
+  border-radius: 50px;
+  cursor: pointer;
+  background: #fff;
+
+}
+
 </style>
-<body class="container">
-  <form class="border container-form">
-    <div class="choosephoto">
-      <img id="frame" src="image-preview2.png" class="img-fluid" width="80px" height="150px" />
-      <div class="custom-file">
-        <div class="mb-5">
-          <input class="form-label custom-file-input" type="file" id="formFile" onchange="preview()">
-          <label class="custom-file-label">Choose Image</label>
-        </div>
-      </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+<body>
+    <div class="container">
+        <button id="support">click</button>
     </div>
-    <div class="issueInfo">
-      <div class="issueInfoParts">
-        <label>State</label>
-        <select class="form-control" placeholder="State" required>
-          <option selected>Open this select menu</option>
-          <option value="1">One</option>
-          <option value="2">Two</option>
-          <option value="3">Three</option>
-        </select>
-      </div>
-      <div class="issueInfoParts">
-        <label>City</label>
-        <select class="form-control" placeholder="City" required>
-          <option selected>Open this select menu</option>
-          <option value="1">One</option>
-          <option value="2">Two</option>
-          <option value="3">Three</option>
-        </select>
-      </div>
+    <div class="model-container">
+        <div class="model">
+            <i class="fas fa-home"></i>
+            <h3>support Box</h3>
+            <p>welcome Ali Bin_Dohri </p>
+            <h3>choos what you want to support</h3>
+            <div class=main>
+              <button id=off class=off>Money</button>
+              <button id=on class=on>Matt</button>
 
-      <div class="issueInfoParts">
-        <label>Category</label>
-        <select class="form-control" placeholder="Category" required>
-          <option selected>Open this select menu</option>
-          <option value="1">One</option>
-          <option value="2">Two</option>
-          <option value="3">Three</option>
-        </select>
-      </div>
-      
-      <div class="issueInfoParts">
-        <label>Description</label>
-        <textarea class="form-control" placeholder="Add description..." rows="5" cols="30"
-          name="description"></textarea>
-      </div>
+            </div>
+            <div class=money>
+                <form>
+                  <input type=number class="sel ">
+                  <select class="sel">
+                    <option>$<option>
+                  </select>
+                  <button  value=>Support</button>
+                <form>
+            </div>
+           <div class="matt">
+              <form>
+                <select class="form-control w-50">
+                  <option>light<option>
+                </select>
+                <input type=number class="form-control w-50" value=>
+                <button  value=>Support</button>
 
-      <div class="issueInfoParts">
-        <button id="getPositionButton" class="btn2">Add Geolocation</button>
-        <div class="geolocation result"></div>
-      </div>
+              </form>
+            </div>
+              
+              <i  class="fas fa-times close"></i>
+          </div>
     </div>
+    <script>
+        $(function(){
+    $('#support').click(function(){
+    $('.model-container').delay(2000).css('transform',' scale(1)')
+    });
+    $('body').on('click','.close',function(){
+        $('.model-container').css('transform',' scale(0)')
+        });
+        
+});
+$('#off').click(function(){
+          $('.matt').hide()
+          $('.money').show()
+          $('.off').delay(2000).css('background','#fff')
+          $('.on').delay(2000).css('background','#4d90fe')
 
-    <button class="btn btn-primary" type="submit">Submit Issue</button>
-  </form>
+        });
+$('#on').click(function(){
+  $('.matt').show()
+  $('.money').hide()
+  $('.on').delay(5000).css('background','#fff')
+  $('.off').delay(5000).css('background','#4d90fe')
+
+
+})
+
+
+    </script>
 </body>
-
-</html>
