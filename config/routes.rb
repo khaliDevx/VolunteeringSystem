@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
-  resources :employees
+  resources :photos
+  resources :employees 
+  resources :users do
+    member do
+      get :personal_page
+    end
+  end
   resources :problems
   get "/submit", to: "problems#new"
 
@@ -19,7 +25,7 @@ Rails.application.routes.draw do
   get "/issue", to: "employees#issue"
   get "/new_user", to: "sessions#new_user"
   post "/employee", to: "sessions#create_user"
-  get "/users", to: "employees#index"
+  get "/user", to: "employees#user"
   get "/profile", to: "users#profile"
   post "/upprofile", to: "users#update_profile"
   post "/edit_user", to: "users#update"
@@ -48,6 +54,16 @@ Rails.application.routes.draw do
   get "/accept_status", to: "users#accept_status"
   # post "/accept", to: "users#accept_problem"
   post "/join_issue", to: "users#join"
+  #meassages
+  get "/meassage", to: "users#meassage"
+  #image
+  post "/image", to: "users#upimage"
+  ##personal_page
+  get "/personal_page", to: "users#personal_page"
+  get "/log", to: "users#log"
+
+  ##Add Bio
+  post "/bio", to: "users#add_bio"
 
   resources :users do
     member do

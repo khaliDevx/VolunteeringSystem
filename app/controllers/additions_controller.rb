@@ -1,7 +1,7 @@
 class AdditionsController < ApplicationController
     layout 'application'
 
-    def help
+    def help 
 
     end
     def addition
@@ -11,7 +11,7 @@ class AdditionsController < ApplicationController
     def new_gover
         gover = Governorate.new(gover_params)
 
-        if gover.save
+        if gover.save 
             redirect_to '/addition'
         else
             redirect_to '/addition'
@@ -19,7 +19,7 @@ class AdditionsController < ApplicationController
     end
     def new_city
         city = City.new(city_params)
-        if city.save
+        if city.save 
             redirect_to '/addition'
         else
             redirect_to '/addition'
@@ -27,7 +27,7 @@ class AdditionsController < ApplicationController
     end
     def new_cat
         cat = Category.new(cat_params)
-        if cat.save
+        if cat.save 
             redirect_to '/addition'
         else
             redirect_to '/addition'
@@ -35,13 +35,13 @@ class AdditionsController < ApplicationController
     end
     def new_mat
         mat = Material.new(mat_params)
-        if mat.save
+        if mat.save 
             redirect_to '/addition'
         else
             redirect_to '/addition'
         end
     end
-
+    
 
     private
         def gover_params
@@ -54,6 +54,6 @@ class AdditionsController < ApplicationController
             params.require(:cat).permit(:name)
         end
         def mat_params
-            params.require(:mat).permit(:name, :category_id)
+            params.require.permit(:name, :category_id)
         end
 end

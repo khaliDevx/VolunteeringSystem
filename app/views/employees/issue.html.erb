@@ -77,7 +77,7 @@
                                                         <% @user.each do |user| %>
                                                             <%x=user.first_name%>
                                                             <%y=user.last_name%>
-                                                            <span > <%= link_to "#{x} #{y}", :class=>"link-dark" %></span>
+                                                            <span > <%= link_to "#{x} #{y}",personal_page_user_path(user),:class=>"link-dark" %></span>
                                                         <% end %>
                                                         
                                                     </div>

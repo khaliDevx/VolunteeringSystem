@@ -1,27 +1,19 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
+     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <meta name="theme-color" content="#2eb8e6">
     <title>FixIt</title>
-    <%= favicon_link_tag 'favicon.ico' %>
-    
+    <meta name="theme-color" content="#2eb8e6">
+    <%= favicon_link_tag 'fixit.jpg' %>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="manifest" href="manifest.json">
-    <link rel="stylesheet"href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
-    <link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css">
-    <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
-    <link rel="stylesheet" href="assets/fonts/fontawesome5-overrides.min.css">
-    <link rel="stylesheet" href="assets/css/styles.min.css">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
@@ -56,16 +48,10 @@
                         </a>
                     </li>
                     <%end%>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/profile">
-                            <i class="fas fa-user"></i>
-                            <span>Profile</span>
-                        </a>
-                    </li>
                     <%@employee= User.where(:id=>session[:user_id],:user_type=>"Employee")%>
                     <%if @employee.present?%>
                         <li class="nav-item">
-                            <a class="nav-link" href="users">
+                            <a class="nav-link" href="/user">
                                 <i class="fas fa-table"></i>
                                 <span>Users</span>
                             </a>
@@ -76,12 +62,12 @@
                                 <span>Register</span>
                             </a>
                         </li>
-
-
+                       
+                        
                          <li class="nav-item"> <a class="nav-link" href="/addition">
-                    <i class="fas fa-plus "></i><span>ِAdditions</span>
+                    <i class="fas fa-plus "></i><span>Additions</span>
                         </a>
-                    </li>
+                    </li> 
                      <li class="nav-item">
                             <a class="nav-link" href="/issue">
                                 <i class="fas fa-camera"></i>
@@ -107,6 +93,7 @@
                                 <span>Accepted_issues</span>
                             </a>
                     </li>
+                    
                     <li class="nav-item">
                         <a class="nav-link" href="/help">
                             <i class="fas fa-question-circle "></i>
@@ -126,15 +113,6 @@
                         <button class="btn btn-link d-md-none rounded-circle me-3" id="sidebarToggleTop" type="button">
                             <i class="fas fa-bars"></i>
                         </button>
-                        <form class="d-none d-sm-inline-block me-auto ms-md-3 my-2 my-md-0 mw-100 navbar-search">
-                            <div class="input-group">
-                                <input class="bg-light form-control border-0 small" type="text"
-                                    placeholder="Search for ...">
-                                <button class="btn btn-primary py-0" type="button">
-                                    <i class="fas fa-search"></i>
-                                </button>
-                            </div>
-                        </form>
                         <ul class="navbar-nav flex-nowrap ms-auto">
                             <li class="nav-item dropdown d-sm-none no-arrow">
                                 <a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown"
@@ -160,8 +138,18 @@
                                 <div class="nav-item dropdown no-arrow">
                                     <a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown"
                                         href="#">
-                                        <span class="badge bg-danger badge-counter"></span>
-                                        <i class="fas fa-bell fa-fw"></i>
+                                        <%if us.present?%>
+                                            <span class="badge bg-danger badge-counter"></span>
+                                            <%if Problem.where(:status=>"Submitted").count ==0%>
+                                            <i class="fas fa-bell fa-fw"></i>
+                                            <%else%>
+                                                <i class="fas fa-bell fa-fw"></i>
+                                                <div style="color:red;font-size: 10px;"><%=Problem.where(:status=>"Submitted").count%></div>
+                                            <%end%>
+                                        <%else%>
+                                            <i class="fas fa-bell fa-fw"></i>
+
+                                        <%end%>
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-end dropdown-list animated--grow-in">
                                         <h6 class="dropdown-header">alerts center</h6>
@@ -250,7 +238,7 @@
                                                 <p class="small text-gray-500 mb-0">E. Omer Ahmed - 2d</p>
                                             </div>
                                         </a>
-                                        <a class="dropdown-item text-center small text-gray-500" href="#">Show All
+                                        <a class="dropdown-item text-center small text-gray-500" href="/meassage">Show All
                                             Alerts</a>
                                     </div>
                                 </div>
@@ -265,22 +253,32 @@
 
                                         <% @user = User.where(:id=>session[:user_id]) %>
                                             <% @user.each do |user| %>
-
-
+                                                
+                                            
                                                 <span class="d-none d-lg-inline me-2 text-gray-600 small"><%=user.first_name%><br><%=user.last_name%></span>
-                                            <% end %>
-                                        <img class="border rounded-circle img-profile" <%=image_tag('avatar.png')%>
+                                                    <%if @photos= Photo.where(:user_id=>user.id).present?%>
+				                                            	<%@photos= Photo.where(:user_id=>user.id)%>
+				                                            	<% @photos.each do |photo| %>
+      			                                            		<% if (photo.image.attached?) %>
+      			                                            		  <%=image_tag(url_for(photo.image),class:'border rounded-circle img-profile')%>
+      			                                            		<% else %>
+                                                                		<%=image_tag('avatar.png',class:'border rounded-circle img-profile')%> 
+      			                                            		<% end %>
+				                                            	    <% end %>
+				                                    <% else %>
+                                                                <%=image_tag('avatar.png',class:'border rounded-circle img-profile')%> 
+				                                    <% end %>
                                     </a>
 
                                     <div class="dropdown-menu shadow dropdown-menu-end animated--grow-in">
-                                        <a class="dropdown-item" href="/profile">
-                                            <i class="fas fa-user fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Profile
-                                        </a>
-
+                                        
+                                            &nbsp;&nbsp;&nbsp;&nbsp;<i class="fas fa-user fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;<%= link_to "Profile", personal_page_user_path(user),:class=>"link-dark " %>
+                                    
+                                        <% end %>
+                                       
                                         <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="log_out">
-                                            <i
-                                                class="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Logout
+                                        <a class="dropdown-item" href="/log_out">
+                                            <i class="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Logout
                                         </a>
                                     </div>
                                 </div>
@@ -375,22 +373,22 @@
 
         "use strict";
         var e = document.querySelector(".sidebar"), o = document.querySelectorAll("#sidebarToggle, #sidebarToggleTop");
-        if (e) { e.querySelector(".collapse");
-        var t = [].slice.call(document.querySelectorAll(".sidebar .collapse")).map((function (e) {
-            return new bootstrap.Collapse(e, { toggle: !1 })
+        if (e) { e.querySelector(".collapse"); 
+        var t = [].slice.call(document.querySelectorAll(".sidebar .collapse")).map((function (e) { 
+            return new bootstrap.Collapse(e, { toggle: !1 }) 
         }));
-        for (var l of o) l.addEventListener("click", (function (o) {
-            if (document.body.classList.toggle("sidebar-toggled"), e.classList.toggle("toggled"), e.classList.contains("toggled"))
+        for (var l of o) l.addEventListener("click", (function (o) { 
+            if (document.body.classList.toggle("sidebar-toggled"), e.classList.toggle("toggled"), e.classList.contains("toggled")) 
             for (var l of t) l.hide() })); window.addEventListener("resize", (function () {
-                if (Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0) < 768)
-                for (var e of t) e.hide() }))
-            }
-            var n = document.querySelector("body.fixed-nav .sidebar");
-            n && n.on("mousewheel DOMMouseScroll wheel", (function (e) {
-                if (Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0) > 768) {
-                    var o = e.originalEvent, t = o.wheelDelta || -o.detail; this.scrollTop += 30 * (t < 0 ? 1 : -1), e.preventDefault() } }));
-                    var i = document.querySelector(".scroll-to-top"); i && window.addEventListener("scroll", (function () {
-                        var e = window.pageYOffset; i.style.display = e > 100 ? "block" : "none" }))
+                if (Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0) < 768) 
+                for (var e of t) e.hide() })) 
+            } 
+            var n = document.querySelector("body.fixed-nav .sidebar"); 
+            n && n.on("mousewheel DOMMouseScroll wheel", (function (e) { 
+                if (Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0) > 768) { 
+                    var o = e.originalEvent, t = o.wheelDelta || -o.detail; this.scrollTop += 30 * (t < 0 ? 1 : -1), e.preventDefault() } })); 
+                    var i = document.querySelector(".scroll-to-top"); i && window.addEventListener("scroll", (function () { 
+                        var e = window.pageYOffset; i.style.display = e > 100 ? "block" : "none" })) 
     }();
 </script>
   </body>

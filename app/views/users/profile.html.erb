@@ -1,6 +1,14 @@
-<!DOCTYPE html>
-<html>
 
+<style>
+    .avatar {
+    vertical-align: middle;
+    width: 225px;
+    height: 225px;
+    border-radius: 50%;
+  }
+ 
+
+</style>
 <body id="page-top" class=body>
     <div id="wrapper">
         
@@ -14,10 +22,37 @@
                     <div class="row mb-3">
                         <div class="col-lg-4">
                             <div class="card mb-3">
-                                <div class="card-body text-center shadow"><img class="rounded-circle mb-3 mt-4"width="160" height="160"
-                                        <%=image_tag('avatar.png')%> 
-                                    <div class="mb-3"><button class="btn btn-primary btn-sm" type="button">Change
-                                            Photo</button></div>
+                                <div class="card-body text-center shadow">
+                                <%if @photos= Photo.where(:user_id=>user.id).present?%>
+				                    	<%@photos= Photo.where(:user_id=>user.id)%>
+				                    	<% @photos.each do |photo| %>
+      			                    		<% if (photo.image.attached?) %>
+      			                    		  <%=image_tag(url_for(photo.image),class:'avatar')%>
+      			                    		<% else %>
+                                       		<%=image_tag('avatar.png')%> 
+      			                    		<% end %>
+				                    	 <% end %>
+				                    <% else %>
+                                    <%@photo=Photo.new%>
+                                       <%=image_tag('avatar.png')%> 
+				                    <% end %>
+                                        <div class="mb-3">
+                                        <%= form_for( @photo , remote: true) do |form| %>
+                                            <%=form.label :image do%>
+                                                <div class= 'form-control'>
+                                                    <i class="fa-solid fa-camera"></i> 
+                                                </div>                                      
+                                                <span style="display:none;">
+                                                    <%= form.file_field :image,class: 'form-control' %>
+                                                </span>
+                                            <%end%>
+                                            
+                                            <%= form.hidden_field(:user_id, value:session[:user_id]) %>
+                                            <input class="btn btn-primary btn-sm" type="submit" value="Change Photo">
+
+                                        <% end %>
+                                        </div>
+                                      
                                 </div>
                             </div>
                             <div class="card shadow mb-4">
@@ -53,8 +88,7 @@
                                                 </div>
                                                 <div class="col-auto"><i class="fas fa-rocket fa-2x"></i></div>
                                             </div>
-                                            <p class="text-white-50 small m-0"><i class="fas fa-arrow-up"></i>&nbsp;5%
-                                                since last month</p>
+                                            <p class="text-white-50 small m-0"><i class="fas fa-arrow-up"></i>&nbsp;5%since last month</p>
                                         </div>
                                     </div>
                                 </div>
@@ -91,6 +125,15 @@
                                                                 for="last_name"><strong>Last Name</strong></label><input
                                                                 id="last_name" class="form-control" type="text"
                                                                 placeholder="last name" name="edit_user[last_name]" value=<%=user.last_name%>></div>
+                                                    </div>
+                                                    <div class="col">
+                                                        <div class="mb-3"><label class="form-label"for="last_name"><strong>Phon Numbere</strong></label>
+                                                        <input id="last_name" class="form-control" type="number"placeholder="Phone Number" name="edit_user[phone]" value=<%=user.phone%>></div>
+                                                    </div>
+                                                    <div class="col">
+                                                        <div class="mb-3"><label class="form-label"for="last_name"><strong>Bio</strong></label>
+                                                            <%=text_area_tag(:bio,params[:bio], class:"form-control",value:user.bio) %>
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div class="mb-3"><button class="btn btn-primary btn-sm"
@@ -152,10 +195,6 @@
                 </div>
             </div>
             
-        </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
+        </div><a class="border rounded d-inline scroll-to-top" href="page-top"><i class="fas fa-angle-up"></i></a>
     </div>
-    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-    <script src="assets/js/script.min.js"></script>
 </body>
-
-</html>

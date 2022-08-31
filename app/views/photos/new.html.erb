@@ -1,0 +1,71 @@
+ <%= stylesheet_link_tag 'profile_personaly'%>
+
+
+<body>
+    <header class= ' chatbar'>
+            <div class=header>
+                <i class="fa fa-arrow-left"></i>
+
+                <span>profile personaly</span>
+                 <a class=skip href="/log" >
+                <span>Skip </span>
+                <i class="fas fa-fast-forward"></i>
+            <a>
+            <div>
+            
+    </header>
+    <div class=' row picture-profile'>
+        <%if  @photos= Photo.where(:user_id=>session[:user_id]).present?%>
+			<%@photos= Photo.where(:user_id=>session[:user_id])%>
+
+            <% @photos.each do |photo| %>
+      			<% if (photo.image.attached?) %>
+      			    <%=image_tag(url_for(photo.image),class:"profile-pic")%>
+                      
+      			<% else %>
+                    <%=image_tag('avatar.png',class:"profile-pic")%> 
+      			<% end %>
+			<% end %>
+        <%else%>
+            <%=image_tag('avatar.png',class:"profile-pic")%> 
+            <%= form_for( @photo , remote: true) do |form| %>
+                <%= form.hidden_field(:user_id, value:session[:user_id]) %>
+                <%=form.label :image do%>
+                    <span style="display:none;">
+                    <%= form.file_field :image,class: 'form-control' %>
+                    </span>
+                        <div class='btn-camera btn btn-primary btn-sm' >
+                            <i class="fa-solid fa-camera"></i> 
+                        </div>
+                <%end%>
+                <input type=submit value='Add Photo'class='bnt-save btn btn-primary btn-sm'>
+            <% end %>
+        <%end%>
+    </div>
+    <div class=info>
+        <a class="span nav-link" >
+            <i class="fas fa-user-circle"></i>
+            <span>Full Name:</span>
+        </a>
+        <%user= User.where(:id=>session[:user_id])%>
+        <%user.each do |user|%>
+            <label class="form-control"> <%=user.first_name%>&nbsp;&nbsp;<%=user.last_name%></label>
+            </div>
+            <form action=/bio method=POST>
+                <label>Bio</label>
+                <input type='hidden' name='authenticity_token' value="<%= form_authenticity_token%>">
+                <input type=hidden name=bio[id] value=<%=user.id%>>
+                <input type=text name=bio[bio] class="form-control"placeholder="Add Your Bio..." ,rows="5" ,cols="30" value=<%=user.bio%>>
+                <input type=submit class="btn btn-primary btn-sm" value='Add Bio'>
+            </form>
+            <div>
+                <a class="nav-link" >
+                    <i class="fa fa-phone"></i>
+                    <span>Phone Number:</span>
+                </a>
+                <label class="form-control"> <%=user.phone%></label>
+            </div>
+        <%end%>
+
+</body>
+

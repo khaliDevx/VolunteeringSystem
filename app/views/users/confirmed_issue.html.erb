@@ -2,43 +2,11 @@
 <html>
  <%= stylesheet_link_tag 'index'%>
 <head>
-  \
+  
 </head>
 
 <body id="page-top" class=body>
 
-                            <%# <div id="menus" class="modal"> 
-                                <div class="modal-content modal-style">
-                                    <div class="modal-body">
-                                        <button class="menu">option1</button>
-                                        <button class="menu">option2</button>
-                                        <button class="menu">option3</button>
-                                        <button class="menu">option4</button>
-                                        <button class="menu">option5</button>
-                                    </div>
-                                </div>
-                            </div> %>
-                                <div id="modal" class="modal1">
-                                        <div class="instagram-card-header">
-                                          <div>
-                                            <img src="insta_me.jpeg" class="instagram-card-user-image" />
-                                            <span class="instagram-card-user-name">khalid99io</span>
-                                          </div>
-                                        </div>
-                                        <div class="users-comments">
-                                          <div class="cmt">
-                                            <img src="insta_me.jpeg" class="instagram-card-user-image" />
-                                            <div class="instagram-card-user-name">khalid99io</div>
-                                            <div class="cmt-txt">This is real issue!</div>
-                                          </div>
-                                        </div>
-                                        <div class="instagram-card-footer">
-                                          <a class="footer-action-icons" href="#"><i class="fa fa-heart-o"></i></a>
-                                          <input class="comments-input blog-text-success" id="enter-comment" type="text" placeholder="Add a comment..." />
-                                          <button class="btn btn-outline-info post_cmt" id="post-comment">Post</button>
-                                        </div>
-                                </div>
-  </div>
         <div id="wrapper">
        
           <div class="container-fluid">
@@ -56,7 +24,18 @@
                                             <div class="instagram-card-header">
                                               <div>
                                                 <% @user.each do |user| %>
-                                                    <img  class="instagram-card-user-image"<%=image_tag('avatar.png')%>
+                                                    <%if @photos= Photo.where(:user_id=>user.id).present?%>
+				                                              	<%@photos= Photo.where(:user_id=>user.id)%>
+				                                              	<% @photos.each do |photo| %>
+      	                                              				<% if (photo.image.attached?) %>
+      	                                              				  <%=image_tag(url_for(photo.image),class:"instagram-card-user-image")%>
+      	                                              				<% else %>
+                                                                  		<%=image_tag('avatar.png', class:"instagram-card-user-image")%> 
+      	                                              				<% end %>
+				                                              	 <% end %>
+				                                            <% else %>
+                                                        <%=image_tag('avatar.png', class:"instagram-card-user-image")%> 
+				                                            <% end %>
                                                     <span class="instagram-card-user-name"><%=user.first_name%> <%=user.last_name%></span>
                                                 <%end%>
                                               </div>
@@ -116,14 +95,71 @@
                                                   <%@submiter=User.where(:id=> problem.user_id)%>
                                                   
                                                   <% @submiter.each do |user| %>
-                                                    <span><%=user.first_name%> <%=user.last_name%></span>
+                                                      <span > <%= link_to "#{user.first_name} #{user.last_name}",personal_page_user_path(user),:class=>"link-dark" %></span>
                                                   <% end %>
                                                 </div>
                                               </div>
 
-                                              <button id="view_cmt">View all <span>111</span> comments</button>
+                                                             <div class="container">
+                                                <button id="open"class=open>View all <span id=number-cmt><%=Coment.where(:problem_id=>problem.id).count%></span> comments</button>
+                                              </div>
                                               <div class="issue_date"><span class="issue_date"><%=problem.created_at.to_date%></span> </div>
                                             </div>
+                                            <div class="model-container "tabindex="-1">
+                                                        <div class="model">
+                                                            <div class="instagram-card-header">
+                                                          <div>
+                                                          <%@user.each do |user|%>
+                                                              <%if @photos= Photo.where(:user_id=>user.id).present?%>
+				                                                          	<%@photos= Photo.where(:user_id=>user.id)%>
+				                                                          	<% @photos.each do |photo| %>
+      	                                                          				<% if (photo.image.attached?) %>
+      	                                                          				  <%=image_tag(url_for(photo.image),class:'instagram-card-user-image')%>
+      	                                                          				<% else %>
+                                                                             		<%=image_tag('avatar.png',class:'instagram-card-user-image')%> 
+      	                                                          				<% end %>
+				                                                          	 <% end %>
+				                                                      <% else %>
+                                                                    <%=image_tag('avatar.png',class:'instagram-card-user-image')%> 
+				                                                      <% end %>
+                                                            
+                                                              <span class="instagram-card-user-name"><%=user.first_name%> <%=user.last_name%></span>
+                                                            <%end%>
+                                                          </div>
+                                                        </div>
+                                                          <%@comments=Coment.where(:problem_id=>problem.id)%>
+                                                            <%@comments.each do |com|%>
+                                                                  <div class="users-comments">
+                                                                    <div class="cmt">
+                                                                      <%user = User.where(:id=>com.user_id)%>
+                                                                      <%user.each do |user|%>
+                                                                          <%if @photos = Photo.where(:user_id=>user.id).present?%>
+				                                                          	          <%@photos = Photo.where(:user_id=>user.id)%>
+				                                                          	          <% @photos.each do |photo| %>
+      	                                                          				        <% if (photo.image.attached?) %>
+      	                                                          				          <%=image_tag(url_for(photo.image),class:'instagram-card-user-image')%>
+      	                                                          				        <% else %>
+                                                                                     		<%=image_tag('avatar.png',class:'instagram-card-user-image')%> 
+      	                                                          				        <% end %>
+				                                                          	          <% end %>
+				                                                                    <% else %>
+                                                                                  <%=image_tag('avatar.png',class:'instagram-card-user-image')%> 
+				                                                                    <% end %> 
+                                                                          <div class="instagram-card-user-name"><%=user.first_name%> <%=user.last_name%></div>
+                                                                      <%end%>
+                                                                          <div class="cmt-txt"><%=com.comment%></div>
+                                                                    </div>
+                                                                  </div>
+                                                            <%end%>
+                                                        <div class="instagram-card-footer">
+                                                          
+                                                        </div>
+
+                                                         <i class="fas fa-times close"></i>
+
+                                                    </div>
+
+                                                </div>
                                            
                                             <button class="btn btn-primary" id="btn-accept">Accept</button>
                                             
@@ -192,7 +228,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+       
         <a class="border rounded d-inline scroll-to-top" href="" style="margin-right: 60px;">
             <i class="fas fa-angle-up"></i>
         </a>
@@ -200,6 +236,16 @@
     <a class="border rounded d-inline scroll-to-top" href="/submit_issue">
         <button class="btn btn-primary add-issue fa fa-plus" type="button" data-toggle="modal" data-target="#submit_issue"></button>
     <a> 
+      <script >
+        $(function(){
+          $('#open').click(function(){
+          $('.model-container').delay(2000).css('transform',' scale(1)')
+          });
+          $('body').on('click','.close',function(){
+              $('.model-container').css('transform',' scale(0)')
+              });
+          });
+    </script>
 </body>
 
 </html>

@@ -3,13 +3,137 @@
         	padding: 60px;
         	font-family: 'Droid Sans', sans-serif;
         } */
+		*{
+			// box-sizing: border-box;
+			transition: all.2s linear;
+		
+		}
+		.container{
+			/* display: flex; */
+			align-items: center;
+			justify-content: center;
+			
+			/* min-height: 660px; */
+			/* width: 100%; */
+			/* background-color: rgb(99, 97, 97); */
+			/* background-size: cover;
+			background-position: center; */
+		  }
+		  .open {
+			  outline: none;
+			  border: none;
+			  color: #7f7f7f;
+			  font-size: 0.8em;
+			  background: none;
+			  margin: 0 0 3px 0;
+		  }
+		
+		  .model-container{
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			min-height: 100%;
+			width: 100%;
+			position: fixed;
+			top: 0;
+			left: 0;
+			background: rgba(0,0,0,.3);
+			transform: scale(0);
+			
+		  }
+		
+		  .model-container .model{
+		  height: 50%;
+		  width: 50%;
+		  margin: 0 10px;
+		  padding: 20px;
+		  background: #fff;
+		  border-radius: 5px;
+		  text-align: center;
+		  position: relative;
+		
+		  }
+		
+		  .model-container .model .fa-times{
+		  position: absolute; 
+		  top: 15px;
+		  right: 15px;  
+		  font-size: 25px; 
+		  cursor: pointer;
+		  color: #333;
+		  }
+		  .instagram-card-header {
+			  display: flex;
+			  flex-flow: row nowrap;
+			  justify-content: space-between;
+			  align-items: center;
+			  padding: 0 0 15px 0;
+			  margin-bottom: 5px;
+			  border-bottom: 0.3px solid #a0a0a0;
+			  height: 50px;
+		  }
+		  .instagram-card-user-image {
+			  border-radius: 50%;
+			  width: 40px;
+			  height: 40px;
+			  vertical-align: middle;
+		  }
+		  .instagram-card-user-name {
+			  margin-left: 20px;
+			  font-weight: bold;
+			  color: #262626;
+		  }
+		  .users-comments{
+			  display: flex;
+			  flex-flow: column nowrap;
+			  justify-content: left;
+			  width: 100%;
+			  height: 350px;
+		  }
+		  .cmt{
+			  display: flex;
+			  flex-flow: row nowrap;
+			  align-items: center;
+			  padding: 0;
+			  margin: 5px 0 5px 0;
+		  }
+		  .instagram-card-footer {
+			  padding: 0;
+			  display: flex;
+			  align-items: center;
+		  }
+		  .footer-action-icons {
+			  font-size: 16px;
+			  color: #ccc;
+		  }
+		  .modal-content2 {
+			  width: 600px !important;
+		  }
+		  .cmt-txt{
+			  margin-left: 20px;
+		
+		  }
+		  .blog-text-success {
+			  color: #6f6f6f !important
+		  }
+		  .post_cmt {
+			  border-style: none !important;
+		  }
+		  .comments-input {
+			  border: none;
+			  outline: none;
+			  margin-left: 10px;
+			  width: 100%;
+		  }
 		   .body{
 	display:flex;
     flex-flow: column nowrap;
 
     }
             a {
+				
     	text-decoration: none;
+		
         }
 
         .instagram-card span {

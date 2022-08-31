@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WhatsApp</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="./css/stylesheet.css" />
+</head>
+ <%= stylesheet_link_tag 'meassage'%>
+
+<body>
+    <!-- PRELOADER -->
+    <div id="mask">
+        <div class="loader-item fa fa-spin loader-color">
+        </div>
+    </div>
+    <!-- PRELOADER END -->
+
+    <!-- Start of whatsapp view -->
+    <div class="container-fluid no_padding">
+        <div class="row" id="row_height">
+            
+            <div class="col-sm-11 col-lg-11 col-xl-11 chatbox_padding">
+                <div class="row" id="chatbox">
+                    <div class="col-5 col-sm-5 col-lg-5 col-xl-5 chatlist">
+                        <div class="row chatbar">
+             
+                        </div>
+                        <div class="row scrollchats">
+                            <table class="table table-hover">
+                                <tbody>
+                                    <tr class="clickable-row" data-href="#john-msg">
+                                        <td>
+                                        <%=image_tag('avatar.png',class:"img rounded-circle")%>
+                                            <span class="personName">John</span>
+                                            <span class="message-time">10:00</span>
+                                            <br>
+                                            <span class="chatMessage">Hey... Hello !!</span>
+                                            <span class="message-notify">2</span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col-7 col-sm-7 col-lg-7 col-xl-7 message-view" id="john_msg">
+                        <header class="detail_div">
+                            <div class="profile_pic">
+                                <%=image_tag('avatar.png',class:"profile_img" )%>
+                            </div>
+                            <div class="name_div">
+                                <div class="person_name">John</div>
+                                <div class="last_seen">last seen at 11:49 am</div>
+                            </div>
+                        </header>
+                        <div class="row message" id="conversation">
+                            <div class="row message-body">
+                                <div class="col-sm-12 message-main-receiver">
+                                    <div class="receiver">
+                                        <div class="message-text">
+                                            Good Morning!!
+                                        </div>
+                                        <span class="full-message-time pull-right">
+                                            7:03
+                                          </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row message-body">
+                                <div class="col-sm-12 message-main-sender">
+                                    <div class="sender">
+                                        <div class="message-text">
+                                            Good mrng
+                                        </div>
+                                        <span class="full-message-time pull-right">
+                                            8:00
+                                          </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row message-body">
+                                <div class="col-sm-12 message-main-receiver">
+                                    <div class="receiver">
+                                        <div class="message-text">
+                                            Hey... Hello !!
+                                        </div>
+                                        <span class="full-message-time pull-right">
+                                                10:00
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <footer class="reply">
+                            <div class="reply-emojis">
+                                <i class="material-icons">mood</i>
+                            </div>
+                            <div class="reply-main">
+                                <input type="text" id="message_send" name="sendMessage" placeholder="Type a message">
+                            </div>
+                            <div class=" reply-recording">
+                                <i class="material-icons">mic_none</i>
+                            </div>
+                            <div class="reply-send">
+                                <i class="material-icons">send</i>
+                            </div>
+                        </footer>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End of whatsapp view -->
+
+    <!-- Script to load full page background for header -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E=" crossorigin="anonymous"></script>
+    <script>
+        document.onreadystatechange = () => {
+            if (document.readyState === 'complete') {
+                document.getElementById("mask").style.display = "none";
+                document.getElementById("row_height").style.height = window.innerHeight + "px";
+                document.getElementById("chatbox").style.height = window.innerHeight - 50 + "px";
+            }
+        };
+    </script>
+    <script>
+        $(window).ready(function() {
+            if (($(window).width()) <= 426) {
+                $(".chatlist").addClass("col-12");
+                $(".message-view").addClass("col-12");
+                $("#john_msg").hide();
+                $(".clickable-row").click(function() {
+                    $(".chatlist").css("display", "none");
+                    $("#john_msg").show();
+                });
+            } else {
+                $(".chatlist").removeClass("col-12");
+                $(".message-view").removeClass("col-12");
+            }
+        });
+        $(window).resize(function() {
+            if (($(window).width()) <= 426) {
+                $(".chatlist").addClass("col-12");
+                $(".message-view").addClass("col-12");
+            } else {
+                $(".chatlist").removeClass("col-12");
+                $(".message-view").removeClass("col-12");
+            }
+        });
+        $(document).ready(function($) {
+            $(".clickable-row").click(function() {
+                window.location = $(this).data("href");
+                $(".message-notify").css("display", "none");
+            });
+        });
+    </script>
+    <!-- end of script -->
+</body>
+
+</html>

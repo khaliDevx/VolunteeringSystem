@@ -1,0 +1,390 @@
+.menu {
+    padding-right: 0;
+    padding-left: 0;
+    background: #424242;
+}
+
+.custom_nav {
+    color: white;
+    text-align: center;
+}
+
+.material-icons {
+    vertical-align: middle;
+}
+
+.chatbox_padding {
+    padding-left: 0;
+    padding-right: 0;
+    background: white;
+}
+
+#chatbox {
+    margin: 0 auto;
+    width: 95%;
+    position: relative;
+    top: 5%;
+    background: white;
+    -webkit-box-shadow: 0px 0px 7px 3px rgba(199, 194, 184, 1);
+    -moz-box-shadow: 0px 0px 7px 3px rgba(199, 194, 184, 1);
+    box-shadow: 0px 0px 7px 3px rgba(199, 194, 184, 1);
+}
+
+.scrollchats {
+    height: 86%;
+    overflow-y: auto;
+    width: 100%;
+    margin-left: -7px;
+}
+
+.personName {
+    position: relative;
+    left: 20px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.chatMessage {
+    position: relative;
+    left: 20px;
+    font-size: 12px;
+    color: #757575;
+}
+
+.detail_div {
+    display: flex;
+    flex-direction: row;
+    box-sizing: border-box;
+    height: 60px;
+    width: 100%;
+    align-items: center;
+}
+
+.profile_pic {
+    flex-grow: 1;
+}
+
+.profile_img {
+    width: 40px;
+    height: 40px;
+}
+
+.name_div {
+    flex-grow: 9;
+}
+
+.person_name {
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.last_seen {
+    font-size: 11px;
+}
+
+.image_div {
+    text-align: right;
+    flex-grow: 2;
+}
+
+.message-time {
+    margin: 0;
+    font-size: 12px;
+    float: right;
+    color: #9a9a9a;
+}
+
+.message-notify {
+    margin: 0;
+    font-size: 12px;
+    float: right;
+    color: white;
+    border: 1px solid #003569;
+    border-radius: 50%;
+    background-color: #003569;
+    padding: 0 5px;
+}
+
+.full-message-time {
+    margin: 0;
+    padding: 10px 10px 0 10px;
+    font-size: 12px;
+    text-align: right;
+    color: #9a9a9a;
+}
+
+.material_icon {
+    padding: 5px;
+}
+
+.chatlist {
+    border-right: 1px solid #C7C2B8;
+    background: #EBE9DC;
+    height:100%;
+}
+
+.chatbar {
+    text-align: center;
+    padding: 20px 5px 0;
+    margin-right: 0;
+    font-weight: bold;
+    color: #573230;
+}
+
+.chat_button {
+    border: none;
+    padding-bottom: 10px;
+}
+
+.chat_button a,
+.status_button a,
+.calls_button a {
+    color: #003569;
+}
+
+.table td {
+    border-top: 1px solid #fff;
+}
+
+.message {
+    padding: 20px 0 0 0;
+    margin: 0;
+    background: url("w.jpg") no-repeat fixed center;
+    background-size: cover;
+    width: 100%;
+}
+
+.message-body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: auto;
+}
+
+.message-main-receiver {
+    max-width: 100%;
+}
+
+.message-main-sender {
+    padding: 3px 20px;
+    max-width: 100%;
+}
+
+.sender {
+    width: auto;
+    border-radius: 3px 10px;
+    border: 1px solid black;
+    background: #ffffff;
+    line-height: 30px;
+    font-size: 12px;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, .2);
+    word-wrap: break-word;
+    float: right;
+}
+
+.receiver {
+    width: auto;
+    border-radius: 3px 10px;
+    border: 1px solid black;
+    background: #ffffff;
+    line-height: 30px;
+    font-size: 12px;
+    float: left;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, .2);
+    word-wrap: break-word;
+}
+
+.message-text {
+    margin: 0;
+    padding: 5px;
+    word-wrap: break-word;
+    font-weight: 200;
+    font-size: 14px;
+    float: left;
+    padding-bottom: 0;
+}
+
+.rounded-circle {
+    height: 50px;
+    float: left;
+}
+
+.reply {
+    width: 100%;
+    display: flex;
+    position: absolute;
+    bottom: 20px;
+    right: 0;
+}
+
+.reply-emojis {
+    padding: 5px 0 5px 15px;
+    flex-grow: 1;
+}
+
+.reply-main {
+    padding: 5px 0;
+    flex-grow: 9;
+}
+
+.reply-recording,
+.reply-send {
+    padding: 5px 0;
+    flex-grow: 1;
+}
+
+input {
+    width: 100%;
+}
+
+.home_section {
+    height: 100%;
+    padding: 0;
+}
+
+.home_text_center {
+    margin: auto;
+    text-align: center;
+    height: 80%;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+}
+
+.home-pic {
+    max-width: 60%;
+}
+
+.picture-profile {
+    width: 100%;
+    height: 100%;
+    margin: auto;
+}
+
+.keep_phone {
+    font-size: 1.7em;
+}
+
+.bg-color {
+    background: white;
+    margin: 0;
+    padding-left: 20px;
+    padding-top: 10px;
+}
+
+.first_name {
+    font-size: 20px;
+    text-align: left;
+    padding: 0;
+}
+
+.edit_name {
+    padding: 5px;
+}
+
+.data_usage {
+    font-size: 0.9em;
+    padding: 15px;
+    color: grey;
+}
+
+.profile-pic {
+    background: url('../images/avatar.jpg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 60%;
+    width: 60%;
+    margin: auto;
+}
+
+.change_photo {
+    margin: auto;
+    padding-bottom: 25px;
+    margin-top: -20px;
+}
+
+.warn_info {
+    font-size: 14px;
+    color: #929fa6;
+    padding: 10px 0;
+    text-align: left;
+}
+
+.warning {
+    margin: 0;
+    padding-left: 20px;
+    padding-bottom: 10px;
+}
+
+.your_name {
+    color: green;
+    padding: 5px 0;
+    font-size: 14px;
+}
+
+@media screen and (max-width:767px) {
+    .table td {
+        padding-left: 0;
+    }
+    .chatlist {
+        padding-right: 0;
+    }
+}
+
+@media screen and (min-width:576px) {
+    .custom_nav {
+        padding: 15px 0;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .flex-column {
+        flex-direction: row!important;
+        padding-top: 5px;
+    }
+    #chatbox {
+        width: 100%;
+        box-shadow: none;
+        -webkit-box-shadow: none;
+        top: 0.5%;
+    }
+    .chatlist {
+        width: 50%;
+        height: 100%;
+        padding-right: 0;
+    }
+    .home_section {
+        height: 100%;
+        padding: 0;
+        width: 50%;
+    }
+    .table td {
+        padding-right: 7px;
+        padding-left: 0;
+    }
+    .personName,
+    .chatMessage {
+        left: 5px;
+    }
+}
+
+@media screen and (max-width: 425px) {
+    .chatlist {
+        width: 100%;
+    }
+    .home_section {
+        width: 100%;
+    }
+    .personName,
+    .chatMessage {
+        left: 20px;
+    }
+}
+
+@media screen and (max-width:320px) {
+    .custom_nav {
+        padding: 0 10px;
+    }
+}

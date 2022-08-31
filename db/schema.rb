@@ -10,7 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema[7.0].define(version: 2022_08_21_154619) do
+=======
+ActiveRecord::Schema.define(version: 2022_08_27_112243) do
+
+>>>>>>> 58eea2e53d16237372e6b869f08fb7b470e6535a
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -101,6 +106,11 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_21_154619) do
     t.index ["user_id"], name: "index_confirms_on_user_id"
   end
 
+  create_table "employees", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "governorates", force: :cascade do |t|
     t.string "name"
     t.string "zip_cod"
@@ -139,8 +149,25 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_21_154619) do
     t.index ["category_id"], name: "index_materials_on_category_id"
   end
 
+  create_table "meassages", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "meassage"
+    t.datetime "date_time"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_meassages_on_user_id"
+  end
+
+  create_table "photos", force: :cascade do |t|
+    t.bigint "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_photos_on_user_id"
+  end
+
   create_table "problems", force: :cascade do |t|
     t.text "desciption"
+    t.string "cordinates"
     t.string "status", default: "Submitted"
     t.bigint "user_id"
     t.bigint "category_id"
@@ -167,10 +194,26 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_21_154619) do
     t.string "username"
     t.string "password_digest"
     t.bigint "city_id"
+<<<<<<< HEAD
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+=======
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "employee_id"
+>>>>>>> 58eea2e53d16237372e6b869f08fb7b470e6535a
     t.boolean "supervisor", default: false
+    t.string "bio"
     t.index ["city_id"], name: "index_users_on_city_id"
+    t.index ["id"], name: "index_users_on_id"
+    t.index ["user_type", "id"], name: "index_users_on_user_type_and_id"
+    t.index ["user_type"], name: "index_users_on_user_type"
+  end
+
+  create_table "volunteers", force: :cascade do |t|
+    t.boolean "supervisor", default: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
