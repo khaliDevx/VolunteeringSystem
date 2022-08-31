@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
     end
     def create
         user=User.new(new_params)
-        user.user_type="Volunteer"
+        user.user_type="Employee"
 
             if user.save
                 cookies[:user_type]=user.user_type

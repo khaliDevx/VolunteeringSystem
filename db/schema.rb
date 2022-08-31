@@ -10,8 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_21_154619) do
-
+ActiveRecord::Schema[7.0].define(version: 2022_08_21_154619) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -20,9 +19,9 @@ ActiveRecord::Schema.define(version: 2022_08_21_154619) do
     t.bigint "user_id"
     t.integer "required_volunteer"
     t.integer "totale_cost"
-    t.datetime "start_date"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "start_date", precision: nil
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["problem_id"], name: "index_accepts_on_problem_id"
     t.index ["user_id"], name: "index_accepts_on_user_id"
   end
@@ -32,7 +31,7 @@ ActiveRecord::Schema.define(version: 2022_08_21_154619) do
     t.string "record_type", null: false
     t.bigint "record_id", null: false
     t.bigint "blob_id", null: false
-    t.datetime "created_at", null: false
+    t.datetime "created_at", precision: nil, null: false
     t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
   end
@@ -45,7 +44,7 @@ ActiveRecord::Schema.define(version: 2022_08_21_154619) do
     t.string "service_name", null: false
     t.bigint "byte_size", null: false
     t.string "checksum", null: false
-    t.datetime "created_at", null: false
+    t.datetime "created_at", precision: nil, null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
@@ -60,8 +59,8 @@ ActiveRecord::Schema.define(version: 2022_08_21_154619) do
     t.integer "cost"
     t.integer "quantity"
     t.bigint "unit_of_measure_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.bigint "accept_id"
     t.index ["accept_id"], name: "index_bill_of_materials_on_accept_id"
     t.index ["material_id"], name: "index_bill_of_materials_on_material_id"
@@ -70,15 +69,15 @@ ActiveRecord::Schema.define(version: 2022_08_21_154619) do
 
   create_table "categories", force: :cascade do |t|
     t.string "name"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "cities", force: :cascade do |t|
     t.string "name"
     t.bigint "governorate_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["governorate_id"], name: "index_cities_on_governorate_id"
   end
 
@@ -86,15 +85,15 @@ ActiveRecord::Schema.define(version: 2022_08_21_154619) do
     t.bigint "problem_id"
     t.bigint "user_id"
     t.string "comment"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["problem_id"], name: "index_coments_on_problem_id"
     t.index ["user_id"], name: "index_coments_on_user_id"
   end
 
   create_table "confirms", force: :cascade do |t|
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.boolean "confirmed"
     t.bigint "problem_id"
     t.bigint "user_id"
@@ -105,8 +104,8 @@ ActiveRecord::Schema.define(version: 2022_08_21_154619) do
   create_table "governorates", force: :cascade do |t|
     t.string "name"
     t.string "zip_cod"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "issues", force: :cascade do |t|
@@ -115,8 +114,8 @@ ActiveRecord::Schema.define(version: 2022_08_21_154619) do
     t.string "status", default: "Submitted"
     t.bigint "user_id"
     t.bigint "category_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.bigint "city_id"
     t.index ["category_id"], name: "index_issues_on_category_id"
     t.index ["city_id"], name: "index_issues_on_city_id"
@@ -126,8 +125,8 @@ ActiveRecord::Schema.define(version: 2022_08_21_154619) do
   create_table "join_issues", force: :cascade do |t|
     t.bigint "problem_id"
     t.bigint "user_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["problem_id"], name: "index_join_issues_on_problem_id"
     t.index ["user_id"], name: "index_join_issues_on_user_id"
   end
@@ -135,8 +134,8 @@ ActiveRecord::Schema.define(version: 2022_08_21_154619) do
   create_table "materials", force: :cascade do |t|
     t.string "name"
     t.bigint "category_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["category_id"], name: "index_materials_on_category_id"
   end
 
@@ -146,8 +145,8 @@ ActiveRecord::Schema.define(version: 2022_08_21_154619) do
     t.bigint "user_id"
     t.bigint "category_id"
     t.bigint "city_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["category_id"], name: "index_problems_on_category_id"
     t.index ["city_id"], name: "index_problems_on_city_id"
     t.index ["user_id"], name: "index_problems_on_user_id"
@@ -155,8 +154,8 @@ ActiveRecord::Schema.define(version: 2022_08_21_154619) do
 
   create_table "unit_of_measures", force: :cascade do |t|
     t.string "name"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -168,8 +167,8 @@ ActiveRecord::Schema.define(version: 2022_08_21_154619) do
     t.string "username"
     t.string "password_digest"
     t.bigint "city_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.boolean "supervisor", default: false
     t.index ["city_id"], name: "index_users_on_city_id"
   end
