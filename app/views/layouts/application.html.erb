@@ -18,7 +18,7 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body class=body>
+  <body class="body d-flex flex-column min-vh-100">
     <div id="wrapper">
         <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0">
             <div class="container-fluid d-flex flex-column p-0">
@@ -288,10 +288,10 @@
                 </nav>
                 <div class="container-fluid">
     <%= yield %>
-    <footer class="bg-white sticky-footer">
-                <div class="container my-auto">
-                    <div class="text-center my-auto copyright"><span>Copyright © FixIt2022</span></div>
-                </div>
+    <footer class="footer container">
+        <div class="container my-auto">
+            <div class="text-center my-auto copyright"><span>Copyright © FixIt2022</span></div>
+        </div>
     </footer>
     <script>
             var modal = document.getElementById("accept-form");

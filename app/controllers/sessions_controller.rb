@@ -7,13 +7,9 @@ class SessionsController < ApplicationController
     end
     def create 
         user=User.new(new_params)
-<<<<<<< HEAD
-        user.user_type="Employee"
 
-=======
         user.user_type="Volunteer"
         
->>>>>>> 58eea2e53d16237372e6b869f08fb7b470e6535a
             if user.save
                 cookies[:user_type]=user.user_type
                 session[:user_id]=user.id

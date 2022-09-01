@@ -1,506 +1,520 @@
-           /* body {
-        	background-color: #fafafa;
-        	padding: 60px;
-        	font-family: 'Droid Sans', sans-serif;
-        } */
-		*{
-			// box-sizing: border-box;
-			transition: all.2s linear;
-		
-		}
-		.container{
-			/* display: flex; */
-			align-items: center;
-			justify-content: center;
-			
-			/* min-height: 660px; */
-			/* width: 100%; */
-			/* background-color: rgb(99, 97, 97); */
-			/* background-size: cover;
-			background-position: center; */
-		  }
-		  .open {
-			  outline: none;
-			  border: none;
-			  color: #7f7f7f;
-			  font-size: 0.8em;
-			  background: none;
-			  margin: 0 0 3px 0;
-		  }
-		
-		  .model-container{
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			min-height: 100%;
-			width: 100%;
-			position: fixed;
-			top: 0;
-			left: 0;
-			background: rgba(0,0,0,.3);
-			transform: scale(0);
-			
-		  }
-		
-		  .model-container .model{
-		  height: 50%;
-		  width: 50%;
-		  margin: 0 10px;
-		  padding: 20px;
-		  background: #fff;
-		  border-radius: 5px;
-		  text-align: center;
-		  position: relative;
-		
-		  }
-		
-		  .model-container .model .fa-times{
-		  position: absolute; 
-		  top: 15px;
-		  right: 15px;  
-		  font-size: 25px; 
-		  cursor: pointer;
-		  color: #333;
-		  }
-		  .instagram-card-header {
-			  display: flex;
-			  flex-flow: row nowrap;
-			  justify-content: space-between;
-			  align-items: center;
-			  padding: 0 0 15px 0;
-			  margin-bottom: 5px;
-			  border-bottom: 0.3px solid #a0a0a0;
-			  height: 50px;
-		  }
-		  .instagram-card-user-image {
-			  border-radius: 50%;
-			  width: 40px;
-			  height: 40px;
-			  vertical-align: middle;
-		  }
-		  .instagram-card-user-name {
-			  margin-left: 20px;
-			  font-weight: bold;
-			  color: #262626;
-		  }
-		  .users-comments{
-			  display: flex;
-			  flex-flow: column nowrap;
-			  justify-content: left;
-			  width: 100%;
-			  height: 350px;
-		  }
-		  .cmt{
-			  display: flex;
-			  flex-flow: row nowrap;
-			  align-items: center;
-			  padding: 0;
-			  margin: 5px 0 5px 0;
-		  }
-		  .instagram-card-footer {
-			  padding: 0;
-			  display: flex;
-			  align-items: center;
-		  }
-		  .footer-action-icons {
-			  font-size: 16px;
-			  color: #ccc;
-		  }
-		  .modal-content2 {
-			  width: 600px !important;
-		  }
-		  .cmt-txt{
-			  margin-left: 20px;
-		
-		  }
-		  .blog-text-success {
-			  color: #6f6f6f !important
-		  }
-		  .post_cmt {
-			  border-style: none !important;
-		  }
-		  .comments-input {
-			  border: none;
-			  outline: none;
-			  margin-left: 10px;
-			  width: 100%;
-		  }
-		   .body{
-	display:flex;
-    flex-flow: column nowrap;
+* {
+	box-sizing: border-box;
+	transition: all.2s linear;
 
-    }
-            a {
-				
-    	text-decoration: none;
-		
-        }
+}
 
-        .instagram-card span {
-    	font-family: Verdana, Geneva, Tahoma, sans-serif;
-        }
+.container {
+	align-items: center;
+	justify-content: center;
+	padding: 0;
+	width: 80%;
+}
 
-        .instagram-card {
-    	background: #ffffff;
-    	border: 1px solid #cacaca;
-    	border-radius: 12px;
-    	width: 100%;
-    	max-width: 600px;
-    	margin: auto;
-        }
+#open {
+	outline: none;
+	border: none;
+	color: #7f7f7f;
+	font-size: 0.8em;
+	background: none;
+	margin: 0 0 3px 0;
+}
 
-        .intagram-card-image {
-    	position: relative;
-    	width: auto;
-    	height: auto;
-        }
+.model-container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 100%;
+	width: 100%;
+	position: fixed;
+	top: 0;
+	left: 0;
+	background: rgba(0, 0, 0, .3);
+	transform: scale(0);
 
-        .intagram-card-image img {
-    	width: 100%;
-    	height: auto;
-        }
+}
 
-        .instagram-card-header {
-    	display: flex;
-    	flex-flow: row nowrap;
-    	justify-content: space-between;
-    	align-items: center;
-    	padding: 0 0 15px 0;
-    	margin-bottom: 5px;
-    	border-bottom: 0.3px solid #a0a0a0;
-    	height: 50px;
-        }
+.model-container .model {
+	height: 50%;
+	width: 50%;
+	margin: 0 10px;
+	padding: 20px;
+	background: #fff;
+	border-radius: 5px;
+	text-align: center;
+	position: relative;
 
-        .instagram-card-user-image {
-    	border-radius: 50%;
-    	width: 40px;
-    	height: 40px;
-    	vertical-align: middle;
-        }
+}
 
-        .instagram-card-time {
-    	float: right;
-    	width: 80px;
-    	padding-top: 10px;
-    	text-align: right;
-    	color: #999;
-        }
-
-        .instagram-card-user-name {
-    	margin-left: 10px;
-    	font-weight: bold;
-    	color: #262626;
-        }
-
-        .instagram-card-content {
-    	padding: 20px;
-        }
-
-        .likes {
-    	font-weight: bold;
-        }
-
-        .instagram-card-content-user {
-    	font-weight: bold;
-    	color: #262626;
-        }
-
-        .hashtag {
-    	color: #003569;
-        }
-
-        .comments {
-    	color: #999;
-        }
-
-        .user-comment {
-    	color: #003569;
-        }
-
-        .instagram-card-footer {
-    	padding: 0;
-    	display: flex;
-    	align-items: center;
-        }
-
-        hr {
-    	border: none;
-    	border-bottom: 1px solid #ccc;
-    	margin-top: 30px;
-    	margin-bottom: 0px;
-
-        }
-
-        .footer-action-icons {
-    	font-size: 16px;
-    	color: #ccc;
-        }
-
-        .comments-input {
-    	border: none;
-    	outline: none;
-    	margin-left: 10px;
-    	width: 100%;
-        }
-
-        .blog-card-blog .blog-card-caption {
-    	margin-top: 5px
-        }
-
-        .blog-card-caption {
-    	font-weight: 500;
-    	font-size: 1.6em;
-    	font-family: "Roboto Slab", "Times New Roman", serif
-        }
-
-        .blog-card-caption, .blog-card-caption a {
-    	color: #333;
-    	text-decoration: none
-        }
-
-        .blog-category {
-    	position: relative;
-    	line-height: 0;
-    	margin: 15px 0
-        }
-
-        .blog-card-description {
-    	color: #444;
-    	font: 0.9em sans-serif;
-        }
-
-        .blog-text-success {
-    	color: #6f6f6f !important
-        }
-
-        .blog-table {
-    	margin-bottom: 0;
-    	padding: 20px;
-        }
-
-        .issue_info_parts {
-    	margin-bottom: 20px;
-        }
-
-        .post_cmt {
-    	border-style: none !important;
-        }
-
-        #view_cmt {
-    	outline: none;
-    	border: none;
-    	color: #7f7f7f;
-    	font-size: 0.8em;
-    	background: none;
-    	margin: 0 0 3px 0;
-        }
-
-        .issue_date {
-    	padding-left: 4px;
-    	color: #7f7f7f;
-    	font-size: 0.7em;
-    	margin: 0;
-        }
-
-        .three-dots {
-    	padding-right: 10px;
-    	outline: none;
-    	border: none;
-    	background: none;
-        }
-
-        /* The Modal (background) */
-        // .modal1 {
-    	// display: none;
-    	// /* Hidden by default */
-    	
-        // }
-		#modal{
-			display: none;
-			position:absolute;
-			z-index: 1;
-			left: 30%;
-			top: 30%;
-			width: auto;
-			height: auto;
-			overflow: auto;
-			background-color: rgba(255,255,255,0);
-			background: none;
-			border-radius: 8px;
-			border: 1px solid #888;
-			box-shadow: 0 4px 0 rgba(0,0,0,0.2),0 6;
-			
-		}
-		// .model2{
-		// 	display: block;
-		// 	position: absolute;
-    	// 	/* Stay in place */
-    	// 	z-index: 1;
-    	// 	/* Sit on top */
-    	// 	padding-top: 100px;
-    	// 	/* Location of the box */
-    	// 	left: 50%;
-    	// 	top: 50%;
-    	// 	width: 100%;
-    	// 	/* Full width */
-    	// 	height: 100vh;
-    	// 	/* Full height */
-    	// 	overflow: auto;
-    	// 	/* Enable scroll if needed */
-    	// 	background-color: rgb(0, 0, 0);
-    	// 	/* Fallback color */
-    	// 	background-color: rgba(0, 0, 0, 0.4);
-    	// 	/* Black w/ opacity */
-		// }
-
-        /* Modal Content */
-        .modal-content {
-    	width: 280px !important;
-        }
-        .modal-content2 {
-    	width: 600px !important;
-        }
-        .modal-style{
-    	position: relative;
-    	display: flex;
-    	flex-flow: column nowrap;
-    	align-items: center;
-    	justify-content: center;
-    	justify-items: center;
-    	background-color: #fefefe;
-    	margin: 0;
-    	padding: 5;
-        width:100%;
-    	
-        }
-
-        /* Add Animation */
-        @-webkit-keyframes animatetop {
-    	from {
-    		top: -300px;
-    		opacity: 0
-    	}
-
-    	to {
-    		top: 0;
-    		opacity: 1
-    	}
-        }
-
-        @keyframes animatetop {
-    	from {
-    		top: -300px;
-    		opacity: 0
-    	}
-
-    	to {
-    		top: 0;
-    		opacity: 1
-    	}
-        }
-
-        .modal-body {
-    	padding: 2px 16px;
-    	display: flex;
-    	flex-flow: column nowrap;
-    	 align-items:flex-start; 
-    	 justify-content:space-between;
-    	// justify-items: center; */
-    	width: 100%;
-    	height: auto;
-    	// border-radius: 8px;
-
-        }
-
-        .menu {
-    	outline: none;
-    	border: none;
-    	background: none;
-    	border-bottom: 0.3px solid #6f6f6f;
-    	margin-bottom: 0.5px;
-    	padding: 6px;
-    	width: 100%;
-        }
-        .comments-card{
-    	// display: flex;
-    	// flex-flow: column nowrap;
-    	margin: 0;
-    	width: 100%;
-    	height: auto;
-    	border-radius: 8px;
-        }
-        .cmt{
-        	display: flex;
-        	flex-flow: row nowrap;
-        	// align-items: center;
-        	padding: 0;
-        	margin: 5px 0 5px 0;
-        }
-        .users-comments{
-    	display: flex;
-    	flex-flow: column nowrap;
-		align-items: flex-start;
-    	// justify-content: left;
-    	width: 100%;
-    	height: 100%;
-        }
-		.status{
-			width: 20%;
-		}
-    
+.model-container .model .fa-times {
+	position: absolute;
+	top: 15px;
+	right: 15px;
+	font-size: 25px;
+	cursor: pointer;
+	color: #333;
+}
 
 
-        .accept-modal {
-            display: none;
-            /* Hidden by default */
-            position: fixed;
-            /* Stay in place */
-            z-index: 1;
-            /* Sit on top */
-            /* Location of the box */
-            left: 0;
-            top: 0;
-            width: 100%;
-            /* Full width */
-            height: 100vh;
-            /* Full height */
-            overflow: auto;
-            /* Enable scroll if needed */
-            background-color: rgb(0, 0, 0);
-            /* Fallback color */
-            background-color: rgba(0, 0, 0, 0.4);
-            /* Black w/ opacity */
-        }
 
-        /* Modal Content */
-        .modal-content-accept {
-            width: 1000px !important;
-            position: relative;
-            display: flex;
-            flex-flow: column nowrap;
-            align-items: center;
-            justify-content: center;
-            justify-items: center;
-            background-color: #fefefe;
-            padding: 20px;
+// --------------------------------------------------------------
+// --------------------------------------------------------------
 
-            margin: auto;
-            border: 1px solid #888;
-            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-            -webkit-animation-name: animatetop;
-            -webkit-animation-duration: 0.4s;
-            animation-name: animatetop;
-            animation-duration: 0.4s
-        }
 
-        .modal-body-accept {
-            padding: 2px 16px;
-            display: flex;
-            flex-flow: column nowrap;
-            /* align-items: center; */
-            /* justify-content: center;
-            justify-items: center; */
-            width: 100%;
-            height: auto;
-            border-radius: 8px;
-        }
+
+.instagram-card span {
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.instagram-card {
+	width: auto;
+	display: flex;
+	flex-flow: row nowrap;
+	padding: 30px;
+}
+
+.intagram-card-image {
+	position: relative;
+	width: auto;
+	height: auto;
+	margin-bottom: 5px;
+	-webkit-box-shadow: 0 8px 6px -6px black;
+	-moz-box-shadow: 0 8px 6px -6px black;
+	box-shadow: 0 8px 6px -6px black;
+}
+
+.intagram-card-image img {
+	width: 400px;
+	height: 400px;
+	border-radius: 5px;
+}
+
+.category-date {
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: space-between;
+	align-items: center;
+	width: 100%;
+	padding: 5px;
+}
+
+.issue_date {
+	font-size: 0.8em;
+	float: right;
+}
+
+
+.blog-category {
+	position: relative;
+	line-height: 0;
+	margin: 15px 0
+}
+
+.instagram-card-header {
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: space-between;
+	align-items: center;
+	padding: 0 0 15px 0;
+	height: 40px;
+	width: 100%;
+}
+
+.instagram-card-user-image {
+	border-radius: 50%;
+	width: 40px;
+	height: 40px;
+	vertical-align: middle;
+}
+
+.instagram-card-user-name {
+	margin-left: 20px;
+	display: inline;
+}
+
+.users-comments {
+	display: flex;
+	flex-flow: column nowrap;
+	justify-content: left;
+	width: 100%;
+	height: 350px;
+}
+
+.submitted-issue-img-likes {
+	display: flex;
+	flex-flow: column nowrap;
+	align-items: flex-start;
+	margin-right: 30px;
+}
+
+.like-unlike {
+	display: flex;
+	flex-flow: row nowrap;
+	padding-left: 7px;
+}
+
+.like-unlike button {
+	border: none;
+	background: none;
+	outline: none;
+	width: 20px;
+	height: 20px;
+	margin-right: 20px;
+
+}
+
+.like {
+	margin-right: 30px;
+}
+
+.like-unlike i {
+	font-size: 28px;
+	color: #0053ec;
+}
+
+#btn-accept{
+	width: 100px;
+	float: right;
+	margin-top: 20px;
+}
+
+.employee-confirmation{
+	width: 100%;
+	display: flex;
+	flex-flow: row nowrap;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.submitted-issue-details {
+	padding: 0;
+}
+
+.submitted-issue-details-comment {
+	display: flex;
+	flex-flow: column nowrap;
+	justify-content: space-around;
+	border-left: 5px solid #4586ff41;
+	padding-left: 30px;
+}
+
+.instagram-card-time {
+	float: right;
+	width: 80px;
+	padding-top: 10px;
+	text-align: right;
+	color: #999;
+}
+
+.instagram-card-content {
+	padding: 20px;
+}
+
+
+.instagram-card-content-user {
+	font-weight: bold;
+	color: #262626;
+}
+
+
+.comments {
+	color: #999;
+}
+
+.user-comment {
+	color: #003569;
+}
+
+.instagram-card-footer {
+	padding: 0;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.cmt {
+	display: flex;
+	flex-flow: row nowrap;
+	align-items: center;
+	padding: 0;
+	margin: 5px 0 5px 0;
+}
+
+.footer-action-icons {
+	font-size: 16px;
+	color: #ccc;
+}
+
+.modal-content2 {
+	width: 600px !important;
+}
+
+.cmt-txt {
+	margin-left: 20px;
+
+}
+
+.blog-text-success {
+	color: #6f6f6f !important
+}
+
+.post_cmt {
+	border-style: none !important;
+}
+
+.comments-input {
+	border: none;
+	outline: none;
+	margin-left: 10px;
+	width: 100%;
+}
+
+.body {
+	display: flex;
+	flex-flow: column nowrap;
+
+}
+
+a {
+
+	text-decoration: none;
+
+}
+
+
+hr {
+	border: none;
+	border-bottom: 1px solid #ccc;
+	margin-top: 30px;
+	margin-bottom: 0px;
+
+}
+
+.blog-card-blog .blog-card-caption {
+	margin-top: 5px
+}
+
+.blog-card-caption,
+.blog-card-caption a {
+	color: #333;
+	text-decoration: none
+}
+
+
+.blog-card-description {
+	color: #444;
+	font: 0.9em sans-serif;
+	margin: 7px;
+}
+
+.blog-text-success {
+	color: #6f6f6f !important
+}
+
+.blog-table {
+	margin-bottom: 0;
+	margin-top: 20px;
+	width: 100%;
+	padding: 10px;
+}
+
+.issue_info_parts {
+	margin-bottom: 20px;
+}
+
+.post_cmt {
+	border-style: none !important;
+}
+
+#view_cmt {
+	outline: none;
+	border: none;
+	color: #7f7f7f;
+	font-size: 0.8em;
+	background: none;
+	margin: 0 0 3px 0;
+}
+
+.three-dots {
+	padding-right: 10px;
+	outline: none;
+	border: none;
+	background: none;
+}
+
+/* The Modal (background) */
+// .modal1 {
+// display: none;
+// /* Hidden by default */
+
+// }
+#modal {
+	display: none;
+	position: absolute;
+	z-index: 1;
+	left: 30%;
+	top: 30%;
+	width: auto;
+	height: auto;
+	overflow: auto;
+	background-color: rgba(255, 255, 255, 0);
+	background: none;
+	border-radius: 8px;
+	border: 1px solid #888;
+	box-shadow: 0 4px 0 rgba(0, 0, 0, 0.2), 0 6;
+
+}
+
+.modal-content {
+	width: 280px !important;
+}
+
+.modal-content2 {
+	width: 600px !important;
+}
+
+.modal-style {
+	position: relative;
+	display: flex;
+	flex-flow: column nowrap;
+	align-items: center;
+	justify-content: center;
+	justify-items: center;
+	background-color: #fefefe;
+	margin: 0;
+	padding: 5;
+	width: 100%;
+
+}
+
+/* Add Animation */
+@-webkit-keyframes animatetop {
+	from {
+		top: -300px;
+		opacity: 0
+	}
+
+	to {
+		top: 0;
+		opacity: 1
+	}
+}
+
+@keyframes animatetop {
+	from {
+		top: -300px;
+		opacity: 0
+	}
+
+	to {
+		top: 0;
+		opacity: 1
+	}
+}
+
+.modal-body {
+	padding: 2px 16px;
+	display: flex;
+	flex-flow: column nowrap;
+	align-items: flex-start;
+	justify-content: space-between;
+	// justify-items: center; */
+	width: 100%;
+	height: auto;
+	// border-radius: 8px;
+
+}
+
+.menu {
+	outline: none;
+	border: none;
+	background: none;
+	border-bottom: 0.3px solid #6f6f6f;
+	margin-bottom: 0.5px;
+	padding: 6px;
+	width: 100%;
+}
+
+.comments-card {
+	// display: flex;
+	// flex-flow: column nowrap;
+	margin: 0;
+	width: 100%;
+	height: auto;
+	border-radius: 8px;
+}
+
+.cmt {
+	display: flex;
+	flex-flow: row nowrap;
+	// align-items: center;
+	padding: 0;
+	margin: 5px 0 5px 0;
+}
+
+.status {
+	width: 20%;
+}
+
+
+
+.accept-modal {
+	display: none;
+	/* Hidden by default */
+	position: fixed;
+	/* Stay in place */
+	z-index: 1;
+	/* Sit on top */
+	/* Location of the box */
+	left: 0;
+	top: 0;
+	width: 100%;
+	/* Full width */
+	height: 100vh;
+	/* Full height */
+	overflow: auto;
+	/* Enable scroll if needed */
+	background-color: rgb(0, 0, 0);
+	/* Fallback color */
+	background-color: rgba(0, 0, 0, 0.4);
+	/* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content-accept {
+	width: 1000px !important;
+	position: relative;
+	display: flex;
+	flex-flow: column nowrap;
+	align-items: center;
+	justify-content: center;
+	justify-items: center;
+	background-color: #fefefe;
+	padding: 20px;
+
+	margin: auto;
+	border: 1px solid #888;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	-webkit-animation-name: animatetop;
+	-webkit-animation-duration: 0.4s;
+	animation-name: animatetop;
+	animation-duration: 0.4s
+}
+
+.modal-body-accept {
+	padding: 2px 16px;
+	display: flex;
+	flex-flow: column nowrap;
+
+	width: 100%;
+	height: auto;
+	border-radius: 8px;
+}
+
+// ********************************************************************************
+// *******************************************************************************
+// ****************************************************************************
+
+// .likes {
+// 	font-weight: bold;
+// }

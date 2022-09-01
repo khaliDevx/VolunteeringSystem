@@ -19,36 +19,40 @@
     }
     .container-form{
     display: flex;
-    flex-flow: column nowrap;
-	  align-items: flex-start;
+    flex-flow: row nowrap;
+	align-items: flex-start;
     padding: 40px;
-    width: 500px;
+    width: auto;
     height: auto;
-    border-radius: 10px;
-    background-color: #fff; 
+    border: none;
     }
-    #frame{
-    border-radius: 10px;
-    margin-left: -15px;
-    margin-right: 20px;
+    .img-preview{
+        border-radius: 10px;
     }
     .custom-file{
     width: 250px;
     margin-left: 0px;
     }
-    .choosephoto{
+    .choose-photo-form{
     display: flex;
 	align-items: center;
-	flex-flow: row nowrap;
-	justify-content: space-between;
+	flex-flow: column nowrap;
+	justify-content: space-around;
     width: 300px;
     height: auto;
-    margin-bottom: 40px;
+    margin-right: 50px;
+    }
+    .select-photo{
+        margin-bottom: 50px;
+    }
+    .submit-issue{
+        float: right;
+        margin-top: 20px;
     }
     .issueInfo{
     height: auto;
-    background-color: #fff; 
-
+    border-left: 3px solid rgba(0, 153, 255, 0.432);
+    padding-left: 50px;
     }
     .issueInfoParts{
     display: flex;
@@ -85,6 +89,92 @@
         color: red;
         font-size: 15px;
     }
-    .form_issue{
-        margin-left: 20%;
+
+    .add-new{
+        margin: 10px;
+        padding: 10px;
+        border: none;
+        background-color: rgba(241, 241, 241, 0.39);
+        border-radius: 5px;
+        color: #333;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        width: 65%;
     }
+    .add-container{
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: center;
+        justify-self: start;
+    }
+    .add-new-btn{
+        width: auto;
+        height: auto;
+        margin: 10px;
+        padding: 5px;
+        float: right;
+        width: 20%;
+    }
+    .add-new-input{
+        width: 75%;
+        height: 35px;
+        float: left;
+        border-radius: 5px;
+        border: 0.5px #ddd solid;
+    }
+    .input-btn-add{
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: center;
+        overflow: hidden;
+        width: 60%;
+        height: auto;
+        float: right;
+    }
+    .add-material-city{
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-between;
+        align-items: center;
+        justify-items: center;
+        width: 100%;
+        height: auto;
+    }
+    .add-material-city label{
+        padding-top: 5px;
+        margin-left: 30px;
+    }
+    .add-governorate-category{
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-around;
+        align-items: center;
+        width: 100%;
+        height: auto;
+        margin: 15px;
+    }
+    .add-governorate-category label{
+        padding-top: 5px;
+        margin-right: 50px;
+    }
+    .select-governorate-category label{
+        padding-top: 5px;
+        margin-right: 50px;
+    }
+    .select-governorate-category select{
+        width: 60%;
+        height: 35px;
+        float: right;
+        border-radius: 5px;
+        border: 0.5px #ddd solid;
+    }
+    .select-governorate-category{
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-around;
+        align-items: center;
+        width: 100%;
+        height: auto;
+        margin: 15px;
+    }
+
+

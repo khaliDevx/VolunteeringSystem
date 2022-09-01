@@ -1,5 +1,5 @@
 class AddEmployeeId < ActiveRecord::Migration[6.1]
   def change
-    add_column :users, :employee_id, 
+    add_column :users, :employee_id, :integer
   end
 end

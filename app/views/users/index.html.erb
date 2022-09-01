@@ -1,377 +1,285 @@
-<!DOCTYPE html>
-<html>
- <%= stylesheet_link_tag 'index'%>
-<head>
-</head>
-
-
- <%
-=begin%>
- <style>
-
-
-  .container{
-    /* display: flex; */
-    align-items: center;
-    justify-content: center;
-    
-    /* min-height: 660px; */
-    /* width: 100%; */
-    /* background-color: rgb(99, 97, 97); */
-    /* background-size: cover;
-    background-position: center; */
-  }
-  #open {
-  	outline: none;
-  	border: none;
-  	color: #7f7f7f;
-  	font-size: 0.8em;
-  	background: none;
-  	margin: 0 0 3px 0;
-  }
-
-
-  .model-container{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 100%;
-    width: 100%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    background: rgba(0,0,0,.3);
-    transform: scale(0);
-    
-  }
-
-  .model-container .model{
-  height: 50%;
-  width: 50%;
-  margin: 0 10px;
-  padding: 20px;
-  background: #fff;
-  border-radius: 5px;
-  text-align: center;
-  position: relative;
-
-  }
-
-  .model-container .model .fa-times{
-  position: absolute; 
-  top: 15px;
-  right: 15px;  
-  font-size: 25px; 
-  cursor: pointer;
-  color: #333;
-  }
-  .instagram-card-header {
-  	display: flex;
-  	flex-flow: row nowrap;
-  	justify-content: space-between;
-  	align-items: center;
-  	padding: 0 0 15px 0;
-  	margin-bottom: 5px;
-  	border-bottom: 0.3px solid #a0a0a0;
-  	height: 50px;
-  }
-  .instagram-card-user-image {
-  	border-radius: 50%;
-  	width: 40px;
-  	height: 40px;
-  	vertical-align: middle;
-  }
-  .instagram-card-user-name {
-  	margin-left: 20px;
-  	font-weight: bold;
-  	color: #262626;
-  }
-  .users-comments{
-  	display: flex;
-  	flex-flow: column nowrap;
-  	justify-content: left;
-  	width: 100%;
-  	height: 350px;
-  }
-  .cmt{
-  	display: flex;
-  	flex-flow: row nowrap;
-  	align-items: center;
-  	padding: 0;
-  	margin: 5px 0 5px 0;
-  }
-  .instagram-card-footer {
-  	padding: 0;
-  	display: flex;
-  	align-items: center;
-  }
-  .footer-action-icons {
-  	font-size: 16px;
-  	color: #ccc;
-  }
-  .modal-content2 {
-  	width: 600px !important;
-  }
-  .cmt-txt{
-  	margin-left: 20px;
-
-  }
-  .blog-text-success {
-  	color: #6f6f6f !important
-  }
-  .post_cmt {
-  	border-style: none !important;
-  }
-  .comments-input {
-  	border: none;
-  	outline: none;
-  	margin-left: 10px;
-  	width: 100%;
-  }
-</style>  
-<%
-=end%>
-
-<body id="page-top" class=body>                   
- 
-   
-        <div id="wrapper">
-                <div class="container-fluid">
-                    <div class="d-sm-flex justify-content-between align-items-center mb-4">
-                        <h3 class="text-dark mb-0">Dashboard</h3>
-                    </div>
-                    <div class=status>
-                        <%# <%= form_tag '/index', :method =>'get' do%> 
-                          <%# <%=text_field_tag :search, params[:search] %> 
-                          <%# <%= select_tag :search,  options_for_select(["Submitted", "Passed","Accepted","Confirmed"], params[:search]), id: "different_option_value_html", onchange: "this.form.submit();", include_blank: "Which status ?",class:"form-select form-select "%> 
-                          <%# <%= submit_tag "Search"%>
-                          <%# <%end%> 
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <h1>Issues</h1>
-                            <div class="container">
-
-                            
-
-                                <% @problems.each do |problem| %>
-                                        <div class="instagram-card shadow-sm p-3 mb-5 bg-white rounded">
-                                            <div class="instagram-card-header">
-                                              <div>
-                                                <% @user.each do |user| %>
-                                                    <%if @photos= Photo.where(:user_id=>user.id).present?%>
-				                                            	<%@photos= Photo.where(:user_id=>user.id)%>
-				                                            	<% @photos.each do |photo| %>
-      	                                            				<% if (photo.image.attached?) %>
-      	                                            				  <%=image_tag(url_for(photo.image),class:'instagram-card-user-image')%>
-      	                                            				<% else %>
-                                                                		<%=image_tag('avatar.png',class:'instagram-card-user-image')%> 
-      	                                            				<% end %>
-				                                            	 <% end %>
-				                                             <% else %>
-                                                                <%=image_tag('avatar.png',class:'instagram-card-user-image')%> 
-				                                             <% end %>
-                                                    <span class="instagram-card-user-name"><%=user.first_name%> <%=user.last_name%></span>
-                                                <%end%>
-                                              </div>
-                                              <button id="myBtn" class="three-dots fa fa-ellipsis-h"></button>
+<%= stylesheet_link_tag 'index' %>
+  <div id="wrapper">
+    <div class="container-fluid">
+      <div class="d-sm-flex justify-content-between align-items-center mb-4">
+        <h3 class="text-dark mb-0">Passed Issues</h3>
+      </div>
+      <div class="container">
+        <% @problems.each do |problem| %>
+          <div class="instagram-card shadow-sm p-3 mb-5 bg-white rounded">
+            <div class="submitted-issue-img-likes">
+              <div class="instagram-card-header">
+                <div>
+                  <% @user.each do |user| %>
+                    <%if @photos=Photo.where(:user_id=>user.id).present?%>
+                      <%@photos= Photo.where(:user_id=>user.id)%>
+                        <% @photos.each do |photo| %>
+                          <% if (photo.image.attached?) %>
+                            <%=image_tag(url_for(photo.image),class:'instagram-card-user-image')%>
+                              <% else %>
+                                <%=image_tag('avatar.png',class:'instagram-card-user-image')%>
+                                  <% end %>
+                                    <% end %>
+                                      <% else %>
+                                        <%=image_tag('avatar.png',class:'instagram-card-user-image')%>
+                                          <% end %>
+                                            <div class="instagram-card-user-name h5">
+                                              <%=user.first_name%>
+                                                <%=user.last_name%>
                                             </div>
-
-                                            <div class="intagram-card-image">
-                                            <% if (problem.image.attached?) %>
-                                              <%=image_tag(url_for(problem.image))%>
-                                              <% else %>
-                                                <p>no image</p>
-                                            <% end %>
-                                              <%# <img src="issues-logo.jpg" /> %>
-                                            </div>
-
-                                            <div class="blog-table">
-                                              <% @category=Category.where(:id=>problem.category_id)%>
-                                              <% @category.each do |category| %>
-                                                    <div class="blog-category blog-text-success issue_info_parts">
-                                                        <%= category.name%>
-                                                    </div>
-                                              <% end %>
-                                              <div class="issue_info_parts">
-                                                <h4 class="blog-card-caption">Location:</h4>
-                                                <div class="blog-card-description">
-                                                  <span>Governorate:</span>
-                                                  <%@city=City.where(:id=>problem.city_id)%>
-                                                  <% @city.each do |city| %>
-                                                    <%@gove=Governorate.where(:id=>city.governorate_id)%>
-                                                  <% @gove.each do |gove| %>
-                                                    <span><%=gove.name%></span>
-                                                   <% end %>
-                                                  <% end %>
-
-                                                </div>
-                                                <div class="blog-card-description">
-                                                  <span>City:</span>
-                                                  <% @city.each do |city| %>
-                                                    <span><%=city.name%></span>
-                                                  <%end%>
-                                                </div>
-                                              </div>
-                                              
-                                              <div class="issue_info_parts">
-                                                <h4 class="blog-card-caption">Description</h4>
-                                                <p class="blog-card-description">
-                                                  <%=problem.desciption%>
-                                                </p>
-                                                <%=@x=problem.id%>
-                                                
-                                              </div>
-                                              <div class="issue_info_parts">
-                                                <h4 class="blog-card-caption">Status</h4>
-                                                <p class="blog-card-description"><%=problem.status%></p>
-
-                                              </div >
-                                              <div class="issue_info_parts">
-                                                <h4 class="blog-card-caption">Submitted by:</h4>
-                                                <div class="blog-card-description">
-                                                  <span>user:</span>
-                                                  <%@submiter=User.where(:id=> problem.user_id)%>
-                                                  <% @submiter.each do |user| %>
-                                                    <span > <%= link_to "#{user.first_name} #{user.last_name}",personal_page_user_path(user),:class=>"link-dark" %></span>
-                                                  <% end %>
-                                                </div>
-                                                <div>
-                                                </div>
-                                              </div>
-                                              <div class="container">
-                                                
-                                                <button id="open<%=@x%>"class=open>View all <span id=number-cmt><%=Coment.where(:problem_id=>problem.id).count%></span> comments</button>
-                                              
-                                               
-                                              </div>
-                                                <div class="model-container" >
-                                                        <div class="model">
-                                                            <div class="instagram-card-header">
-                                                          <div>
-                                                          <%@user.each do |user|%>
-                                                              <%if @photos= Photo.where(:user_id=>user.id).present?%>
-				                                                          	<%@photos= Photo.where(:user_id=>user.id)%>
-				                                                          	<% @photos.each do |photo| %>
-      	                                                          				<% if (photo.image.attached?) %>
-      	                                                          				  <%=image_tag(url_for(photo.image),class:'instagram-card-user-image')%>
-      	                                                          				<% else %>
-                                                                             		<%=image_tag('avatar.png',class:'instagram-card-user-image')%> 
-      	                                                          				<% end %>
-				                                                          	 <% end %>
-				                                                      <% else %>
-                                                                    <%=image_tag('avatar.png',class:'instagram-card-user-image')%> 
-				                                                      <% end %>
-                                                            
-                                                              <span class="instagram-card-user-name"><%=user.first_name%> <%=user.last_name%></span>
-                                                            <%end%>
-                                                          </div>
-                                                        </div>
-                                                          <%@comments=Coment.where(:problem_id=>@x).order("id DESC")%>
-                                                            <%@comments.each do |com|%>
-                                                                  <div class="users-comments">
-                                                                    <div class="cmt">
-                                                                      <%user = User.where(:id=>com.user_id)%>
-                                                                      <%user.each do |user|%>
-                                                                          <%if @photos = Photo.where(:user_id=>user.id).present?%>
-				                                                          	          <%@photos = Photo.where(:user_id=>user.id)%>
-				                                                          	          <% @photos.each do |photo| %>
-      	                                                          				        <% if (photo.image.attached?) %>
-      	                                                          				          <%=image_tag(url_for(photo.image),class:'instagram-card-user-image')%>
-      	                                                          				        <% else %>
-                                                                                     		<%=image_tag('avatar.png',class:'instagram-card-user-image')%> 
-      	                                                          				        <% end %>
-				                                                          	          <% end %>
-				                                                                    <% else %>
-                                                                                  <%=image_tag('avatar.png',class:'instagram-card-user-image')%> 
-				                                                                    <% end %> 
-                                                                          <div class="instagram-card-user-name"><%=user.first_name%> <%=user.last_name%></div>
-                                                                      <%end%>
-                                                                          <div class="cmt-txt"><%=com.comment%></div>
-                                                                    </div>
-                                                                  </div>
-                                                            <%end%>
-                                                        <div class="instagram-card-footer">
-                                                          <form action=/feed method=POST>
-                                                             <input type='hidden' name='authenticity_token' value="<%= form_authenticity_token%>">
-                                                             <input type='hidden' name='feed[problem_id]' value="<%=problem.id%>">
-                                                            <div class="instagram-card-footer">
-                                                              <input name=feed[comment] class="comments-input blog-text-success" id="enter-comment" type="text" placeholder="Add a comment..." />
-                                                              <input type=submit class="btn btn-outline-info post_cmt btn-post" id="post-comment" value=Post >
-                                                            </div>
-                                                          </form>
-                                                        </div>
-
-                                                         <i class="fas fa-times close"></i>
-
-                                                    </div>
-
-                                                </div>
-                                              
-                                              <div class="issue_date"><span class="issue_date"><%=problem.created_at.to_date%></span> </div>
-                                            </div>
-                                           
-                                                <%if @employee.present?%>
-                                                    <form action='/confirm_issue' method="POST">
-                                                        <input type='hidden' name='authenticity_token' value="<%= form_authenticity_token%>">
-                                                        <input type='hidden' name='confirm_issue[id]' value="<%=problem.id%>">
-                                                        <button class='btn btn-primary'name=confirm_issue[status] value=Confirmed>Confirm</button>
-                                                        <%= link_to 'Destroy', problem, method: :delete, data: { confirm: 'Are you sure?' },class:"btn btn-danger " %>
-                                                    </form>
-                                                <%else%>
-                                                    <form action='/confirm' method="POST">
-                                                        <input type='hidden' name='authenticity_token' value="<%= form_authenticity_token%>">
-                                                        <input type='hidden' name='confirm[problem_id]' value="<%=problem.id%>">
-                                                        <div>
-                                                            <button name=confirm[confirmed] value=true><i class="far fa-thumbs-up"></i></button>
-                                                            <span><%=Confirm.where(:problem_id=>problem.id,:confirmed=>true).count%></span>
-                                                        </div>
-                                                        <div>
-                                                          <button name=confirm[confirmed] value=false><i class="far fa-thumbs-down"></i></button>
-                                                            <span><%=Confirm.where(:problem_id=>problem.id,:confirmed=>false).count%></span>
-
-                                                        </div>
-                                                    </form>
-                                                <%end%>
-                                            <form action=/feed method=POST>
-                                                 <input type='hidden' name='authenticity_token' value="<%= form_authenticity_token%>">
-                                                 <input type='hidden' name='feed[problem_id]' value="<%=problem.id%>">
-                                                <div class="instagram-card-footer">
-                                                  <a class="footer-action-icons" href=""><i class="fa fa-heart-o"></i></a>
-                                                  <input name=feed[comment] class="comments-input blog-text-success" id="enter-comment" type="text" placeholder="Add a comment..." />
-                                                  <button class="btn btn-outline-info post_cmt" id="post-comment" onclick="post" >Post</button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    <%end%>
-                            </div>
-                            </div>
-                        </div>
-                    </div>
+                                            <%end%>
                 </div>
+                <button id="myBtn" class="three-dots fa fa-ellipsis-h"></button>
+              </div>
+
+              <div class="intagram-card-image">
+                <% if (problem.image.attached?) %>
+                  <%=image_tag(url_for(problem.image))%>
+                    <% else %>
+                      <p>no image</p>
+                      <% end %>
+              </div>
+              <div class="category-date">
+                <% @category=Category.where(:id=>problem.category_id)%>
+                  <% @category.each do |category| %>
+                    <div class="blog-category blog-text-success">
+                      <%= category.name%>
+                    </div>
+                    <% end %>
+                      <div class="issue_date blog-text-success">
+                        <span>Date: </span>
+                        <span>
+                          <%=problem.created_at.to_date%>
+                        </span>
+                      </div>
+
+              </div>
+              <%if @employee.present?%>
+              <div class="employee-confirmation">
+                <form action='/confirm_issue' method="POST">
+                  <input type='hidden' name='authenticity_token' value="<%= form_authenticity_token%>">
+                  <input type='hidden' name='confirm_issue[id]' value="<%=problem.id%>">
+                  <button class='btn btn-primary' name=confirm_issue[status] value=Confirmed>Confirm</button>
+                  <%= link_to 'Destroy' , problem, method: :delete, data: { confirm: 'Are you sure?' },class:"btn
+                    btn-danger " %>
+                </form>
+                <div class="like-unlike">
+                  <div class="like">
+                    <button disabled><i class="far fa-thumbs-up un-like"></i></button>
+                    <span>
+                      <%=Confirm.where(:problem_id=>problem.id,:confirmed=>true).count%>
+                    </span>
+                  </div>
+                  <div>
+                    <button disabled><i class="far fa-thumbs-down un-like"></i></button>
+                    <span>
+                      <%=Confirm.where(:problem_id=>problem.id,:confirmed=>false).count%>
+                    </span>
+                  </div>
+                </div>
+              </div>
+                
+            <%else%>
+            <form action='/confirm' method="POST">
+                    <input type='hidden' name='authenticity_token' value="<%= form_authenticity_token%>">
+                    <input type='hidden' name='confirm[problem_id]' value="<%=problem.id%>">
+                    <div class="like-unlike">
+                      <div class="like">
+                        <button name=confirm[confirmed] value=true><i class="far fa-thumbs-up un-like"
+                            onclick="handleLike()"></i></button>
+                        <span>
+                          <%=Confirm.where(:problem_id=>problem.id,:confirmed=>true).count%>
+                        </span>
+                      </div>
+                      <div>
+                        <button name=confirm[confirmed] value=false><i class="far fa-thumbs-down un-like"
+                            onclick="handleLike()"></i></button>
+                        <span>
+                          <%=Confirm.where(:problem_id=>problem.id,:confirmed=>false).count%>
+                        </span>
+                      </div>
+                    </div>
+
+                </form>
+                <%end%>
             </div>
-           
-        <a class="border rounded d-inline scroll-to-top" href="" style="margin-right: 60px;">
-            <i class="fas fa-angle-up"></i>
-        </a>
-    <a class="border rounded d-inline scroll-to-top" href="/submit_issue">
-        <button class="btn btn-primary add-issue fa fa-plus" type="button" data-toggle="modal" data-target="#submit_issue"></button>
+            <div class="submitted-issue-details-comment">
+              <div class="submitted-issue-details">
+                <div class="h5">Issue Details</div>
+                <div class="blog-table">
+                  <div class="issue_info_parts">
+                    <div class="h6">Location:</div>
+                    <div class="blog-card-description">
+                      <span>Governorate:</span>
+                      <%@city=City.where(:id=>problem.city_id)%>
+                        <% @city.each do |city| %>
+                          <%@gove=Governorate.where(:id=>city.governorate_id)%>
+                            <% @gove.each do |gove| %>
+                              <span>
+                                <%=gove.name%>
+                              </span>
+                              <% end %>
+                                <% end %>
+
+                    </div>
+                    <div class="blog-card-description">
+                      <span>City:</span>
+                      <% @city.each do |city| %>
+                        <span>
+                          <%=city.name%>
+                        </span>
+                        <%end%>
+                    </div>
+                  </div>
+
+                  <div class="issue_info_parts">
+                    <div class="h6">Description</div>
+                    <p class="blog-card-description">
+                      <%=problem.desciption%>
+                    </p>
+                  </div>
+                  <div class="issue_info_parts">
+                    <div class="h6">Status</div>
+                    <p class="blog-card-description">
+                      <%=problem.status%>
+                    </p>
+
+                  </div>
+                  <div class="issue_info_parts">
+                    <div class="h6">Submitted by:</div>
+                    <div class="blog-card-description">
+                      <span>user:</span>
+                      <%@submiter=User.where(:id=> problem.user_id)%>
+                        <% @submiter.each do |user| %>
+                          <span>
+                            <%= link_to "#{user.first_name} #{user.last_name}" ,personal_page_user_path(user),:class=>
+                              "link-dark" %>
+                          </span>
+                          <% end %>
+                    </div>
+                  </div>
+                  <div class="container">
+                    <button id="open" class=open>View all <span id=number-cmt>
+                        <%=Coment.where(:problem_id=>problem.id).count%>
+                      </span> comments</button>
+                  </div>
+
+
+
+                  <div class="model-container" tabindex="-1">
+                    <div class="model">
+                      <div class="instagram-card-header">
+                        <div>
+                          <%@user.each do |user|%>
+                            <%if @photos=Photo.where(:user_id=>user.id).present?%>
+                              <%@photos= Photo.where(:user_id=>user.id)%>
+                                <% @photos.each do |photo| %>
+                                  <% if (photo.image.attached?) %>
+                                    <%=image_tag(url_for(photo.image),class:'instagram-card-user-image')%>
+                                      <% else %>
+                                        <%=image_tag('avatar.png',class:'instagram-card-user-image')%>
+                                          <% end %>
+                                            <% end %>
+                                              <% else %>
+                                                <%=image_tag('avatar.png',class:'instagram-card-user-image')%>
+                                                  <% end %>
+
+                                                    <span class="instagram-card-user-name">
+                                                      <%=user.first_name%>
+                                                        <%=user.last_name%>
+                                                    </span>
+                                                    <%end%>
+                        </div>
+                      </div>
+                      <%@comments=Coment.where(:problem_id=>@x).order("id DESC")%>
+                        <%@comments.each do |com|%>
+                          <div class="users-comments">
+                            <div class="cmt">
+                              <%user=User.where(:id=>com.user_id)%>
+                                <%user.each do |user|%>
+                                  <%if @photos=Photo.where(:user_id=>user.id).present?%>
+                                    <%@photos=Photo.where(:user_id=>user.id)%>
+                                      <% @photos.each do |photo| %>
+                                        <% if (photo.image.attached?) %>
+                                          <%=image_tag(url_for(photo.image),class:'instagram-card-user-image')%>
+                                            <% else %>
+                                              <%=image_tag('avatar.png',class:'instagram-card-user-image')%>
+                                                <% end %>
+                                                  <% end %>
+                                                    <% else %>
+                                                      <%=image_tag('avatar.png',class:'instagram-card-user-image')%>
+                                                        <% end %>
+                                                          <div class="instagram-card-user-name">
+                                                            <%=user.first_name%>
+                                                              <%=user.last_name%>
+                                                          </div>
+                                                          <%end%>
+                                                            <div class="cmt-txt">
+                                                              <%=com.comment%>
+                                                            </div>
+                            </div>
+                          </div>
+                          <%end%>
+                            <div class="instagram-card-footer">
+                              <form action=/feed method=POST>
+                                <input type='hidden' name='authenticity_token' value="<%= form_authenticity_token%>">
+                                <input type='hidden' name='feed[problem_id]' value="<%=problem.id%>">
+                                <div class="instagram-card-footer">
+                                  <input name=feed[comment] class="comments-input blog-text-success" id="enter-comment"
+                                    type="text" placeholder="Add a comment..." />
+                                  <input type=submit class="btn btn-outline-info post_cmt btn-post" id="post-comment"
+                                    value=Post>
+                                </div>
+                              </form>
+                            </div>
+                            <i class="fas fa-times close"></i>
+                  </div>
+                  </div>
+                </div>
+              </div>
+              <form action=/feed method=POST>
+                <input type='hidden' name='authenticity_token' value="<%= form_authenticity_token%>">
+                <input type='hidden' name='feed[problem_id]' value="<%=problem.id%>">
+                <div class="instagram-card-footer">
+                  <a class="footer-action-icons" href=""><i class="fa fa-heart-o"></i></a>
+                  <input name=feed[comment] class="comments-input blog-text-success" id="enter-comment" type="text"
+                    placeholder="Add a comment..." />
+                  <button class="btn btn-outline-info post_cmt" id="post-comment" onclick="post">Post</button>
+                </div>
+              </form>
+            </div>
+
+
+
+          </div>
+        <%end%>
+      </div>
+    </div>
+  </div>
+
+  <a class="border rounded d-inline scroll-to-top" href="" style="margin-right: 60px;">
+    <i class="fas fa-angle-up"></i>
+  </a>
+  <a class="border rounded d-inline scroll-to-top" href="/submit_issue">
+    <button class="btn btn-primary add-issue fa fa-plus" type="button" data-toggle="modal"
+      data-target="#submit_issue"></button>
     <a>
-    
-   <script >
-        $(function(){
-    $('#open87').click(function(){
-    $('.model-container').delay(2000).css('transform',' scale(1)')
-    });
-     $('#open90').click(function(){
-    $('.model-container').delay(2000).css('transform',' scale(1)')
-    });
 
-    $('body').on('click','.close',function(){
-        $('.model-container').css('transform',' scale(0)')
+      <script>
+        $(function () {
+          // var id = "id" + Math.random().toString(16).slice(2);
+          $('.open').click(function () {
+            $(this).click(function () {
+              $('.model-container').delay(2000).css('transform', ' scale(1)')
+            });
+          });
+          $('body').on('click', '.close', function () {
+            $('.model-container').css('transform', ' scale(0)')
+          });
+          // function handleLike(){
+          //   document.getElementsByClassName("un-like").toggleClass("far");
+          //   document.getElementsByClassName("un-like").toggleClass("fa");
+
+          // }
         });
-});
-    </script>
-</body>
-
-</html>
+      </script>
