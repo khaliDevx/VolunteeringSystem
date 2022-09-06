@@ -11,12 +11,16 @@ Rails.application.routes.draw do
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
+  # get "/", to: "homepage#home_page"
+
+  get "/", to: 'homepage#home_page'
+
   get "/new", to: "sessions#new"
   post "/user", to: "sessions#create"
   post "/login", to: "sessions#login"
   get "/index", to: "users#index"
   get "/log_out", to: "users#log_out"
-  get "/", to: "sessions#log_in"
+  get "/login", to: "sessions#log_in"
   get "/new_issue", to: "issues#new"
   # post "/issue", to: "issues#create"
   get "/show", to: "issues#show"

@@ -51,7 +51,7 @@ class SessionsController < ApplicationController
 
             end
         else
-             flash[:error]="user not found!"
+            flash[:error]="user not found!"
             redirect_to '/'
         end
     end

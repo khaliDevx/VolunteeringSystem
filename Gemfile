@@ -24,7 +24,6 @@ gem 'bcrypt', '~> 3.1.7'
 gem "aws-sdk-s3", require: false
 gem 'font-awesome-sass'
 gem 'bootstrap', '~> 5.0.1'
-gem 'webpacker', '~> 5.0'  
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
