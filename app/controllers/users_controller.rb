@@ -69,9 +69,6 @@ class UsersController < ApplicationController
         else
             redirect_to '/index'
         end
-
-        # @comment=Coment.where(:problem_id=>92).count
-        # redirect_to'/index'
     end
     
     def confirmed_issue
@@ -83,19 +80,22 @@ class UsersController < ApplicationController
     def accept_status
         @user = User.where(:id=>session[:user_id]) 
         @problems = Problem.accept_issue.order("id DESC").with_attached_image
+        @money = MoneyType.all
+        @mat = Material.all
+
     end
     def accept_issue
         accept=Accept.new(accept_params)
         accept.user_id=session[:user_id]
         accept.problem_id=params[:problem_id]
         if accept.save 
-            @billOfMaterial=BillOfMaterial.create({cost:params[:cost],quantity:params[:quantity],material_id:params[:material_id] ,accept_id: session[:user_id]})
+            @billOfMaterial=BillOfMaterial.create({cost:params[:cost],quantity:params[:quantity],material_id:params[:material_id] ,accept_id: accept.id})
             Problem.where(id:params[:problem_id]).update_all(:status=>"Accepted")
             User.where(:id=>session[:user_id]).update_all(:supervisor=>true)
-            redirect_to "/accept_issue"
+            redirect_to "/accept_status"
         else
             flash[:error_accept]="something went wrong"
-            redirect_to "/accept_issue"
+            redirect_to "/accept_status"
         end
     end
     def join
@@ -124,6 +124,30 @@ class UsersController < ApplicationController
         redirect_to new_photo_path
        end
 
+    end
+
+    def support_money
+        support = SupportedMoney.new(money_params)
+        respond_to do |format|
+            if support.save
+                format.html { redirect_to '/accept_status', notice: "supported was successfully created." }
+            else
+                flash[:error_supp]= "something went wrong"
+                redirect_to '/accept_status'
+            end
+        end
+    end
+
+    def support_mat
+        supportmat = MaterialSupporet.new(supmat_params)
+        respond_to do |format|
+            if supportmat.save
+                format.html { redirect_to '/accept_status', notice: "supported was successfully created." }
+            else
+                flash[:error_supp]= "something went wrong"
+                redirect_to '/accept_status'
+            end
+        end
     end
 
     
@@ -155,9 +179,10 @@ class UsersController < ApplicationController
          def  bio_params
             params.require(:bio).permit(:bio,:id)
          end
-
-       
-        
-        
-        
+         def money_params
+             params.require(:money).permit(:user_id, :problem_id, :amount, :money_type_id)
+         end
+         def supmat_params
+             params.require(:supmat).permit(:user_id, :problem_id, :material_id, :quantity)
+         end
 end

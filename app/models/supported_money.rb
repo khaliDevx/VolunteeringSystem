@@ -1,0 +1,2 @@
+class SupportedMoney < ApplicationRecord
+end

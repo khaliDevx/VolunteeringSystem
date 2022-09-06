@@ -51,7 +51,7 @@ class SessionsController < ApplicationController
 
             end
         else
-             flash[:error]="user not found!"
+            flash[:error]="user not found!"
             redirect_to '/'
         end
     end
@@ -62,11 +62,14 @@ class SessionsController < ApplicationController
         feed=Coment.new(feed_prams)
 
         feed.user_id=session[:user_id]
-        if feed.save 
-            redirect_to "/index"
-        else
-            flash[:error_feed]="something went wrong"
-            redirect_to '/issue'
+        respond_to do |format|
+            if feed.save 
+                format.html { redirect_to '/index', notice: "comment was successfully created." }
+                format.js 
+            else
+                flash[:error_feed]="something went wrong"
+                redirect_to '/issue'
+            end
         end
         
     end

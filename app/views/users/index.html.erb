@@ -191,38 +191,38 @@
                                                     <%end%>
                         </div>
                       </div>
-                      <%@comments=Coment.where(:problem_id=>@x).order("id DESC")%>
+                      <%@comments=Coment.where(:problem_id=>problem.id).order("id DESC")%>
                         <%@comments.each do |com|%>
                           <div class="users-comments">
                             <div class="cmt">
-                              <%user=User.where(:id=>com.user_id)%>
-                                <%user.each do |user|%>
-                                  <%if @photos=Photo.where(:user_id=>user.id).present?%>
-                                    <%@photos=Photo.where(:user_id=>user.id)%>
-                                      <% @photos.each do |photo| %>
-                                        <% if (photo.image.attached?) %>
-                                          <%=image_tag(url_for(photo.image),class:'instagram-card-user-image')%>
+                                  <%user=User.where(:id=>com.user_id)%>
+                                  <%user.each do |user|%>
+                                    <% if @photos=Photo.where(:user_id=>user.id).present?%>
+                                        <%@photos=Photo.where(:user_id=>user.id)%>
+                                          <% @photos.each do |photo| %>
+                                            <% if (photo.image.attached?) %>
+                                              <%=image_tag(url_for(photo.image),class:'instagram-card-user-image')%>
                                             <% else %>
-                                              <%=image_tag('avatar.png',class:'instagram-card-user-image')%>
-                                                <% end %>
-                                                  <% end %>
-                                                    <% else %>
-                                                      <%=image_tag('avatar.png',class:'instagram-card-user-image')%>
-                                                        <% end %>
-                                                          <div class="instagram-card-user-name">
-                                                            <%=user.first_name%>
-                                                              <%=user.last_name%>
-                                                          </div>
-                                                          <%end%>
-                                                            <div class="cmt-txt">
-                                                              <%=com.comment%>
-                                                            </div>
+                                                  <%=image_tag('avatar.png',class:'instagram-card-user-image')%>
+                                            <% end %>
+                                        <% end %>
+                                      <% else %>
+                                        <%=image_tag('avatar.png',class:'instagram-card-user-image')%>
+                                      <% end %>
+                                      <div class="instagram-card-user-name">
+                                        <%=user.first_name%>
+                                          <%=user.last_name%>
+                                      </div>
+                                      <%end%>
+                                        <div class="cmt-txt">
+                                          <%=com.comment%>
+                                        </div>
                             </div>
                           </div>
                           <%end%>
                             <div class="instagram-card-footer">
-                              <form action=/feed method=POST>
-                                <input type='hidden' name='authenticity_token' value="<%= form_authenticity_token%>">
+                              <%= form_tag({:controller=>'sessions',:action=>'comment'},:remote=> true, method: :post) do%>
+                                <%# <input type='hidden' name='authenticity_token' value="<%= form_authenticity_token%>"> %>
                                 <input type='hidden' name='feed[problem_id]' value="<%=problem.id%>">
                                 <div class="instagram-card-footer">
                                   <input name=feed[comment] class="comments-input blog-text-success" id="enter-comment"
@@ -230,7 +230,7 @@
                                   <input type=submit class="btn btn-outline-info post_cmt btn-post" id="post-comment"
                                     value=Post>
                                 </div>
-                              </form>
+                              <% end %>
                             </div>
                             <i class="fas fa-times close"></i>
                   </div>

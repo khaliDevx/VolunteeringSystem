@@ -54,6 +54,6 @@ class AdditionsController < ApplicationController
             params.require(:cat).permit(:name)
         end
         def mat_params
-            params.require.permit(:name, :category_id)
+            params.require(:mat).permit(:name, :category_id)
         end
 end

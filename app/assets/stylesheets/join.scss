@@ -42,7 +42,8 @@
 #support{
     position: absolute;
     float: right;
-    margin-bottom: 20px;
+    // margin-bottom: 20px;
+    margin-top: 9%;
 }
 #support:hover{
     letter-spacing: 1px;
@@ -72,8 +73,7 @@ text-align: center;
 position: relative;
 
 }
-.fa-home
-{
+.model .fa-home{
     font-size: 30px;
     color: #4d90fe;
     padding-bottom: 50px;

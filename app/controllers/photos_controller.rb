@@ -1,5 +1,5 @@
 class PhotosController < ApplicationController
-  layout 'login_signup'
+  layout :false
   before_action :set_photo, only: %i[ show edit update destroy ]
 
   # GET /photos or /photos.json

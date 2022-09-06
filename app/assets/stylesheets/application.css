@@ -14,7 +14,16 @@ h1 {
 .blog-card-blog {
     margin-top: 30px
 }
-
+.location-new-user{
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    width: 100%;
+}
+.location-new-user div{
+    margin: 5px;
+    width: 50%;
+}
 .blog-card {
     display: inline-block;
     position: relative;
@@ -131,7 +140,13 @@ a {
 }
 
 .fixit-logo {
-    margin-left: 100px
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 5%;
+    border-radius: 50px;
+    width: 100px;
+    height: 100px;
 }
 @import url(https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i);
 
@@ -4839,7 +4854,9 @@ textarea.form-control-lg {
     background-color: #fff;
     background-clip: border-box;
     border: 1px solid #e3e6f0;
-    border-radius: .35rem
+    border-radius: .35rem;
+    float: right;
+    margin-right: 10%;
 }
 
 .card>hr {
@@ -4870,7 +4887,6 @@ textarea.form-control-lg {
 
 .card-body {
     flex: 1 1 auto;
-    padding: 1rem 1rem
 }
 
 .card-title {
@@ -7306,7 +7322,7 @@ textarea.form-control-lg {
 }
 
 .top-50 {
-    top: 50% !important
+    top: 50% !important;
 }
 
 .top-100 {
@@ -7945,10 +7961,6 @@ textarea.form-control-lg {
 
 .p-4 {
     padding: 1.5rem !important
-}
-
-.p-5 {
-    padding: 3rem !important
 }
 
 .px-0 {
@@ -12886,6 +12898,13 @@ a:focus {
 
 form.user .custom-checkbox.small label {
     line-height: 1.5rem
+}
+
+.user{
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    justify-content: space-evenly;
 }
 
 form.user .form-control-user {

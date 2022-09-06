@@ -227,10 +227,8 @@
                                   <tr>
 
                                     <td class="row-index text-center">
-                                      <%= select_tag :material_id,
-                                        options_from_collection_for_select(Material.all.order(:name), :id, :name,
-                                        params[:material_id]),include_blank: "Which status ?" %>
-
+                                      <%= select_tag :material_id,options_from_collection_for_select(Material.all.order(:name), :id, :name,
+                                        params[:material_id]),include_blank: "Choose the material?" %>
                                     </td>
                                     <td class="row-index text-center">
                                       <%= number_field_tag(:cost, params[:cost]) %>

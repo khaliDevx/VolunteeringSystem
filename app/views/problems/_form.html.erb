@@ -37,7 +37,7 @@
         
       <div class="issueInfoParts">
           <label>City</label>
-          <select class="form-select form-select"name="problem[city_id]"  for="floatinginput" placeholder="city"  required>
+          <select class="form-select form-select"name="problem[city_id]"  for="floatinginput" placeholder="city"  >
               <option ></option>
                 <% @city.each do |ct| %>
                   <option value="<%=ct.id%>">
@@ -49,7 +49,7 @@
       <div class="issueInfoParts">
           <label > Category </label>
           <%@cat=Category.all%>
-          <select class="form-select form-select" name="problem[category_id]" for="floatinginput" placeholder="category"  required>
+          <select class="form-select form-select" name="problem[category_id]" for="floatinginput" placeholder="category"  >
               <option ></option>
               <% @cat.each do |ct| %>
                   <option value="<%=ct.id%>">

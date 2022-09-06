@@ -11,12 +11,16 @@ Rails.application.routes.draw do
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
+  # get "/", to: "homepage#home_page"
+
+  get "/", to: 'homepage#home_page'
+
   get "/new", to: "sessions#new"
   post "/user", to: "sessions#create"
   post "/login", to: "sessions#login"
   get "/index", to: "users#index"
   get "/log_out", to: "users#log_out"
-  get "/", to: "sessions#log_in"
+  get "/login", to: "sessions#log_in"
   get "/new_issue", to: "issues#new"
   # post "/issue", to: "issues#create"
   get "/show", to: "issues#show"
@@ -24,7 +28,7 @@ Rails.application.routes.draw do
   post "/problem", to: "employees#update"
   get "/issue", to: "employees#issue"
   get "/new_user", to: "sessions#new_user"
-  post "/employee", to: "sessions#create_user"
+  # post "/employee", to: "sessions#create_user"
   get "/user", to: "employees#user"
   get "/profile", to: "users#profile"
   post "/upprofile", to: "users#update_profile"
@@ -64,7 +68,10 @@ Rails.application.routes.draw do
 
   ##Add Bio
   post "/bio", to: "users#add_bio"
-
+  ## supporte money
+  post "/money", to: "users#support_money"
+  ## support matterails
+  post '/supmat', to: "users#support_mat"
   resources :users do
     member do
       patch :accept
