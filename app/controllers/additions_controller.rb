@@ -1,5 +1,7 @@
 class AdditionsController < ApplicationController
     layout 'application'
+    before_action :check_login
+  before_action :check_type, except: :help
 
     def help 
 

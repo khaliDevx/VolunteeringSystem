@@ -1,7 +1,8 @@
 class ProblemsController < ApplicationController
   layout 'application'
   before_action :set_problem, only: %i[ show edit update destroy ]
-
+  before_action :blok_or_active,except: [:show, :edit, :update, :confirm] 
+  before_action :check_login
   # GET /problems or /problems.json
   def index
     @problems = Problem.where(["status LIKE ?","%#{params[:search]}%"]).with_attached_image
@@ -17,6 +18,7 @@ class ProblemsController < ApplicationController
   # GET /problems/1 or /problems/1.json
   def show
     @problems = Problem.issue_submitted.with_attached_image
+    @user=User.where(:id=>session[:user_id])
   end
 
   # GET /problems/new
@@ -29,6 +31,12 @@ class ProblemsController < ApplicationController
 
   # GET /problems/1/edit
   def edit
+    if user = Problem.where(:id=>params[:id]).present?
+      @problem = Problem.find(params[:id])
+      @city=City.all
+    else
+      redirect_to '/index'
+    end
   end
 
   # POST /problems or /problems.json
@@ -95,18 +103,21 @@ class ProblemsController < ApplicationController
   end
   def confirm 
       user=User.where(:id=>session[:user_id])
-
+      respond_to do |format|
       confirm=Confirm.new(confirm_prams)
-     if user=Confirm.find_by(:problem_id=>confirm_prams[:problem_id],:user_id=>session[:user_id])
-      Confirm.where(:problem_id=>confirm_prams[:problem_id]).update(:confirmed=>confirm_prams[:confirmed])
-      redirect_to '/index'
-     else
-        confirm.user_id=session[:user_id]
-        if confirm.save 
-            redirect_to'/index'
-           
+        if user=Confirm.find_by(:problem_id=>confirm_prams[:problem_id],:user_id=>session[:user_id])
+         Confirm.where(:problem_id=>confirm_prams[:problem_id],:user_id=>session[:user_id]).update(:confirmed=>confirm_prams[:confirmed])
+        
+           format.html { redirect_to '/index', notice: "Confirmed." }
+        else
+           confirm.user_id=session[:user_id]
+           if confirm.save 
+
+               format.html { redirect_to '/index', notice: "Confirmed." }
+
+           end
         end
-     end
+      end
 
   end
 

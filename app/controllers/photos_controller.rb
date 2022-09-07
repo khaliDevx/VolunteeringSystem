@@ -1,6 +1,7 @@
 class PhotosController < ApplicationController
   layout :false
   before_action :set_photo, only: %i[ show edit update destroy ]
+  before_action :check_login
 
   # GET /photos or /photos.json
   def index

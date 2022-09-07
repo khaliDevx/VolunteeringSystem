@@ -1,7 +1,8 @@
 class EmployeesController < ApplicationController
   layout 'application'
-  
+  before_action :check_login
   before_action :set_bass ,only: [:bass]
+  before_action :check_type
   # before_action :set_user ,only: [:edit]
   # before_action :confirm_employee_type, except: [:new, :create]
 

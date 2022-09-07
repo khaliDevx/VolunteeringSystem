@@ -65,7 +65,8 @@ class SessionsController < ApplicationController
         respond_to do |format|
             if feed.save 
                 format.html { redirect_to '/index', notice: "comment was successfully created." }
-                format.js 
+                format.json { head :no_content }
+              
             else
                 flash[:error_feed]="something went wrong"
                 redirect_to '/issue'

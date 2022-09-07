@@ -10,30 +10,29 @@
           <%@problems=Problem.where(:status=>"Confirmed").with_attached_image%>
             <%end%>
               <% @problems.each do |problem| %>
-
                 <div class="instagram-card shadow-sm p-3 mb-5 bg-white rounded">
                 <div class="submitted-issue-img-likes">
-                  
                   <div class="instagram-card-header">
                     <div>
-                      <% @user.each do |user| %>
+                     <% @submiter = User.where(:id=> problem.user_id)%>
+                      <% @submiter.each do |user| %>
                         <%if @photos=Photo.where(:user_id=>user.id).present?%>
                           <%@photos= Photo.where(:user_id=>user.id)%>
                             <% @photos.each do |photo| %>
                               <% if (photo.image.attached?) %>
                                 <%=image_tag(url_for(photo.image),class:"instagram-card-user-image")%>
-                                  <% else %>
-                                    <%=image_tag('avatar.png', class:"instagram-card-user-image")%>
-                                      <% end %>
-                                        <% end %>
-                                          <% else %>
-                                            <%=image_tag('avatar.png', class:"instagram-card-user-image")%>
-                                              <% end %>
-                                                <span class="instagram-card-user-name">
-                                                  <%=user.first_name%>
-                                                    <%=user.last_name%>
-                                                </span>
-                                                <%end%>
+                              <% else %>
+                                <%=image_tag('avatar.png', class:"instagram-card-user-image")%>
+                              <% end %>
+                            <% end %>
+                          <% else %>
+                            <%=image_tag('avatar.png', class:"instagram-card-user-image")%>
+                              <% end %>
+                                <span class="instagram-card-user-name">
+                                  <%=user.first_name%>
+                                    <%=user.last_name%>
+                                </span>
+                        <%end%>
                     </div>
                     <button id="myBtn" class="three-dots fa fa-ellipsis-h"></button>
                   </div>
@@ -46,7 +45,6 @@
                           <% end %>
                   </div>
                   <div class="category-date">
-
                     <% @category=Category.where(:id=>problem.category_id)%>
                     <% @category.each do |category| %>
                       <div class="blog-category blog-text-success issue_info_parts">
@@ -76,21 +74,20 @@
                   </div>
                 </div>
                   <div class="blog-table">
-                   
-                          <div class="issue_info_parts">
-                            <h4 class="blog-card-caption">Location:</h4>
-                            <div class="blog-card-description">
-                              <span>Governorate:</span>
-                              <%@city=City.where(:id=>problem.city_id)%>
-                                <% @city.each do |city| %>
-                                  <%@gove=Governorate.where(:id=>city.governorate_id)%>
-                                    <% @gove.each do |gove| %>
-                                      <span>
-                                        <%=gove.name%>
-                                      </span>
-                                      <% end %>
-                                        <% end %>
-                            </div>
+                    <div class="issue_info_parts">
+                        <h4 class="blog-card-caption">Location:</h4>
+                        <div class="blog-card-description">
+                          <span>Governorate:</span>
+                          <%@city=City.where(:id=>problem.city_id)%>
+                            <% @city.each do |city| %>
+                              <%@gove=Governorate.where(:id=>city.governorate_id)%>
+                                <% @gove.each do |gove| %>
+                                    <span>
+                                      <%=gove.name%>
+                                    </span>
+                                <% end %>
+                              <% end %>
+                    </div>
                             <div class="blog-card-description">
                               <span>City:</span>
                               <% @city.each do |city| %>
@@ -130,9 +127,13 @@
                                 <%=Coment.where(:problem_id=>problem.id).count%>
                               </span> comments</button>
                           </div>
-                          <button class="btn btn-primary" id="btn-accept">Accept</button>
+                            <% if @accepter.present?%>
+                              <input  style="width:100px"type=submit class='btn btn-outline-info w-100' value='your already Supervisor' disabled>
 
-                          
+                            <% else %>
+                              <button class="btn btn-outline-info w-100" id="btn-accept">Accept</button>
+
+                            <% end %>
                   </div>
                   <div class="model-container" tabindex="-1">
                     <div class="model">
@@ -144,19 +145,18 @@
                                 <% @photos.each do |photo| %>
                                   <% if (photo.image.attached?) %>
                                     <%=image_tag(url_for(photo.image),class:'instagram-card-user-image')%>
-                                      <% else %>
-                                        <%=image_tag('avatar.png',class:'instagram-card-user-image')%>
-                                          <% end %>
-                                            <% end %>
-                                              <% else %>
-                                                <%=image_tag('avatar.png',class:'instagram-card-user-image')%>
-                                                  <% end %>
-
-                                                    <span class="instagram-card-user-name">
-                                                      <%=user.first_name%>
-                                                        <%=user.last_name%>
-                                                    </span>
-                                                    <%end%>
+                                  <% else %>
+                                    <%=image_tag('avatar.png',class:'instagram-card-user-image')%>
+                                  <% end %>
+                                <% end %>
+                              <% else %>
+                                <%=image_tag('avatar.png',class:'instagram-card-user-image')%>
+                              <% end %>
+                                <span class="instagram-card-user-name">
+                                  <%=user.first_name%>
+                                  <%=user.last_name%>
+                                </span>
+                            <%end%>
                         </div>
                       </div>
                       <%@comments=Coment.where(:problem_id=>problem.id)%>
@@ -170,88 +170,83 @@
                                       <% @photos.each do |photo| %>
                                         <% if (photo.image.attached?) %>
                                           <%=image_tag(url_for(photo.image),class:'instagram-card-user-image')%>
-                                            <% else %>
-                                              <%=image_tag('avatar.png',class:'instagram-card-user-image')%>
-                                                <% end %>
-                                                  <% end %>
-                                                    <% else %>
-                                                      <%=image_tag('avatar.png',class:'instagram-card-user-image')%>
-                                                        <% end %>
-                                                          <div class="instagram-card-user-name">
-                                                            <%=user.first_name%>
-                                                              <%=user.last_name%>
-                                                          </div>
-                                                          <%end%>
-                                                            <div class="cmt-txt">
-                                                              <%=com.comment%>
-                                                            </div>
+                                        <% else %>
+                                          <%=image_tag('avatar.png',class:'instagram-card-user-image')%>
+                                        <% end %>
+                                      <% end %>
+                                    <% else %>
+                                      <%=image_tag('avatar.png',class:'instagram-card-user-image')%>
+                                    <% end %>
+                                      <div class="instagram-card-user-name">
+                                        <%=user.first_name%>
+                                          <%=user.last_name%>
+                                      </div>
+                                <%end%>
+                                <div class="cmt-txt">
+                                  <%=com.comment%>
+                                </div>
                             </div>
                           </div>
-                          <%end%>
-                            <div class="instagram-card-footer">
-
-                            </div>
-
+                        <%end%>
+                            <div class="instagram-card-footer"></div>
                             <i class="fas fa-times close"></i>
-
                     </div>
 
                   </div>
-
-
+                  <%# modal accept issue %>
                   <div id="accept-form" class="accept-modal">
                     <div class="modal-content-accept">
                       <div class="modal-body-accept">
                         <div>
                           <div>Number of needed volunteers:</div>
                           <form action=/accept method=POST>
-                            <input type='hidden' name='authenticity_token' value="<%= form_authenticity_token%>">
-                            <input type=number name=accept[required_volunteer]>
+                                <input type='hidden' name='authenticity_token' value="<%= form_authenticity_token%>">
+                                <input type=number name=accept[required_volunteer]>
+                            </div>
+                              <div>
+                                <div>Materials:</div>
+                                <div class="table-responsive">
+                                  <table class="table table-bordered">
+                                    <thead>
+                                      <tr>
+                                        <td class="text-center">Name</td>
+                                        <td class="text-center">Cost</td>
+                                        <td class="text-center">Quantity</td>
+                                        <td class="text-center">Total</td>
+                                        <td class="text-center"></td>
+                                        <td><button class="btn btn-md btn-primary" id="addBtn" type="button">+</button></td>
+                                      </tr>
+                                    </thead>
+                                    <tbody id="materials-list">
+                                      <tr>
 
-                        </div>
-                          <div>
-                            <div>Materials:</div>
-                            <div class="table-responsive">
-                              <table class="table table-bordered">
-                                <thead>
-                                  <tr>
-                                    <td class="text-center">Name</td>
-                                    <td class="text-center">Cost</td>
-                                    <td class="text-center">Quantity</td>
-                                    <td class="text-center">Total</td>
-                                    <td class="text-center"></td>
-                                    <td><button class="btn btn-md btn-primary" id="addBtn" type="button">+</button></td>
-                                  </tr>
-                                </thead>
-                                <tbody id="materials-list">
-                                  <tr>
+                                        <td class="row-index text-center ">
+                                          <%= select_tag :material_id,options_from_collection_for_select(Material.all.order(:name), :id, :name,params[:material_id]), class:"selectt-mat", include_blank: "Choose the material?" %>
+                                        </td>
+                                        <td class="row-index text-center">
+                                          <%= number_field_tag(:cost, params[:cost]) %>
+                                            <%= hidden_field_tag(:problem_id, params[:problem_id],value:problem.id) %>
 
-                                    <td class="row-index text-center">
-                                      <%= select_tag :material_id,options_from_collection_for_select(Material.all.order(:name), :id, :name,
-                                        params[:material_id]),include_blank: "Choose the material?" %>
-                                    </td>
-                                    <td class="row-index text-center">
-                                      <%= number_field_tag(:cost, params[:cost]) %>
-                                        <%= hidden_field_tag(:problem_id, params[:problem_id],value:problem.id) %>
+                                        </td>
+                                        <td class="row-index text-center">
+                                          <%=number_field_tag(:quantity, params[:quantity])%>
+                                        </td>
+                                        <td class="row-index text-center">
+                                          <input type=number name=accept[totale_cost]>
+                                        </td>
+                                        <td class="text-center">
 
-                                    </td>
-                                    <td class="row-index text-center">
-                                      <%=number_field_tag(:quantity, params[:quantity])%>
-                                    </td>
-                                    <td class="row-index text-center">
-                                      <input type=number name=accept[totale_cost]>
-                                    </td>
-                                    <td class="text-center">
-                                      <button class="btn btn-danger remove" type="button">Remove</button>
-                                    </td>
+                                          <button class="btn btn-danger remove" type="button">Remove</button>
+                                        </td>
 
-                                  </tr>
-                                </tbody>
-                              </table>
-                            <input type=submit value=accept>
-                            </form>
-                          </div>
-                        </div>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                                  <input type=submit class='btn btn-outline-info w-50' value=Accept>
+
+                              </div>
+                            </div>
+                        </form>
                       </div>
                     </div>
                   </div>

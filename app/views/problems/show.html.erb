@@ -1,8 +1,20 @@
+
+<style>
+  .gallery-image {
+    width: 300px;
+    height: 30%;
+    object-fit: cover;
+  }
+</style>
 <p id="notice"><%= notice %></p>
 <% if (@problem.image.attached?) %>
-        <%=image_tag(url_for(@problem.image))%>
+        <%=image_tag(url_for(@problem.image),class:"gallery-image")%>
         <% else %>
           <p>no image</p>
       <% end %>
-<%= link_to 'Edit', edit_problem_path(@problem) %> |
-<%= link_to 'Back', problems_path %>
+<%= link_to 'Edit', edit_problem_path(@problem), class: 'btn-outline-info' %> 
+<%= link_to 'Destroy', @problem, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn-outline-info' %>
+
+<%@user.each do |user|%>
+    <%= link_to 'Back',personal_page_user_path(user),  class: 'btn-outline-info' %>
+<%end%>

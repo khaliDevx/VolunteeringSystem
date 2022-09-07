@@ -10,24 +10,25 @@
             <div class="submitted-issue-img-likes">
               <div class="instagram-card-header">
                 <div>
-                  <% @user.each do |user| %>
+                  <% @submiter = User.where(:id=> problem.user_id)%>
+                  <% @submiter.each do |user| %>
                     <%if @photos=Photo.where(:user_id=>user.id).present?%>
                       <%@photos= Photo.where(:user_id=>user.id)%>
                         <% @photos.each do |photo| %>
                           <% if (photo.image.attached?) %>
                             <%=image_tag(url_for(photo.image),class:'instagram-card-user-image')%>
-                              <% else %>
-                                <%=image_tag('avatar.png',class:'instagram-card-user-image')%>
-                                  <% end %>
-                                    <% end %>
-                                      <% else %>
-                                        <%=image_tag('avatar.png',class:'instagram-card-user-image')%>
-                                          <% end %>
-                                            <div class="instagram-card-user-name h5">
-                                              <%=user.first_name%>
-                                                <%=user.last_name%>
-                                            </div>
-                                            <%end%>
+                          <% else %>
+                            <%=image_tag('avatar.png',class:'instagram-card-user-image')%>
+                          <% end %>
+                        <% end %>
+                    <% else %>
+                      <%=image_tag('avatar.png',class:'instagram-card-user-image')%>
+                    <% end %>
+                      <div class="instagram-card-user-name h5">
+                        <%=user.first_name%>
+                          <%=user.last_name%>
+                      </div>
+                  <%end%>
                 </div>
                 <button id="myBtn" class="three-dots fa fa-ellipsis-h"></button>
               </div>
@@ -80,8 +81,9 @@
               </div>
                 
             <%else%>
-            <form action='/confirm' method="POST">
-                    <input type='hidden' name='authenticity_token' value="<%= form_authenticity_token%>">
+            <%= form_tag({:controller=>'problems',:action=>'confirm'},:remote=> true, method: :post) do%>
+
+                    <%# <input type='hidden' name='authenticity_token' value="<%= form_authenticity_token%>
                     <input type='hidden' name='confirm[problem_id]' value="<%=problem.id%>">
                     <div class="like-unlike">
                       <div class="like">
@@ -100,7 +102,7 @@
                       </div>
                     </div>
 
-                </form>
+                <% end %>
                 <%end%>
             </div>
             <div class="submitted-issue-details-comment">
@@ -112,15 +114,14 @@
                     <div class="blog-card-description">
                       <span>Governorate:</span>
                       <%@city=City.where(:id=>problem.city_id)%>
-                        <% @city.each do |city| %>
-                          <%@gove=Governorate.where(:id=>city.governorate_id)%>
-                            <% @gove.each do |gove| %>
-                              <span>
-                                <%=gove.name%>
-                              </span>
-                              <% end %>
-                                <% end %>
-
+                      <% @city.each do |city| %>
+                        <%@gove=Governorate.where(:id=>city.governorate_id)%>
+                          <% @gove.each do |gove| %>
+                            <span>
+                              <%=gove.name%>
+                            </span>
+                          <% end %>
+                      <% end %>
                     </div>
                     <div class="blog-card-description">
                       <span>City:</span>
@@ -131,7 +132,6 @@
                         <%end%>
                     </div>
                   </div>
-
                   <div class="issue_info_parts">
                     <div class="h6">Description</div>
                     <p class="blog-card-description">
@@ -143,19 +143,17 @@
                     <p class="blog-card-description">
                       <%=problem.status%>
                     </p>
-
                   </div>
                   <div class="issue_info_parts">
                     <div class="h6">Submitted by:</div>
                     <div class="blog-card-description">
                       <span>user:</span>
                       <%@submiter=User.where(:id=> problem.user_id)%>
-                        <% @submiter.each do |user| %>
-                          <span>
-                            <%= link_to "#{user.first_name} #{user.last_name}" ,personal_page_user_path(user),:class=>
-                              "link-dark" %>
-                          </span>
-                          <% end %>
+                      <% @submiter.each do |user| %>
+                        <span>
+                          <%= link_to "#{user.first_name} #{user.last_name}" ,personal_page_user_path(user),:class=>"link-dark" %>
+                        </span>
+                      <% end %>
                     </div>
                   </div>
                   <div class="container">
@@ -163,9 +161,6 @@
                         <%=Coment.where(:problem_id=>problem.id).count%>
                       </span> comments</button>
                   </div>
-
-
-
                   <div class="model-container" tabindex="-1">
                     <div class="model">
                       <div class="instagram-card-header">
@@ -176,24 +171,23 @@
                                 <% @photos.each do |photo| %>
                                   <% if (photo.image.attached?) %>
                                     <%=image_tag(url_for(photo.image),class:'instagram-card-user-image')%>
-                                      <% else %>
-                                        <%=image_tag('avatar.png',class:'instagram-card-user-image')%>
-                                          <% end %>
-                                            <% end %>
-                                              <% else %>
-                                                <%=image_tag('avatar.png',class:'instagram-card-user-image')%>
-                                                  <% end %>
-
-                                                    <span class="instagram-card-user-name">
-                                                      <%=user.first_name%>
-                                                        <%=user.last_name%>
-                                                    </span>
-                                                    <%end%>
+                                  <% else %>
+                                      <%=image_tag('avatar.png',class:'instagram-card-user-image')%>
+                                  <% end %>
+                                <% end %>
+                            <% else %>
+                              <%=image_tag('avatar.png',class:'instagram-card-user-image')%>
+                            <% end %>
+                            <span class="instagram-card-user-name">
+                              <%=user.first_name%>
+                                <%=user.last_name%>
+                            </span>
+                          <%end%>
                         </div>
                       </div>
                       <%@comments=Coment.where(:problem_id=>problem.id).order("id DESC")%>
-                        <%@comments.each do |com|%>
                           <div class="users-comments">
+                        <%@comments.each do |com|%>
                             <div class="cmt">
                                   <%user=User.where(:id=>com.user_id)%>
                                   <%user.each do |user|%>
@@ -218,17 +212,16 @@
                                           <%=com.comment%>
                                         </div>
                             </div>
+                          <% end %>
+
                           </div>
-                          <%end%>
                             <div class="instagram-card-footer">
                               <%= form_tag({:controller=>'sessions',:action=>'comment'},:remote=> true, method: :post) do%>
-                                <%# <input type='hidden' name='authenticity_token' value="<%= form_authenticity_token%>"> %>
+                                <%# <input type='hidden' name='authenticity_token' value="<%= form_authenticity_token%>
                                 <input type='hidden' name='feed[problem_id]' value="<%=problem.id%>">
                                 <div class="instagram-card-footer">
-                                  <input name=feed[comment] class="comments-input blog-text-success" id="enter-comment"
-                                    type="text" placeholder="Add a comment..." />
-                                  <input type=submit class="btn btn-outline-info post_cmt btn-post" id="post-comment"
-                                    value=Post>
+                                  <input name=feed[comment] class="comments-input blog-text-success" id="enter-comment"type="text" placeholder="Add a comment..." />
+                                  <input type=submit class="btn btn-outline-info post_cmt btn-post" id="post-comment"value=Post>
                                 </div>
                               <% end %>
                             </div>
@@ -237,8 +230,9 @@
                   </div>
                 </div>
               </div>
-              <form action=/feed method=POST>
-                <input type='hidden' name='authenticity_token' value="<%= form_authenticity_token%>">
+              <%= form_tag({:controller=>'sessions',:action=>'comment'},:remote=> true, :local=> true, html: {:id => "post-com" },method: :post) do%>
+
+                <%# <input type='hidden' name='authenticity_token' value="<%= form_authenticity_token%>
                 <input type='hidden' name='feed[problem_id]' value="<%=problem.id%>">
                 <div class="instagram-card-footer">
                   <a class="footer-action-icons" href=""><i class="fa fa-heart-o"></i></a>
@@ -246,11 +240,8 @@
                     placeholder="Add a comment..." />
                   <button class="btn btn-outline-info post_cmt" id="post-comment" onclick="post">Post</button>
                 </div>
-              </form>
+              <% end %>
             </div>
-
-
-
           </div>
         <%end%>
       </div>
@@ -282,4 +273,15 @@
 
           // }
         });
+        // $("").click(function(event){
+        //   event.preventDefault();
+        // });
+        $('button').submit(function(e){
+        $("input[name = comment]").enabled = enabled;
+        e.preventDefault();
+        return false;
+
+ });
+
+        
       </script>

@@ -1,12 +1,15 @@
 class UsersController < ApplicationController
      layout 'application'
     #  before_action :confirm, except: [:new, :create]
+    before_action :blok_or_active, only: %i[ accept_issue join]
+    before_action :check_login, except: :log_out
+
     def index 
      @user = User.where(:id=>session[:user_id]) 
      @employee= User.where(:id=>session[:user_id],:user_type=>"Employee")
      @problems = Problem.issue_passed.order("id DESC").with_attached_image
      @issue=Problem.where(:id=>params[:problem_id])
-
+    
     end
     def profile
       
@@ -75,6 +78,7 @@ class UsersController < ApplicationController
      @user = User.where(:id=>session[:user_id]) 
      @employee= User.where(:id=>session[:user_id],:user_type=>"Employee")
      @mat = Material.all
+     @accepter = Accept.find_by(:user_id=>session[:user_id])
    
     end
     def accept_status
@@ -82,6 +86,9 @@ class UsersController < ApplicationController
         @problems = Problem.accept_issue.order("id DESC").with_attached_image
         @money = MoneyType.all
         @mat = Material.all
+        @accepter = Accept.find_by(:user_id=>session[:user_id])
+        
+
 
     end
     def accept_issue
@@ -101,12 +108,15 @@ class UsersController < ApplicationController
     def join
         join=JoinIssue.new(join_params)
         join.user_id=session[:user_id]
-        if join.save 
-            flash[:success]="you are successfully joined "
-            redirect_to '/accept_status'
-        else
-            flash[:error_join]="something went wrong"
-            redirect_to '/accept_status'
+        respond_to do |format|
+
+            if join.save 
+                format.html { redirect_to '/accept_status', notice: "you are successfully joined ." }
+
+            else
+                flash[:error_join]="something went wrong"
+                redirect_to '/accept_status'
+            end
         end
       
     end
@@ -114,7 +124,12 @@ class UsersController < ApplicationController
         
     end
     def personal_page
-        @users= User.where(:id=>params[:id])
+        if user = User.where(:id=>params[:id]).present?
+            @users= User.where(:id=>params[:id])
+            @employee = User.where(:id=>session[:user_id],:user_type=>"Employee")
+        else
+            redirect_to '/index'
+        end
     end
     def add_bio
        if User.where(:id=> session[:user_id]).update_all(:bio=>bio_params[:bio])

@@ -42,7 +42,7 @@
                     </li>
                     <%else%>
                     <li class="nav-item">
-                        <a class="nav-link active" href="index">
+                        <a class="nav-link active" href="/index">
                             <i class="fas fa-tachometer-alt"></i>
                             <span>Dashboard</span>
                         </a>
@@ -56,12 +56,12 @@
                                 <span>Users</span>
                             </a>
                         </li>
-                        <li class="nav-item">
+                        <%# <li class="nav-item">
                             <a class="nav-link" href="new_user">
                                 <i class="fas fa-user-circle"></i>
                                 <span>Register</span>
                             </a>
-                        </li>
+                        </li> %>
                        
                         
                          <li class="nav-item"> <a class="nav-link" href="/addition">
@@ -314,24 +314,28 @@
             // jQuery button click event to add a row
             $('#addBtn').on('click', function () {
                 // Adding a row inside the tbody.
+                
                 $('#materials-list').append(`<tr id="R${++rowIdx}">
                     <td class="row-index text-center">
-                        <input type="text">
+                        <%= select_tag :material_id,options_from_collection_for_select(Material.all.order(:name), :id, :name,params[:material_id]), class:"selectt-mat", include_blank: "Choose the material?" %>
+
                     </td>
                     <td class="row-index text-center">
-                        <input type="text">
+                       <%= number_field_tag(:cost, params[:cost]) %>
                     </td>
                     <td class="row-index text-center">
-                        <input type="text">
+                        <%=number_field_tag(:quantity, params[:quantity])%>
+
                     </td>
                     <td class="row-index text-center">
-                        <input type="text">
+                        <input type=number name=accept[totale_cost]>
                     </td>
                     <td class="text-center">
                         <button class="btn btn-danger remove"
                         type="button">Remove</button>
                         </td>
-                    </tr>`);
+                    </tr>
+                   `);
             });
             // jQuery button click event to remove a row.
 	        $('#materials-list').on('click', '.remove', function () {

@@ -29,22 +29,39 @@
                 
 				    <h1 class="profile-user-name"><%=user.first_name%> <%=user.last_name%></h1>
 					<%if user.id==session[:user_id]%>
-						<a href='/profile'>
 							<br>
-				    		<button class="btn profile-edit-btn w-50">Edit Profile</button>
+							<% if user.accountstatu==true%>
+								<button class="btn profile-edit-btn btn-primary w-50">Active</button>
+							<% else%>
+								<button class="btn profile-edit-btn btn-warning w-50">Block</button>
+							<% end %>
+						<a href='/profile'>
+				    		
+							<button class="btn profile-edit-btn w-50">Edit Profile</button>
 						</a>
-					<%elsif User.where(:id=>session[:user_id],:user_type=>"Employee")%>
+					<%elsif @employee.present?%>
 						<br>
-				    	<button class="btn profile-edit-btn ">delete</button>
-				    	<button class="btn profile-edit-btn">Block</button>
-						
-
+				    	<button class="btn profile-edit-btn btn-danger w-50"><%= link_to 'Destroy' , user,method: :delete, data: {confirm: 'Are you sure?'}%></button>
+						<% if user.accountstatu==true %>
+							<form action='/block'method='POST'>
+                        	    <input type='hidden'name='authenticity_token'value="<%= form_authenticity_token%>">
+                        	    <input type='hidden'name='block[accountstatu]'value=false>
+                        	    <input type='hidden'name='block[id]'value=<%=user.id%>>
+                        	    <input type=submit value=Block class="btn profile-edit-btn btn-warning w-50">
+                        	</form>
+						<% else %>
+						 <form action='/active'method='POST'>
+                            <input type='hidden'name='authenticity_token'value="<%= form_authenticity_token%>">
+                            <input type='hidden'name='active[accountstatu]'value=true>
+                            <input type='hidden'name='active[id]'value=<%=user.id%>>
+                            <input type=submit value=Activate class="btn profile-edit-btn btn-success ">
+                         </form>
+						<% end %>
 					<%end%>
 
 			    </div>
 
 			    <div class="profile-stats">
-                
 				    <ul>
 				    	<li><span class="profile-stat-count"><%=Problem.where(:user_id=>user.id).count%></span> Submitted</li>
 				    	<li><span class="profile-stat-count"><%=Accept.where(:user_id=>user.id).count%></span> Accepted</li>
@@ -77,16 +94,21 @@
 		<div class="gallery">
             <%@problems.each do |problem|%>
 			        <div class="gallery-item" tabindex="0">
-
 			        	 <%=image_tag(problem.image,class:"gallery-image")%>
-
+						
+        					<%= link_to 'Show', problem, class: 'btn-outline-info' %>
+						
+						
 			        	<div class="gallery-item-info">
 
 			        		<ul>
 			        			<li class="gallery-item-likes"><span class="visually-hidden">Confirm:</span><i class="far fa-thumbs-up" aria-hidden="true"></i><%=Confirm.where(:problem_id=>problem.id).count%></li>
 			        			<li class="gallery-item-comments"><span class="visually-hidden">Comments:</span><i class="fas fa-comment" aria-hidden="true"></i> <%=Coment.where(:problem_id=>problem.id).count%></li>
 			        			<li class="gallery-item-comments"><span class="visually-hidden">Status:</span><i class="fas fa-info-circle" aria-hidden="true"></i> <%=problem.status%></li>
-
+			        			 <% if problem.status=='Submitted'%>
+									<li class="gallery-item-comments"><span class="visually-hidden">Issue:</span><i class="fas fa-camera" aria-hidden="true"><%= link_to 'Show', problem%></i> </li>
+								<% end %>
+								
 			        		</ul>
 
 			        	</div>

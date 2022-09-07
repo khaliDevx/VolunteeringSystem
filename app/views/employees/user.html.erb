@@ -107,40 +107,19 @@
                                             <td>Blocked</td>
                                         <%end%>
                                         <td class=action>
-                                            <form action='/block'
-                                                method='POST'>
-                                                <input type='hidden'
-                                                    name='authenticity_token'
-                                                    value="<%= form_authenticity_token%>">
-                                                <input type='hidden'
-                                                    name='block[accountstatu]'
-                                                    value=false>
-                                                <input type='hidden'
-                                                    name='block[id]'
-                                                    value=<%=user.id%>>
-                                                <input type=submit
-                                                    value=Block
-                                                    class="btn btn-warning d-block">
+                                            <form action='/block'method='POST'>
+                                                <input type='hidden'name='authenticity_token'value="<%= form_authenticity_token%>">
+                                                <input type='hidden'name='block[accountstatu]'value=false>
+                                                <input type='hidden'name='block[id]'value=<%=user.id%>>
+                                                <input type=submit value=Block class="btn btn-warning d-block">
                                             </form>
-                                            <form action='/active'
-                                                method='POST'>
-                                                <input type='hidden'
-                                                    name='authenticity_token'
-                                                    value="<%= form_authenticity_token%>">
-                                                <input type='hidden'
-                                                    name='active[accountstatu]'
-                                                    value=true>
-                                                <input type='hidden'
-                                                    name='active[id]'
-                                                    value=<%=user.id%>>
-                                                <input type=submit
-                                                    value=Activate
-                                                    class="btn btn-primary d-block">
+                                            <form action='/active'method='POST'>
+                                                <input type='hidden'name='authenticity_token'value="<%= form_authenticity_token%>">
+                                                <input type='hidden'name='active[accountstatu]'value=true>
+                                                <input type='hidden'name='active[id]'value=<%=user.id%>>
+                                                <input type=submit value=Activate class="btn btn-primary d-block">
                                             </form>
-                                            <%= link_to 'Destroy' , user,
-                                                method: :delete, data: {
-                                                confirm: 'Are you sure?'
-                                                },class:"btn btn-danger"%>
+                                            <%= link_to 'Destroy' , user,method: :delete, data: {confirm: 'Are you sure?'},class:"btn btn-danger"%>
 
                                         </td>
                                         <td>
