@@ -49,7 +49,7 @@
     letter-spacing: 1px;
     opacity: 0.8;
 }
-.model-container{
+.model-container, .model-container2{
     display: flex;
     align-items: center;
     justify-content: center;
@@ -58,11 +58,11 @@
     position: fixed;
     top: 0;
     left: 0;
-    // background: rgba(0,0,0,.3);
+    background: rgba(0,0,0,.3);
 
     transform: scale(0);
 }
-.model-container .model{
+.model-container .model, .model-container2 .model2{
 height: 400px;
 width: 50%;
 margin: 0 10px;
@@ -73,7 +73,33 @@ text-align: center;
 position: relative;
 
 }
-.model .fa-home{
+
+// .model-container2{
+//     display: flex;
+//     align-items: center;
+//     justify-content: center;
+//     min-height: 100%;
+//     width: 100%;
+//     position: fixed;
+//     top: 0;
+//     left: 0;
+//     // background: rgba(0,0,0,.3);
+
+//     transform: scale(0);
+// }
+// .model-container2 .model2{
+// height: 400px;
+// width: 50%;
+// margin: 0 10px;
+// padding: 20px;
+// background: #fff;
+// border-radius: 5px;
+// text-align: center;
+// position: relative;
+
+// }
+
+.fa-home{
     font-size: 30px;
     color: #4d90fe;
     padding-bottom: 50px;
@@ -84,15 +110,15 @@ position: relative;
     transform: rotate(-0.10turn);
    
 }
-.model-container .model h3{
+h3{
 color:black;
 font-size: 25px;
 }
-.model-container .model p{
+p{
     color: black;
     margin: 20px 0;
 }
-.model-container .model button{
+.model button, .model2 button{
     width: 100px;
     height: 50px;
     /* background: #4d90fe; */
@@ -110,10 +136,13 @@ button{
     background: #4d90fe;
 
 }
-.model-container .model button:hover{
+.model-container .model button:hover,
+.model-container2 .model2 button:hover{
 opacity: .8;
 }
-.model-container .model .fa-times{
+
+.model-container .model .fa-times,
+.model-container2 .model2 .fa-times{
 position: absolute; 
 top: 15px;
 right: 15px;  
@@ -123,11 +152,10 @@ color:black;
 
 }
 
-.money{
+.matt{
    /* transform: scale(0); */
    display:none;
     // margin-right:20%;
-    float:left;
     margin-left:0;
    
    
@@ -163,7 +191,7 @@ div .main{
   height:20px;
   border-radius: 50px;
   cursor: pointer;
-  background: #4d90fe;
+  background: #fff;
 
 }
 .on{
@@ -171,6 +199,6 @@ div .main{
   height:20px;
   border-radius: 50px;
   cursor: pointer;
-  background: #fff;
+  background: rgb(50, 150, 250);
 
 }

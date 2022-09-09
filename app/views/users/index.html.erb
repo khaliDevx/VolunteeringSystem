@@ -57,13 +57,13 @@
               </div>
               <%if @employee.present?%>
               <div class="employee-confirmation">
-                <form action='/confirm_issue' method="POST">
-                  <input type='hidden' name='authenticity_token' value="<%= form_authenticity_token%>">
+                <%= form_tag({:controller=>'employees',:action=>'confirm'},:remote=> true, method: :post) do%>
+
+                  <%# <input type='hidden' name='authenticity_token' value="<%= form_authenticity_token%>
                   <input type='hidden' name='confirm_issue[id]' value="<%=problem.id%>">
-                  <button class='btn btn-primary' name=confirm_issue[status] value=Confirmed>Confirm</button>
-                  <%= link_to 'Destroy' , problem, method: :delete, data: { confirm: 'Are you sure?' },class:"btn
-                    btn-danger " %>
-                </form>
+                  <button class='btn btn-primary' name=confirm_issue[status] value=Confirmed>Publish</button>
+                  <%= link_to 'Destroy' , problem, method: :delete, data: { confirm: 'Are you sure?' },class:"btn btn-danger " %>
+                <% end %>
                 <div class="like-unlike">
                   <div class="like">
                     <button disabled><i class="far fa-thumbs-up un-like"></i></button>

@@ -3,6 +3,7 @@ class EmployeesController < ApplicationController
   before_action :check_login
   before_action :set_bass ,only: [:bass]
   before_action :check_type
+  before_action :check_status
   # before_action :set_user ,only: [:edit]
   # before_action :confirm_employee_type, except: [:new, :create]
 
@@ -12,23 +13,26 @@ class EmployeesController < ApplicationController
 
   end
   def block 
+    respond_to do |format|
     
-    if User.where(:id=>update_params[:id]).update_all(:accountstatu=>false)
-      redirect_to "/user"
-    else
-      flash[:error_blook]="something went wrong"
-      redirect_to "/user"
-
+      if User.where(:id=>update_params[:id]).update_all(:accountstatu=>false)
+          format.html { redirect_to '/user', notice: "this user are blocked." }
+      else
+        flash[:error_blook]="something went wrong"
+        format.html { redirect_to '/user', notice: "something went wrong." }
+      end
     end
   end
   def active
     # @user=User.find_by(id: active_params[:id])
     # @user.accountstatu=true
-    if User.where(:id=>active_params[:id]).update_all(:accountstatu=>true)
-      redirect_to "/user"
-    else
-      flash[:error_active]="something went wrong"
-      redirect_to "/user"
+    respond_to do |format|
+      if User.where(:id=>active_params[:id]).update_all(:accountstatu=>true)
+        format.html { redirect_to '/user', notice: "this user are active." }
+      else
+        flash[:error_active]="something went wrong"
+        format.html { redirect_to '/user', notice: "something went wrong." }
+      end
     end
   end
   def pass
@@ -49,7 +53,9 @@ class EmployeesController < ApplicationController
   def confirm
     # problem=Problem.find_by(id: confirm_params[:id])
     Problem.where(id:confirm_params[:id]).update_all(:status=>"Confirmed")
-    redirect_to '/index'
+    respond_to do |format|
+      format.html { redirect_to '/index', notice: "Photo was successfully created." }
+    end
     # problem.status="Confirmed"
     # problem.update(confirm_params)
   end

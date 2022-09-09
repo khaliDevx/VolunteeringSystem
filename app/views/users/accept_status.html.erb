@@ -62,16 +62,15 @@
                               </div>
                           </div>
                     </div>
-                    <% accept = Accept.where( :problem_id => problem.id )%>
-                    <% accept.each do |acc| %>
-                       <% if acc.totale_cost==30000 %>
+                    <% accept = Accept.find_by(:problem_id => problem.id )%>
+                       <% if accept.totale_cost ==3000 %>
                             <input  style="width:100px"type=submit class='btn btn-outline-info' value=Supported disabled>
                        <% else %>
                             <div class="container">
                                <button id="support" class=' btn btn-outline-info'>Support</button>
                             </div>
                         <% end %>
-                    <% end %>
+                  <%# modal supporter %>
                     <div class="model-container">
                         <div class="model">
                             <i class="fas fa-home"></i>
@@ -122,8 +121,8 @@
                         <input  style="width:100px"type=submit class='btn btn-outline-info w-100' value='your already Supervisor' disabled>
 
                     <% else %>
-                        <%join=JoinIssue.where(:user_id=>session[:user_id])%>
-                        <%join_user=JoinIssue.where(:problem_id=>problem.id ,:user_id=>session[:user_id])%>
+                        <%join=JoinIssue.where(:user_id=>session[:user_id],:status=>true)%>
+                        <%join_user=JoinIssue.where(:problem_id=>problem.id ,:user_id=>session[:user_id], :status=>true)%>
                         <%if join_user.present?%>
                             <input style="width:100px" type=submit class='btn btn-outline-info' value=Joined disabled>
                         <%elsif join.present?%>

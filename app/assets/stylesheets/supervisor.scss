@@ -1,0 +1,162 @@
+* {
+	box-sizing: border-box;
+	transition: all.2s linear;
+
+}
+.instagram-card span {
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.instagram-card {
+	width: auto;
+	display: flex;
+	flex-flow: column nowrap;
+	padding: 20px;
+}
+.instagram-card2{
+	display: flex;
+	flex-flow: row nowrap;
+	padding: 10px;
+}
+.support-tables{
+	display: flex;
+	flex-flow: row nowrap;
+	align-items: center;
+	justify-content: space-between;
+	padding: 10px;
+}
+.support-tables div{
+	margin: 5px;
+}
+.support-tables .mat-table{
+	width: 60%;
+}
+.support-tables .money-table{
+	width: 40%;
+}
+.intagram-card-image {
+	position: relative;
+	width: auto;
+	height: auto;
+	margin-bottom: 5px;
+	-webkit-box-shadow: 0 8px 6px -6px black;
+	-moz-box-shadow: 0 8px 6px -6px black;
+	box-shadow: 0 8px 6px -6px black;
+}
+
+.issue-details{
+	display: flex;
+	flex-flow: row nowrap;
+	align-items: center;
+	justify-content: space-between;
+}
+.group-title{
+	margin-bottom: 10px;
+}
+.groups-section{
+	border-left: 5px solid #2b87f071;
+	padding: 10px;
+	min-height: 300px;
+}
+.instagram-card-user-image {
+	border-radius: 50%;
+	width: 40px;
+	height: 40px;
+	vertical-align: middle;
+}
+
+.instagram-card-user-name {
+	margin-left: 20px;
+	display: inline;
+}
+
+.intagram-card-image img {
+	width: 300px;
+	height: 300px;
+	border-radius: 5px;
+}
+
+.category-date {
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: space-between;
+	align-items: center;
+	width: 100%;
+	padding: 5px;
+}
+
+.issue_date {
+	font-size: 0.8em;
+	float: right;
+}
+
+.accept-show-requested {
+	display: flex;
+	flex-flow: row nowrap;
+	padding-left: 7px;
+}
+
+.accept-show-requested .accept {
+	margin-right: 30px;
+}
+
+.submitted-issue-details {
+	padding: 0;
+}
+
+.instagram-card-content {
+	padding: 20px;
+}
+
+
+.instagram-card-content-user {
+	font-weight: bold;
+	color: #262626;
+}
+
+.blog-text-success {
+	color: #6f6f6f !important
+}
+
+
+a {
+
+	text-decoration: none;
+
+}
+
+
+hr {
+	border: none;
+	border-bottom: 1px solid #ccc;
+	margin-top: 30px;
+	margin-bottom: 0px;
+
+}
+
+.blog-card-blog .blog-card-caption {
+	margin-top: 5px
+}
+
+.blog-card-caption,
+.blog-card-caption a {
+	color: #333;
+	text-decoration: none
+}
+
+
+.blog-card-description {
+	color: #444;
+	font: 0.9em sans-serif;
+	margin: 7px;
+}
+
+.blog-table {
+	display: flex;
+	flex-flow: column nowrap;
+	align-items: center;
+	margin-bottom: 0;
+	width: 100%;
+	padding-left: 10px;
+}
+

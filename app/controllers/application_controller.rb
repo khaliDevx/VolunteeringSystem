@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
             return true
         else
             flash[:error]="you must be registerd!"
-            redirect_to "/new"
+            redirect_to "/log_in"
         end
     end
     def check_type
@@ -17,21 +17,13 @@ class ApplicationController < ActionController::Base
             redirect_to '/index'
         end
     end
-
-    def confirm_type
-        if cookies[:user_type]=="Admin"
+    def check_status
+        user = User.find_by(:id=>session[:user_id])
+        if user.status==true
             return true
         else
-            flash[:error]="You don't have permision"
-            redirect_to "/index"
-        end
-    end
-    def confirm_employee_type
-        if (cookies[:user_type]=="Employee"||cookies[:user_type]=="Admin")
-            return true
-        else
-            flash[:error]="You don't have permision"
-            redirect_to "/index"
+            flash[:status_error]="Sorry your account has been deleted"
+            redirect_to '/new'
         end
     end
     def blok_or_active
