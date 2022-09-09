@@ -21,7 +21,11 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
   # get "/", to: "homepage#home_page"
+<<<<<<< HEAD
   #hom page
+=======
+
+>>>>>>> cdb5c703f8af1fc2816d2adb1be81fddb1291645
   get "/", to: 'homepage#home_page'
 
   get "/new", to: "sessions#new"

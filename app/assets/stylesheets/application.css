@@ -24,6 +24,19 @@ h1 {
    margin: 5px;
    width: 50%;
 }
+<<<<<<< HEAD
+=======
+.location-new-user{
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    width: 100%;
+}
+.location-new-user div{
+    margin: 5px;
+    width: 50%;
+}
+>>>>>>> cdb5c703f8af1fc2816d2adb1be81fddb1291645
 .blog-card {
    display: inline-block;
    position: relative;
@@ -140,6 +153,7 @@ a {
 }
 
 .fixit-logo {
+<<<<<<< HEAD
    display: block;
    margin-left: auto;
    margin-right: auto;
@@ -147,6 +161,15 @@ a {
    border-radius: 50px;
    width: 100px;
    height: 100px;
+=======
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 5%;
+    border-radius: 50px;
+    width: 100px;
+    height: 100px;
+>>>>>>> cdb5c703f8af1fc2816d2adb1be81fddb1291645
 }
 @import url(https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i);
 
@@ -4846,6 +4869,7 @@ textarea.form-control-lg {
 }
 
 .card {
+<<<<<<< HEAD
    position: relative;
    display: flex;
    flex-direction: column;
@@ -4857,6 +4881,19 @@ textarea.form-control-lg {
    border-radius: .35rem;
    float: right;
    margin-right: 10%;
+=======
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid #e3e6f0;
+    border-radius: .35rem;
+    float: right;
+    margin-right: 10%;
+>>>>>>> cdb5c703f8af1fc2816d2adb1be81fddb1291645
 }
 
 .card>hr {
@@ -4886,7 +4923,11 @@ textarea.form-control-lg {
 }
 
 .card-body {
+<<<<<<< HEAD
    flex: 1 1 auto;
+=======
+    flex: 1 1 auto;
+>>>>>>> cdb5c703f8af1fc2816d2adb1be81fddb1291645
 }
 
 .card-title {
@@ -7322,7 +7363,11 @@ textarea.form-control-lg {
 }
 
 .top-50 {
+<<<<<<< HEAD
    top: 50% !important;
+=======
+    top: 50% !important;
+>>>>>>> cdb5c703f8af1fc2816d2adb1be81fddb1291645
 }
 
 .top-100 {
@@ -7960,7 +8005,11 @@ textarea.form-control-lg {
 }
 
 .p-4 {
+<<<<<<< HEAD
    padding: 1.5rem !important
+=======
+    padding: 1.5rem !important
+>>>>>>> cdb5c703f8af1fc2816d2adb1be81fddb1291645
 }
 
 .px-0 {
@@ -12905,6 +12954,13 @@ form.user .custom-checkbox.small label {
    flex-flow: column nowrap;
    align-items: center;
    justify-content: space-evenly;
+}
+
+.user{
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    justify-content: space-evenly;
 }
 
 form.user .form-control-user {
