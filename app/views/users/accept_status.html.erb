@@ -1,12 +1,7 @@
 <html>
  <%= stylesheet_link_tag 'join'%>
-
 <style>
-
-
-
 </style>
-
     <body>
         <%@problems.each do |problem|%>
             <div class="join-container">
@@ -16,25 +11,25 @@
                                 <%@cat=Category.where(:id=>problem.category_id)%>
                                 <%@cat.each do |cat|%>
                                     <i class="far fa-newspaper"></i> <%=cat.name%> Issue
-                                <%end%>
+                                <% end %>
                           </h6>
                           <div>
                               <h4 class="blog-card-caption">Location:</h4>
                               <%@city=City.where(:id=>problem.city_id)%>
                               <%@city.each do |city|%>
                                     <%@gover=Governorate.where(:id=>city.governorate_id)%>
-                                <%end%>
+                                <% end %>
                               <div>
                                   <span>Governorate:</span>
                                   <%@gover.each do |go|%>
                                     <span><%=go.name%></span>
-                                  <%end%>
+                                  <% end %>
                               </div>
                               <div>
                                   <span>City:</span>
                                     <%@city.each do |city|%>
                                         <span><%=city.name%></span>
-                                    <%end%>
+                                    <%end %>
                                   
                               </div>
                           </div>
@@ -53,6 +48,7 @@
                                     <%end%>
                               </div>
                           </div>
+                          
                           <div>
                               <h4 class="blog-card-caption">Supervisor Volunteer:</h4>
                               <div>
@@ -63,64 +59,78 @@
                                     <%user.each do |user|%>
                                         <span > <%= link_to "#{user.first_name} #{user.last_name}",personal_page_user_path(user),:class=>"link-dark" %></span>
                                     <%end%>
-                                    
                               </div>
                           </div>
-                        
                     </div>
-                     <div class="container">
-                        <button id="support" class='btn btn-outline-info'>Support</button>
-                       
-                    </div>
+                    <% accept = Accept.find_by(:problem_id => problem.id )%>
+                       <% if accept.totale_cost ==3000 %>
+                            <input  style="width:100px"type=submit class='btn btn-outline-info' value=Supported disabled>
+                       <% else %>
+                            <div class="container">
+                               <button id="support" class=' btn btn-outline-info'>Support</button>
+                            </div>
+                        <% end %>
+                  <%# modal supporter %>
                     <div class="model-container">
                         <div class="model">
                             <i class="fas fa-home"></i>
                             <h3>support Box</h3>
-                            <p>welcome Ali Bin_Dohri </p>
-                            <h3>choos what you want to support</h3>
-                            <div class=main>
-                              <button id=ass class=off>Money</button>
-                              <button id=on class=on>Matt</button>
+                            <% @user.each do |user| %>
+                                <p>welcome <%=user.first_name%> </p>
+                                <h3>choos what you want to support</h3>
+                                <div class=main>
+                                  <button id=ass class=off>Money</button>
+                                  <button id=on class=on>Matt</button>
+                                </div>
+                                <div class=money>
+                                    <form action=/money method=POST>
+                                      <input type='hidden' name='authenticity_token' value="<%= form_authenticity_token%>">
+                                      <input type=hidden name=money[user_id] value=<%= user.id%>>
+                                      <input type=hidden name= money[problem_id] value=<%= problem.id%>>
+                                      <input type=number name=money[amount] class="sel ">
+                                      <select class="sel" name=money[money_type_id]>
+                                        <option><option>
+                                        <% @money.each do |mo| %>
+                                            <option value= <%= mo.id %>><%= mo.coins %><option>
+                                        <% end %>
+                                      </select>
+                                         <button class="btn-money">Support</button>
+                                    </form>
+                                </div>
+                                <div class="matt">
+                                   <form action=/supmat method=POST>
+                                      <input type='hidden' name='authenticity_token' value="<%= form_authenticity_token%>">
+                                      <input type=hidden name=supmat[user_id] value=<%= user.id%>>
+                                      <input type=hidden name= supmat[problem_id] value=<%= problem.id%>>
+                                     <select class="form-control w-50" name=supmat[material_id]>
+                                       <option><option>
+                                       <% @mat.each do |mat| %>
+                                        <option value=<%=mat.id%>><%= mat.name %></option>
+                                       <% end %>
+                                     </select>
+                                     <input type=number class="form-control w-50" name=supmat[quantity]>
+                                     <button >Support</button>
+                                   </form>
+                                 </div>
+                            <% end %>
 
-                            </div>
-                            <div class=money>
-                                <form>
-                                  <input type=number class="sel ">
-                                  <select class="sel">
-                                    <option>$<option>
-                                  </select>
-                                  <button class="btn-money">Support</button>
-                                <form>
-                            </div>
-                           <div class="matt">
-                              <form>
-                                <select class="form-control w-50">
-                                  <option>light<option>
-                                </select>
-                                <input type=number class="form-control w-50" value=>
-                                <button  value=>Support</button>
-
-                              </form>
-                            </div>
                               <i class="fas fa-times close"></i>
                         </div>
                     </div>
-                        <% if flash[:error_join].present?%>
-                                <div id="flash-notice" style="border:1px solid red; color: red ;padding=:10px">
-                                <%=flash[:error]%>
-                                </div>
-                        <%end%>
-                        
-                        <%join=JoinIssue.where(:user_id=>session[:user_id])%>
-                        <%join_user=JoinIssue.where(:problem_id=>problem.id ,:user_id=>session[:user_id])%>
+                    <% if @accepter.present? %>
+                        <input  style="width:100px"type=submit class='btn btn-outline-info w-100' value='your already Supervisor' disabled>
+
+                    <% else %>
+                        <%join=JoinIssue.where(:user_id=>session[:user_id],:status=>true)%>
+                        <%join_user=JoinIssue.where(:problem_id=>problem.id ,:user_id=>session[:user_id], :status=>true)%>
                         <%if join_user.present?%>
                             <input style="width:100px" type=submit class='btn btn-outline-info' value=Joined disabled>
                         <%elsif join.present?%>
                                 <input style="width:auto" type=submit class='btn btn-outline-info' value='you had recently joined another issue' disabled>
-
                         <%else%>
-                            <form action=/join_issue method=POST>
-                                  <input type='hidden' name='authenticity_token' value="<%= form_authenticity_token%>">
+                                <%= form_tag({:controller=>'users',:action=>'join'},:remote=> true, method: :post) do%>
+
+                                  <%# <input type='hidden' name='authenticity_token' value="<%= form_authenticity_token%>
                                   <input type=hidden name=join_issue[problem_id] value=<%=problem.id%>>
                                   <%@accept=Accept.where(:problem_id=>problem.id)%>
                                   <%@accept.each do |acc|%>
@@ -130,10 +140,11 @@
                                           <input style="width:100px"  type=submit class='btn btn-outline-info ' value= Join>
                                       <%end%>
                                   <%end%>
-                            </form>
+                                <% end %>
                         <%end%>
+                    <% end %>
                 </div>
-                  <div class="join-issue-img">
+                  <div class = "join-issue-img">
                         <%= image_tag(problem.image)  %>
                   </div>
             </div>
@@ -170,7 +181,11 @@ $('.on').click(function(){
   $('.off').delay(5000).css('background','#4d90fe')
 
 
-})
+});
+// const modal =doucment.querySelectorAll('#support')
+//     $('#support').click(function(){
+//         $('.model-container').delay(2000).css('transform',' scale(1)')
+//     });
 
 
     </script>

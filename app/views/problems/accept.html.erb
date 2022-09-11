@@ -1,0 +1,104 @@
+ <style>
+  
+ 
+ </style>
+<%= stylesheet_link_tag 'accept' %>
+
+<body>
+ <div id="accept-form" class="accept-modal">
+   <div class="modal-content-accept">
+     <div class="modal-body-accept">
+      <div> 
+      <% if @accept.present?%>
+      <% accept = Accept.find_by(:user_id=> session[:user_id])%>
+      <%  @problem = Problem.find_by(:id=>accept.problem_id) %>
+        number of volunteers: <%= accept.required_volunteer%>       
+      </div>
+      <% else %>
+      <% end %>
+       
+            <div>
+            <div>Materials:</div>
+            <div class="table-responsive">
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <td class="text-center">Name</td>
+                    <td class="text-center">Cost</td>
+                    <td class="text-center">Quantity</td>
+                    <td class="text-center">Total</td>
+                    <%# <td class="text-center"></td> %>
+                    <%# <td><button class="btn btn-md btn-primary" id="addBtn" type="button">+</button></td> %>
+                  </tr>
+                </thead>
+                <tbody >
+                  <% if @accept.present?%>
+                      <% billofmat = BillOfMaterial.where(:accept_id=>accept.id) %>
+                      <% billofmat.each do |bill|%>
+                        <tr>
+                          <% mat = Material.find_by(:id=> bill.material_id)%>
+                          <td class="row-index text-center">
+                            <%= mat.name%>
+                          </td>
+                          <td class="row-index text-center">
+                           <%= bill.cost%>
+                          </td>
+                          <td class="row-index text-center">
+                            <%= bill.quantity%>
+                          </td>
+                        </tr>
+                      <% end %>
+                  <% end %>
+
+                  </tbody>
+              </table>
+               <% if @accept.present?%>
+                <div class="row-index text-center">
+                   total cost: <%= accept.totale_cost%>
+                </div>
+              <% end %>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+    <% if @accept%>
+    <div>Number of needed volunteers:<i class="fa fa-check" aria-hidden="true"></i>
+    </div>
+    <% else%>
+    <div>Number of needed volunteers:</i>
+    </div>
+      <div class=num-volu>
+        <%= form_tag({:controller=>'problems',:action=>'accept_issue'},:remote=> true, :local=> true, html: {:id => "post-com" },method: :post) do %>
+          <%# <input type='hidden' name='authenticity_token' value="<%= form_authenticity_token%>
+          <input type=number name=accept[required_volunteer]>
+          <%= hidden_field_tag(:problem_id, params[:problem_id],value:@problem.id) %>
+          <input type=submit class='btn btn-outline-info' id='num-volu' value=Reuest>
+        <% end %>
+      </div>
+    <% end %>
+
+  <% @cat = Category.find_by(:id=>@problem.id)%>
+  <%= form_tag({:controller=>'problems',:action=>'accept_mat'},:remote=> true, :local=> true, html: {:id => "post-com" },method: :post) do %>
+    <%# <input type='hidden' name='authenticity_token' value="<%= form_authenticity_token%>
+    <%= select_tag :material_id,options_from_collection_for_select(Material.where(:category_id=>@problem.category_id).order(:name), :id, :name,params[:material_id]), class:"selectt-mat", include_blank: "Choose the material?" %>
+    <%# <%= number_field_tag(:cost, params[:cost]) %> 
+    <label>cost:</label>
+    <input type=number name=acce_matt[cost]>
+    <%= hidden_field_tag(:problem_id, params[:problem_id],value:@problem.id) %>
+    <%# <%=number_field_tag(:quantity, params[:quantity])%> 
+    <label>Quantity:</label>
+    <input type=number name=acce_matt[quantity]>
+    <br>
+    <input type=submit class='btn btn-outline-info' value=Reuest>
+  <% end %>
+  <a href='/accept_status'>
+    <button>Finished</button>
+  </a>
+  <script>
+  $('#num-volu').click(function(){
+    $('.num-volu').hide()
+    $('.fa-check').show()
+  });
+  </script>
+</body>

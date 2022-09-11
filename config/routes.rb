@@ -6,13 +6,26 @@ Rails.application.routes.draw do
       get :personal_page
     end
   end
-  resources :problems
+  resources :problems do 
+    member do
+      get :accept
+    end
+  end
+  ## Accept issue
+  post "/acce_matt", to: "problems#accept_mat"
+  post "/accept", to: "problems#accept_issue"
+  get "/accept", to: "problems#accept"
+  
   get "/submit", to: "problems#new"
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
   # get "/", to: "homepage#home_page"
+<<<<<<< HEAD
+  #hom page
+=======
 
+>>>>>>> cdb5c703f8af1fc2816d2adb1be81fddb1291645
   get "/", to: 'homepage#home_page'
 
   get "/new", to: "sessions#new"
@@ -28,7 +41,7 @@ Rails.application.routes.draw do
   post "/problem", to: "employees#update"
   get "/issue", to: "employees#issue"
   get "/new_user", to: "sessions#new_user"
-  post "/employee", to: "sessions#create_user"
+  # post "/employee", to: "sessions#create_user"
   get "/user", to: "employees#user"
   get "/profile", to: "users#profile"
   post "/upprofile", to: "users#update_profile"
@@ -38,11 +51,9 @@ Rails.application.routes.draw do
   post "/active", to: "employees#active"
   get "/submit_issue", to: "problems#new"
   post "/submit_issue", to: "problems#create"
-  # get "/accept", to: "users#accept"
   # post "/issue_accept", to: "users#accept_issue"
   post "/feed", to: "sessions#comment"
   post "/confirm", to: "problems#confirm"
-  post "/accept", to: "users#accept_issue"
   # post "/bill_of_material", to: "users#accept_issue"
   post "/confirm_issue", to: "employees#confirm"
   get "/report", to: "employees#report"
@@ -68,7 +79,17 @@ Rails.application.routes.draw do
 
   ##Add Bio
   post "/bio", to: "users#add_bio"
+  ## supporte money
+  post "/money", to: "users#support_money"
+  ## support matterails
+  post '/supmat', to: "users#support_mat"
 
+  ##spervisor
+  get "/supervisor", to: "users#supervisor"
+  ## accept materails
+  post '/accmat', to: 'users#accept_mat'
+  ## accept money
+  post '/accmoney', to: 'users#accept_money'
   resources :users do
     member do
       patch :accept

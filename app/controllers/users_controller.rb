@@ -1,12 +1,16 @@
 class UsersController < ApplicationController
      layout 'application'
     #  before_action :confirm, except: [:new, :create]
+    before_action :check_status
+    before_action :blok_or_active, only: %i[ accept_issue join]
+    before_action :check_login
+
     def index 
      @user = User.where(:id=>session[:user_id]) 
      @employee= User.where(:id=>session[:user_id],:user_type=>"Employee")
      @problems = Problem.issue_passed.order("id DESC").with_attached_image
      @issue=Problem.where(:id=>params[:problem_id])
-
+    
     end
     def profile
       
@@ -16,7 +20,6 @@ class UsersController < ApplicationController
       @problems=Problem.where(:user_id=> session[:user_id])
       @user = User.where(:id=>session[:user_id]) 
       @photo = Photo.find_by(user_id: session[:user_id])
-      
     end
     def upimage 
        if User.where(:id=>session[:user_id]).save(:image=>image_params[:image])
@@ -45,12 +48,10 @@ class UsersController < ApplicationController
         end
     end
     def destroy
-        user=User.find_by(id:params[:id])
-        if user.destroy
-            redirect_to '/user'
-        else
-            flash[:user_error]="something went wrong"
-            redirect_to '/user'
+        @user=User.where(:id=>params[:id]).update_all(:status=>false)
+        respond_to do |format|
+            format.html { redirect_to '/user', notice: "Photo was successfully destroyed." }
+            format.json { head :no_content }
         end
 
     end
@@ -69,44 +70,34 @@ class UsersController < ApplicationController
         else
             redirect_to '/index'
         end
-
-        # @comment=Coment.where(:problem_id=>92).count
-        # redirect_to'/index'
     end
     
     def confirmed_issue
      @user = User.where(:id=>session[:user_id]) 
      @employee= User.where(:id=>session[:user_id],:user_type=>"Employee")
      @mat = Material.all
+     @accepter = Accept.find_by(:user_id=>session[:user_id])
    
     end
     def accept_status
         @user = User.where(:id=>session[:user_id]) 
         @problems = Problem.accept_issue.order("id DESC").with_attached_image
+        @money = MoneyType.all
+        @mat = Material.all
+        @accepter = Accept.find_by(:user_id=>session[:user_id])
     end
-    def accept_issue
-        accept=Accept.new(accept_params)
-        accept.user_id=session[:user_id]
-        accept.problem_id=params[:problem_id]
-        if accept.save 
-            @billOfMaterial=BillOfMaterial.create({cost:params[:cost],quantity:params[:quantity],material_id:params[:material_id] ,accept_id: session[:user_id]})
-            Problem.where(id:params[:problem_id]).update_all(:status=>"Accepted")
-            User.where(:id=>session[:user_id]).update_all(:supervisor=>true)
-            redirect_to "/accept_issue"
-        else
-            flash[:error_accept]="something went wrong"
-            redirect_to "/accept_issue"
-        end
-    end
+  
     def join
         join=JoinIssue.new(join_params)
         join.user_id=session[:user_id]
-        if join.save 
-            flash[:success]="you are successfully joined "
-            redirect_to '/accept_status'
-        else
-            flash[:error_join]="something went wrong"
-            redirect_to '/accept_status'
+        join.status=true
+        respond_to do |format|
+            if join.save 
+                format.html { redirect_to '/accept_status', notice: "you are successfully joined ." }
+            else
+                flash[:error_join]="something went wrong"
+                redirect_to '/accept_status'
+            end
         end
       
     end
@@ -114,7 +105,12 @@ class UsersController < ApplicationController
         
     end
     def personal_page
-        @users= User.where(:id=>params[:id])
+        if user = User.where(:id=>params[:id]).present?
+            @users= User.where(:id=>params[:id])
+            @employee = User.where(:id=>session[:user_id],:user_type=>"Employee")
+        else
+            redirect_to '/index'
+        end
     end
     def add_bio
        if User.where(:id=> session[:user_id]).update_all(:bio=>bio_params[:bio])
@@ -126,7 +122,61 @@ class UsersController < ApplicationController
 
     end
 
-    
+    def support_money
+        support = SupportedMoney.new(money_params)
+        respond_to do |format|
+            if support.save
+                format.html { redirect_to '/accept_status', notice: "supported was successfully created." }
+            else
+                flash[:error_supp]= "something went wrong"
+                redirect_to '/accept_status'
+            end
+        end
+    end
+
+    def support_mat
+        supportmat = MaterialSupporet.new(supmat_params)
+        respond_to do |format|
+            if supportmat.save
+                format.html { redirect_to '/accept_status', notice: "supported was successfully created." }
+            else
+                flash[:error_supp]= "something went wrong"
+                redirect_to '/accept_status'
+            end
+        end
+    end
+    def supervisor
+        @accept = Accept.find_by(:user_id=>session[:user_id])
+        @problem =Problem.find_by(:id=>@accept.problem_id)
+        @x = @problem.id
+        @supporter_mat = MaterialSupporet.where(:problem_id=>@problem.id)
+        @supporter_m = SupportedMoney.where(:problem_id=>@problem.id)
+        @user = User.where(:id=>session[:user_id])
+        @current_user = User.find_by(:id=>session[:user_id])
+    end
+
+    def accept_mat
+        accept = AcceptMat.new(accmat_params)
+        respond_to do |format|
+            if accept.save
+                format.html { redirect_to '/supervisor', notice: "supported was successfully created." }
+            else 
+                redirect_to '/supervisor'
+            end
+            
+        end
+    end
+    def accept_money
+        accept = AcceptMoney.new(accmaney_params)
+        respond_to do |format|
+            if accept.save
+                format.html { redirect_to '/supervisor', notice: "supported was successfully created." }
+            else 
+                redirect_to '/supervisor'
+            end
+           
+        end
+    end
     
     
     private
@@ -143,9 +193,7 @@ class UsersController < ApplicationController
          def update_params
             params.require(:edit_user).permit(:id,:first_name, :last_name, :username,:phone,:bio)  
          end
-         def accept_params
-            params.require(:accept).permit(:problem_id, :user_id,:required_volunteer ,:start_date ,:totale_cost)
-         end
+       
          def update_profile_params
             params.require(:upprofile).permit(:city_id)
          end
@@ -155,9 +203,16 @@ class UsersController < ApplicationController
          def  bio_params
             params.require(:bio).permit(:bio,:id)
          end
-
-       
-        
-        
-        
+         def money_params
+             params.require(:money).permit(:user_id, :problem_id, :amount, :money_type_id)
+         end
+         def supmat_params
+             params.require(:supmat).permit(:user_id, :problem_id, :material_id, :quantity)
+         end
+         def accmat_params
+            params.require(:accmat).permit(:user_id, :problem_id, :material_id, :quantity, :sup_id)
+         end
+         def accmaney_params 
+            params.require(:accmoney).permit(:user_id, :problem_id, :sup_id, :amount)
+         end
 end

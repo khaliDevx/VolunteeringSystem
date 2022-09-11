@@ -10,18 +10,42 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_27_112243) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_08_125054) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "accept_mats", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "problem_id"
+    t.bigint "material_id"
+    t.integer "quantity"
+    t.integer "sup_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["material_id"], name: "index_accept_mats_on_material_id"
+    t.index ["problem_id"], name: "index_accept_mats_on_problem_id"
+    t.index ["user_id"], name: "index_accept_mats_on_user_id"
+  end
+
+  create_table "accept_moneys", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "problem_id"
+    t.integer "sup_id"
+    t.integer "amount"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["problem_id"], name: "index_accept_moneys_on_problem_id"
+    t.index ["user_id"], name: "index_accept_moneys_on_user_id"
+  end
 
   create_table "accepts", force: :cascade do |t|
     t.bigint "problem_id"
     t.bigint "user_id"
     t.integer "required_volunteer"
-    t.integer "totale_cost"
     t.datetime "start_date", precision: nil
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "totale_cost"
     t.index ["problem_id"], name: "index_accepts_on_problem_id"
     t.index ["user_id"], name: "index_accepts_on_user_id"
   end
@@ -127,8 +151,21 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_27_112243) do
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "status"
     t.index ["problem_id"], name: "index_join_issues_on_problem_id"
     t.index ["user_id"], name: "index_join_issues_on_user_id"
+  end
+
+  create_table "material_supporets", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "problem_id"
+    t.string "quantity"
+    t.bigint "material_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["material_id"], name: "index_material_supporets_on_material_id"
+    t.index ["problem_id"], name: "index_material_supporets_on_problem_id"
+    t.index ["user_id"], name: "index_material_supporets_on_user_id"
   end
 
   create_table "materials", force: :cascade do |t|
@@ -146,6 +183,12 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_27_112243) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_meassages_on_user_id"
+  end
+
+  create_table "money_types", force: :cascade do |t|
+    t.string "coins"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "photos", force: :cascade do |t|
@@ -168,6 +211,18 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_27_112243) do
     t.index ["user_id"], name: "index_problems_on_user_id"
   end
 
+  create_table "supported_moneys", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "problem_id"
+    t.integer "amount"
+    t.bigint "money_type_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["money_type_id"], name: "index_supported_moneys_on_money_type_id"
+    t.index ["problem_id"], name: "index_supported_moneys_on_problem_id"
+    t.index ["user_id"], name: "index_supported_moneys_on_user_id"
+  end
+
   create_table "unit_of_measures", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -188,6 +243,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_27_112243) do
     t.boolean "supervisor", default: false
     t.string "bio"
     t.integer "employee_id"
+    t.boolean "status"
     t.index ["city_id"], name: "index_users_on_city_id"
   end
 

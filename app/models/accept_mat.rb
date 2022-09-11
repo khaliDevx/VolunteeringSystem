@@ -1,0 +1,2 @@
+class AcceptMat < ApplicationRecord
+end

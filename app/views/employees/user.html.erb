@@ -36,24 +36,137 @@
                     <div class="row">
                         <div class="col-md-6 text-nowrap">
                             <div id="dataTable_length" class="dataTables_length" aria-controls="dataTable">
+<<<<<<< HEAD
+                                <label class="form-label">Show&nbsp;
+                                    <select class="d-inline-block form-select form-select-sm">
+=======
                                 <label class="form-label">Show&nbsp;<select
                                         class="d-inline-block form-select form-select-sm">
+>>>>>>> cdb5c703f8af1fc2816d2adb1be81fddb1291645
                                         <option value="10" selected="">10</option>
                                         <option value="25">25</option>
                                         <option value="50">50</option>
                                         <option value="100">100</option>
+<<<<<<< HEAD
+                                    </select>&nbsp;
+                                </label>
+=======
                                     </select>&nbsp;</label>
+>>>>>>> cdb5c703f8af1fc2816d2adb1be81fddb1291645
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="text-md-end dataTables_filter " id="dataTable_filter"><label class="form-label">
                                     <%= form_tag('/user', :method=>'get') do%>
+<<<<<<< HEAD
+                                        <%=text_field_tag :first_name, params[:first_name], class:" form-control-sm",placeholder:"Search"%>
+                                        <button class="btn btn-primary py-0"><i class="fas fa-search"></i></button>
+                                    <%end%>
+                                </label>
+                            </div>
+                        </div>
+                        <div>
+                        </div>
+                    </div>
+                    <div class="table-responsive table mt-2" id="dataTable" role="grid"
+                        aria-describedby="dataTable_info">
+                        <table class="table my-0 text-center" id="dataTable">
+                            <thead>
+                                <tr>
+                                    <th>First Name</th>
+                                    <th>Last Name</th>
+                                    <th>Phone Number</th>
+                                    <th>State</th>
+                                    <th>City</th>
+                                    <th>Account Status</th>
+                                    <th>Action</th>
+                                    <th>Submitted Issues</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% @users.each do |user| %>
+                                    <tr class="users-row">
+                                        <td>
+                                            <%= link_to "#{user.first_name} " ,personal_page_user_path(user),:class=>
+                                                "link-dark" %>
+                                        </td>
+                                        <td>
+                                            <%= link_to "#{user.last_name} " ,personal_page_user_path(user),:class=>
+                                                "link-dark" %>
+                                        </td>
+                                        <td>
+                                            <%=user.phone%>
+                                        </td>
+                                        <%@city=City.where(:id=>1)%>
+                                            <% @city.each do |city| %>
+                                                <%@gove=Governorate.where(:id=>city.governorate_id)%>
+                                        <% end %>
+                                            <% @gove.each do |gove| %>
+                                            <td>
+                                                <%=gove.name%>
+                                            </td>
+                                        <% end %>
+                                        <% @city.each do |city| %>
+                                            <td>
+                                                <%=city.name%>
+                                            </td>
+                                        <% end %>
+                                        <%if user.accountstatu==true%>
+                                            <td>Active</td>
+                                        <%else%>
+                                            <td>Blocked</td>
+                                        <%end%>
+                                        <td class=action>
+                                            <%# <form action='/block'method='POST'> %>
+                                            <%= form_tag({:controller=>'employees',:action=>'block'},:remote=> true, method: :post) do%>
+                                                <%# <input type='hidden'name='authenticity_token'value="<%= form_authenticity_token%>
+                                                <input type='hidden'name='block[accountstatu]'value=false>
+                                                <input type='hidden'name='block[id]'value=<%=user.id%>>
+                                                <input type=submit value=Block class="btn btn-warning d-block">
+                                            <% end %>
+                                            <%= form_tag({:controller=>'employees',:action=>'active'},:remote=> true, method: :post) do%>
+                                                <%# <input type='hidden'name='authenticity_token'value="<%= form_authenticity_token%>
+                                                <input type='hidden'name='active[accountstatu]'value=true>
+                                                <input type='hidden'name='active[id]'value=<%=user.id%>>
+                                                <input type=submit value=Activate class="btn btn-primary d-block">
+                                            <% end %>
+                                            <%= link_to 'Destroy' , user, method: :delete, data: {confirm: 'Are you sure?'}, class:"btn btn-danger"%>
+
+                                        </td>
+                                        <td>
+                                            <%=Problem.where(:user_id=>
+                                                user.id).count%>
+                                        </td>
+                                    </tr>
+                                <% end %>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 align-self-center">
+                            <p id="dataTable_info" class="dataTables_info" role="status" aria-live="polite">Showing 1 to
+                                10 of 27</p>
+                        </div>
+                        <div class="col-md-6">
+                            <nav class="d-lg-flex justify-content-lg-end dataTables_paginate paging_simple_numbers">
+                                <ul class="pagination">
+                                    <li class="page-item disabled"><a class="page-link" href="#"
+                                            aria-label="Previous"><span aria-hidden="true">«</span></a></li>
+                                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                    <li class="page-item"><a class="page-link" href="">2</a></li>
+                                    <li class="page-item"><a class="page-link" href="">3</a></li>
+                                    <li class="page-item"><a class="page-link" href="" aria-label="Next"><span
+                                                aria-hidden="true">»</span></a></li>
+                                </ul>
+                            </nav>
+=======
                                         <%=text_field_tag :first_name, params[:first_name], class:" form-control-sm",
                                             placeholder:"Search"%>
                                             <button class="btn btn-primary py-0"><i class="fas fa-search"></i></button>
                                             <%end%>
                                 </label>
                             </div>
+>>>>>>> cdb5c703f8af1fc2816d2adb1be81fddb1291645
                         </div>
                         <div>
                         </div>

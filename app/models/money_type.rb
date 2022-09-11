@@ -1,0 +1,2 @@
+class MoneyType < ApplicationRecord
+end

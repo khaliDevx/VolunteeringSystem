@@ -1,5 +1,5 @@
 class IssuesController < ApplicationController
-  before_action :confirm
+#   before_action :confirm
     
 
     def new 

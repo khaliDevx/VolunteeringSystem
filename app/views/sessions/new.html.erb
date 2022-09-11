@@ -1,8 +1,13 @@
+<<<<<<< HEAD
+
+
+=======
 <% if flash[:error].present?%>
     <div id="flash-notice" style="border:1px solid red; color: red ;padding:10px">
         <%=flash[:error]%>
     </div>
 <%end%>
+>>>>>>> cdb5c703f8af1fc2816d2adb1be81fddb1291645
 <div class="card shadow-lg o-hidden border-0 my-5">
     <div class="card-body p-0">
         <div class="row">
@@ -11,33 +16,57 @@
                     <div class="text-center">
                         <h4 class="text-dark mb-4">Create an Account!</h4>
                     </div>
+<<<<<<< HEAD
+                    <form class="user" action="/user" method="POST">
+=======
                     <form class="user" action="/employee" method="POST">
+>>>>>>> cdb5c703f8af1fc2816d2adb1be81fddb1291645
                         <input type='hidden' name='authenticity_token' value="<%= form_authenticity_token%>">
                         <div class="row mb-3">
                             <div class="col-sm-6 mb-3 mb-sm-0">
                                 <input class="form-control form-control-user" type="text" id="exampleFirstName"
+<<<<<<< HEAD
+                                    placeholder="First Name" name="user[first_name]">
+                            </div>
+                            <div class="col-sm-6">
+                                <input class="form-control form-control-user" type="text" id="exampleFirstName"
+                                    placeholder="Last Name" name="user[last_name]">
+=======
                                     placeholder="First Name" name="employee[first_name]">
                             </div>
                             <div class="col-sm-6">
                                 <input class="form-control form-control-user" type="text" id="exampleFirstName"
                                     placeholder="Last Name" name="employee[last_name]">
+>>>>>>> cdb5c703f8af1fc2816d2adb1be81fddb1291645
                             </div>
                         </div>
                         <div class="row mb-3">
                             <div class="col">
                                 <input class="form-control form-control-user" type="text" id="exampleInputEmail"
                                     aria-describedby="emailHelp" placeholder="Username"
+<<<<<<< HEAD
+                                    name="user[username]">
+                            </div>
+                            <div class="col-sm-6">
+                                <input class="form-control form-control-user" type="number" id="examplephone"
+                                    placeholder="Phone Number" name="user[phone]">
+=======
                                     name="employee[username]">
                             </div>
                             <div class="col-sm-6">
                                 <input class="form-control form-control-user" type="number" id="examplephone"
                                     placeholder="Phone Number" name="employee[phone]">
+>>>>>>> cdb5c703f8af1fc2816d2adb1be81fddb1291645
                             </div>
                         </div>
                         <div class="row mb-3">
                             <div class="col-sm-6 mb-3 mb-sm-0">
                                 <input class="form-control form-control-user" type="password"
+<<<<<<< HEAD
+                                    id="examplePasswordInput" placeholder="Password" name="user[password]">
+=======
                                     id="examplePasswordInput" placeholder="Password" name="employee[password]">
+>>>>>>> cdb5c703f8af1fc2816d2adb1be81fddb1291645
                             </div>
                             <div class="col-sm-6">
                                 <input class="form-control form-control-user" type="password"
