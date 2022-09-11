@@ -258,7 +258,6 @@
 
       <script>
         $(function () {
-          // var id = "id" + Math.random().toString(16).slice(2);
           $('.open').click(function () {
             $(this).click(function () {
               $('.model-container').delay(2000).css('transform', ' scale(1)')
@@ -267,15 +266,9 @@
           $('body').on('click', '.close', function () {
             $('.model-container').css('transform', ' scale(0)')
           });
-          // function handleLike(){
-          //   document.getElementsByClassName("un-like").toggleClass("far");
-          //   document.getElementsByClassName("un-like").toggleClass("fa");
 
-          // }
         });
-        // $("").click(function(event){
-        //   event.preventDefault();
-        // });
+       
         $('button').submit(function(e){
         $("input[name = comment]").enabled = enabled;
         e.preventDefault();

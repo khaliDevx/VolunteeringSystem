@@ -1,0 +1,256 @@
+
+<%= stylesheet_link_tag 'fixed-issues' %>
+
+<div class="">
+
+  <% @user.each do |user| %>
+    <%@problems=Problem.where(:status=>"Confirmed").with_attached_image%>
+  <%end%>
+  <% @problems.each do |problem| %>
+  
+    <div class="instagram-card shadow-sm p-3 mb-5 bg-white rounded">
+      <div class="supervisor-name">
+        <div>
+          <% @submiter = User.where(:id=> problem.user_id)%>
+          <% @submiter.each do |user| %>
+            <%if @photos=Photo.where(:user_id=>user.id).present?%>
+              <%@photos= Photo.where(:user_id=>user.id)%>
+                <% @photos.each do |photo| %>
+                  <% if (photo.image.attached?) %>
+                    <%=image_tag(url_for(photo.image),class:'instagram-card-user-image')%>
+                  <% else %>
+                    <%=image_tag('avatar.png',class:'instagram-card-user-image')%>
+                  <% end %>
+                <% end %>
+            <% else %>
+              <%=image_tag('avatar.png',class:'instagram-card-user-image')%>
+            <% end %>
+              <div class="instagram-card-user-name h5">
+                <%=user.first_name%>
+                  <%=user.last_name%>
+              </div>
+          <%end%>
+        </div>
+        <div class="blog-text-success">Supervisor</div>
+      </div>
+      <div class="instagram-card2">
+        <div>
+          <div class="issue-after-before">
+            <div class="model-container hide">
+              <div class="model">
+                <div class="instagram-card-image issue-before">
+                  <div>Before</div>
+                  <% if (problem.image.attached?) %>
+                    <%=image_tag(url_for(problem.image), style:"height:600px; width:500px;")%>
+                  <% else %>
+                      <p>no image</p>
+                  <% end %>
+                </div>
+                <div class="instagram-card-image issue-after">
+                  <div>After</div>
+                  <% if (problem.image.attached?) %>
+                    <%=image_tag(url_for(problem.image),style:"height:600px; width:500px;")%>
+                  <% else %>
+                    <p>no image</p>
+                  <% end %>
+                </div>
+                <i class="fas fa-times close"></i>
+              </div>
+            </div>
+            <div class="instagram-card-image issue-before">
+              <div>Before</div>
+              <% if (problem.image.attached?) %>
+                <%=image_tag(url_for(problem.image))%>
+                  <% else %>
+                    <p>no image</p>
+                    <% end %>
+            </div>
+            <div class="instagram-card-image issue-after">
+              <div>After</div>
+              <% if (problem.image.attached?) %>
+                <%=image_tag(url_for(problem.image))%>
+                  <% else %>
+                    <p>no image</p>
+                    <% end %>
+            </div>
+          </div>
+          <div class="category-date ">
+            <div class="blog-category blog-text-success">
+              <%@cat=Category.where(:id=>problem.category_id)%>
+                  <% @cat.each do |cat| %> 
+                      <i class="far fa-newspaper"></i> <%=cat.name%><span> issue</span>
+                  <% end %>   
+            </div>
+            <div class="blog-text-success fixed-date">Fixed in : <span>11/2/2022</span></div>
+          </div>
+        </div>
+        <div class="blog-table">
+          <div class="issue-details">
+            <div class="groups-section">
+              <div class="blog-card-caption group-title">Supporters</div>
+              <div class="supporters-list blog-card-description">
+                <div class="suporter">
+                  <div>
+                    <% @submiter = User.where(:id=> problem.user_id)%>
+                    <% @submiter.each do |user| %>
+                      <%if @photos=Photo.where(:user_id=>user.id).present?%>
+                        <%@photos= Photo.where(:user_id=>user.id)%>
+                          <% @photos.each do |photo| %>
+                            <% if (photo.image.attached?) %>
+                              <%=image_tag(url_for(photo.image),class:'instagram-card-user-image')%>
+                            <% else %>
+                              <%=image_tag('avatar.png',class:'instagram-card-user-image')%>
+                            <% end %>
+                          <% end %>
+                      <% else %>
+                        <%=image_tag('avatar.png',class:'instagram-card-user-image')%>
+                      <% end %>
+                        <div class="instagram-card-user-name h5">
+                          <%=user.first_name%>
+                            <%=user.last_name%>
+                        </div>
+                    <%end%>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="groups-section">
+              <div class="blog-card-caption group-title">volunteers</div>
+              <div class="blog-card-description">
+                <div class="">
+                  <div>
+                    <% @submiter = User.where(:id=> problem.user_id)%>
+                    <% @submiter.each do |user| %>
+                      <%if @photos=Photo.where(:user_id=>user.id).present?%>
+                        <%@photos= Photo.where(:user_id=>user.id)%>
+                          <% @photos.each do |photo| %>
+                            <% if (photo.image.attached?) %>
+                              <%=image_tag(url_for(photo.image),class:'instagram-card-user-image')%>
+                            <% else %>
+                              <%=image_tag('avatar.png',class:'instagram-card-user-image')%>
+                            <% end %>
+                          <% end %>
+                      <% else %>
+                        <%=image_tag('avatar.png',class:'instagram-card-user-image')%>
+                      <% end %>
+                        <div class="instagram-card-user-name h5">
+                          <%=user.first_name%>
+                            <%=user.last_name%>
+                        </div>
+                    <%end%>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="groups-section">
+              <div class="blog-card-caption group-title">Details</div>
+              <div class="blog-card-description">
+                <div class="blog-card-caption">Location:</div>
+                <div class="blog-card-description">
+                  <span>Governorate:</span>
+                  <%@city=City.where(:id=>problem.city_id)%>
+                    <% @city.each do |city| %>
+                      <%@gove=Governorate.where(:id=>city.governorate_id)%>
+                        <% @gove.each do |gove| %>
+                            <span>
+                              <%=gove.name%>
+                            </span>
+                        <% end %>
+                      <% end %>
+                </div>
+                <div class="blog-card-description">
+                    <span>City:</span>
+                    <% @city.each do |city| %>
+                      <span>
+                        <%=city.name%>
+                      </span>
+                      <%end%>
+                </div>
+                <div class="blog-text-success">
+                  <div>Submitted by: </div>
+                  <div class="submition-info">
+                    <%@submiter=User.where(:id=> problem.user_id)%>
+                    <% @submiter.each do |user| %>
+                      <span>
+                        <%= link_to "#{user.first_name} #{user.last_name}",personal_page_user_path(user),:class=>"link-dark" %>
+                      </span>
+                    <% end %>
+                    <div>
+                      <span> in </span><span><%=problem.created_at.to_date%></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              </div>
+            </div>
+          </div>
+      </div>
+      <div class="supervisor-report">
+        <div class="h4">Supervisor Report</div>
+        <p>
+          the issue had been fixed completely...
+        </p>
+      </div>
+      <div class="support-tables">
+        <div class="mat-table">
+          Consumed Materials
+          <table class="table table-bordered text-center">
+            <thead>
+              <tr>
+                <td>Supporter</td>
+                <td>Material</td>
+                <td>Quantity</td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>khalid</td>
+                <td>cement</td>
+                <td>5</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="money-table">
+          Consumed Money
+          <table class="table table-bordered text-center">
+            <thead>
+              <tr>
+                <td>Supporter</td>
+                <td>Amount</td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Ali</td>
+                <td>50000</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  <%end%>
+</div>
+<a class="border rounded d-inline scroll-to-top" href="" style="margin-right: 60px;">
+  <i class="fas fa-angle-up"></i>
+</a>
+<a class="border rounded d-inline scroll-to-top" href="/submit_issue">
+  <button class="btn btn-primary add-issue fa fa-plus" type="button" data-toggle="modal"
+    data-target="#submit_issue">
+  </button>
+<a>
+<script>
+  $(function(){
+    $('.instagram-card-image').click(function(){
+      $(this).siblings(".model-container").delay(2000).css('transform',' scale(1)')
+    });
+   
+    
+    $('body').on('click','.close',function(){
+      $('.model-container').css('transform',' scale(0)')
+    });
+  });
+
+</script>
+
