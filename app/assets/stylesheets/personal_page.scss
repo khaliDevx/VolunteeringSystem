@@ -8,42 +8,41 @@
     box-sizing: border-box;
 } 
 
- body {
-    font-family: "Open Sans", Arial, sans-serif;
-    min-height: 100vh;
-    background-color: #fafafa;
-    color: #262626;
-    padding-bottom: 3rem;
-} 
 .avatar {
-    vertical-align: middle;
-    width: 225px;
-    height: 225px;
+    width: 160px;
+    height: 160px;
     border-radius: 50%;
-  }
-.img {
-    display: block;
-    width: 100px;
 }
 
-.container {
-    max-width: 93.5rem;
-    margin: 0 auto;
-    padding: 0 2rem;
-}
-
-.btn {
-    display: inline-block;
-    font: inherit;
-    background: none;
-    border: none;
-    color: inherit;
+.issuesnavbar{
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    width: 100%;
+    border-top: 0.1rem solid #9c9c9c;
+    margin: 15px 0;
     padding: 0;
-    cursor: pointer;
+    padding-top: 5px;
 }
-
-.btn:focus {
-    outline: 0.5rem auto #4d90fe;
+.issuesnavbar .btn2{
+    color: #4274ff;
+    border-radius: 0;
+    box-sizing: border-box;
+    margin-right: 20px;
+}
+.issuesnavbar .btn2:hover{
+    color: #1f66ff;
+}
+.issuesnavbar .btn2:focus {
+    outline: none;
+    box-shadow: none;
+}
+.issuesnavbar .btn2:active {
+    outline: none;
+    box-shadow: none;
+}
+.btn2 a{
+    text-decoration: none;
 }
 
 .visually-hidden {
@@ -57,9 +56,17 @@
 /* Profile Section */
 
 .profile {
-    padding: 5rem 0;
+    padding: 1rem 0;
 }
-
+.profile-info{
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: flex-start;
+    min-height: 180px;
+}
+.profile-info div{
+    margin-bottom: 10px;
+}
 .profile::after {
     content: "";
     display: block;
@@ -68,11 +75,9 @@
 
 .profile-image {
     float: left;
-    width: calc(33.333% - 1rem);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    height: 100%;
     margin-right: 3rem;
+    padding-left: 2rem;
 }
 
 .profile-image .img {
@@ -83,21 +88,19 @@
 .profile-stats,
 .profile-bio {
     float: left;
-    width: calc(66.666% - 2rem);
 }
 
-.profile-user-settings {
-    margin-top: 1.1rem;
+.profile-user-settings, .profile-user-settings div {
+    display: flex;
+    flex-flow: row nowrap;
 }
 
 .profile-user-name {
     display: inline-block;
-    font-size: 3.2rem;
-    font-weight: 300;
 }
 
 .profile-edit-btn {
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     line-height: 1.8;
     border: 0.1rem solid #dbdbdb;
     border-radius: 0.3rem;
@@ -106,20 +109,17 @@
 }
 
 .profile-settings-btn {
-    font-size: 2rem;
+    font-size: 1.8rem;
     margin-left: 1rem;
-}
-
-.profile-stats {
-    margin-top: 2.3rem;
 }
 
 .profile-stats li {
     display: inline-block;
-    font-size: 1.6rem;
-    line-height: 1.5;
+    font-size: 1.2rem;
     margin-right: 4rem;
-    cursor: pointer;
+}
+.profile-stats ul{
+    margin-bottom: 5px;
 }
 
 .profile-stats li:last-of-type {
@@ -127,33 +127,25 @@
 }
 
 .profile-bio {
-    font-size: 1.6rem;
-    font-weight: 400;
-    line-height: 1.5;
-    margin-top: 2.3rem;
-}
-
-.profile-real-name,
-.profile-stat-count,
-.profile-edit-btn {
-    font-weight: 600;
+    font-size: 1.2rem;
+    margin-top: 1rem;
+    padding-left: 30px;
 }
 
 /* Gallery Section */
-
-.gallery {
-    display: flex;
-    flex-wrap: wrap;
-    margin: -1rem -1rem;
-    padding-bottom: 3rem;
+.no-issues{
+    text-align: center;
+    font-size: larger;
 }
 
 .gallery-item {
     position: relative;
-    flex: 1 0 22rem;
-    margin: 1rem;
     color: #fff;
     cursor: pointer;
+    width: 33% !important;
+    height: 340px;
+    margin: 10px ;
+    margin-bottom: 25px !important;
 }
 
 .gallery-item:hover .gallery-item-info,
@@ -163,9 +155,10 @@
     align-items: center;
     position: absolute;
     top: 0;
-    width: 100%;
+    width: 93%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 3px;
 }
 
 .gallery-item-info {
@@ -203,19 +196,9 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+    border-radius: 3px;
 }
 
-/* Loader */
-
-.loader {
-    width: 5rem;
-    height: 5rem;
-    border: 0.6rem solid #999;
-    border-bottom-color: transparent;
-    border-radius: 50%;
-    margin: 0 auto;
-    animation: loader 500ms linear infinite;
-}
 
 /* Media Query */
 

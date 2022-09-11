@@ -1,5 +1,4 @@
 <%= stylesheet_link_tag 'submit_issue'%>
-<style> </style>
 
 <%= form_with(model: problem ,class:"container-form") do |form| %>
   <% if problem.errors.any? %>
@@ -24,7 +23,7 @@
     <div class="issueInfo">
       <div class="issueInfoParts">
         <label>State</label>
-        <select  class="form-select form-select" for="floatinginput" placeholder="HGsOFT" >
+        <select  class="form-select" for="floatinginput" placeholder="HGsOFT" >
           <option ></option>
           <%@gover=Governorate.all%>
           <% @gover.each do |go| %>

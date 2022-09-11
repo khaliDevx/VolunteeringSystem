@@ -36,22 +36,22 @@
                     <div class="row">
                         <div class="col-md-6 text-nowrap">
                             <div id="dataTable_length" class="dataTables_length" aria-controls="dataTable">
-                                <label class="form-label">Show&nbsp;<select
-                                        class="d-inline-block form-select form-select-sm">
+                                <label class="form-label">Show&nbsp;
+                                    <select class="d-inline-block form-select form-select-sm">
                                         <option value="10" selected="">10</option>
                                         <option value="25">25</option>
                                         <option value="50">50</option>
                                         <option value="100">100</option>
-                                    </select>&nbsp;</label>
+                                    </select>&nbsp;
+                                </label>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="text-md-end dataTables_filter " id="dataTable_filter"><label class="form-label">
                                     <%= form_tag('/user', :method=>'get') do%>
-                                        <%=text_field_tag :first_name, params[:first_name], class:" form-control-sm",
-                                            placeholder:"Search"%>
-                                            <button class="btn btn-primary py-0"><i class="fas fa-search"></i></button>
-                                            <%end%>
+                                        <%=text_field_tag :first_name, params[:first_name], class:" form-control-sm",placeholder:"Search"%>
+                                        <button class="btn btn-primary py-0"><i class="fas fa-search"></i></button>
+                                    <%end%>
                                 </label>
                             </div>
                         </div>
@@ -107,19 +107,20 @@
                                             <td>Blocked</td>
                                         <%end%>
                                         <td class=action>
-                                            <form action='/block'method='POST'>
-                                                <input type='hidden'name='authenticity_token'value="<%= form_authenticity_token%>">
+                                            <%# <form action='/block'method='POST'> %>
+                                            <%= form_tag({:controller=>'employees',:action=>'block'},:remote=> true, method: :post) do%>
+                                                <%# <input type='hidden'name='authenticity_token'value="<%= form_authenticity_token%>
                                                 <input type='hidden'name='block[accountstatu]'value=false>
                                                 <input type='hidden'name='block[id]'value=<%=user.id%>>
                                                 <input type=submit value=Block class="btn btn-warning d-block">
-                                            </form>
-                                            <form action='/active'method='POST'>
-                                                <input type='hidden'name='authenticity_token'value="<%= form_authenticity_token%>">
+                                            <% end %>
+                                            <%= form_tag({:controller=>'employees',:action=>'active'},:remote=> true, method: :post) do%>
+                                                <%# <input type='hidden'name='authenticity_token'value="<%= form_authenticity_token%>
                                                 <input type='hidden'name='active[accountstatu]'value=true>
                                                 <input type='hidden'name='active[id]'value=<%=user.id%>>
                                                 <input type=submit value=Activate class="btn btn-primary d-block">
-                                            </form>
-                                            <%= link_to 'Destroy' , user,method: :delete, data: {confirm: 'Are you sure?'},class:"btn btn-danger"%>
+                                            <% end %>
+                                            <%= link_to 'Destroy' , user, method: :delete, data: {confirm: 'Are you sure?'}, class:"btn btn-danger"%>
 
                                         </td>
                                         <td>

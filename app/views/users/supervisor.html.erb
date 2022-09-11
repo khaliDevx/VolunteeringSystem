@@ -1,0 +1,309 @@
+<%= stylesheet_link_tag 'supervisor' %>
+<%= stylesheet_link_tag 'join' %>
+
+<div class="">
+
+  <% @user.each do |user| %>
+    <%@problems=Problem.where(:status=>"Confirmed").with_attached_image%>
+  <%end%>
+  <% @problems.each do |problem| %>
+  <div class="model-container">
+    <div class="model">
+        <i class="fas fa-home"></i>
+        <h3>Recieve Support Box</h3>
+        <% @user.each do |user| %>
+            <p>welcome <%=user.first_name%> </p>
+            <h3>Select what you recieved from supporters</h3>
+            <div class=main>
+              <button class=on>Money</button>
+              <button class=off>Materials</button>
+            </div>
+            <div class=money>
+                <form action=/money method=POST>
+                  <input type='hidden' name='authenticity_token' value="<%= form_authenticity_token%>">
+                  <input type=hidden name=money[user_id] value=<%= user.id%>>
+                  <input type=hidden name= money[problem_id] value=<%= problem.id%>>
+                  <select class="form-select">
+                    <option><option>
+                    <option>
+                      <% @submiter = User.where(:id=> problem.user_id)%>
+                      <% @submiter.each do |user| %>
+                        <%if @photos=Photo.where(:user_id=>user.id).present?%>
+                          <%@photos= Photo.where(:user_id=>user.id)%>
+                            <% @photos.each do |photo| %>
+                              <% if (photo.image.attached?) %>
+                                <%=image_tag(url_for(photo.image),class:'instagram-card-user-image')%>
+                              <% else %>
+                                <%=image_tag('avatar.png',class:'instagram-card-user-image')%>
+                              <% end %>
+                            <% end %>
+                        <% else %>
+                          <%=image_tag('avatar.png',class:'instagram-card-user-image')%>
+                        <% end %>
+                          <div class="instagram-card-user-name h5">
+                            <%=user.first_name%>
+                              <%=user.last_name%>
+                          </div>
+                      <%end%>
+                    <option>
+                  </select>
+                  <input type=number name=money[amount] class="sel ">
+                  
+                     <button class="btn-money">Received</button>
+                </form>
+            </div>
+            <div class="matt">
+               <form action=/supmat method=POST>
+                  <input type='hidden' name='authenticity_token' value="<%= form_authenticity_token%>">
+                  <input type=hidden name=supmat[user_id] value=<%= user.id%>>
+                  <input type=hidden name= supmat[problem_id] value=<%= problem.id%>>
+                 <select class="form-control w-50" name=supmat[material_id]>
+                   <option><option>
+                   
+                 </select>
+                 <input type=number class="form-control w-50" name=supmat[quantity]>
+                 <button >Received</button>
+               </form>
+             </div>
+        <% end %>
+        <i class="fas fa-times close"></i>
+      </div>
+    </div>
+    <div class="model-container2">
+      <div class="model2">
+          <i class="fas fa-home"></i>
+          <h3>Recieve Support Box</h3>
+          <% @user.each do |user| %>
+              <p>welcome <%=user.first_name%> </p>
+              <h3>Select what you recieved from supporters</h3>
+              <div class=main>
+                <button class=on>Recieved</button>
+                <button class=off>Requested</button>
+              </div>
+              <div class=money>
+                  
+              </div>
+              <div class="matt">
+                 
+               </div>
+          <% end %>
+          <i class="fas fa-times close"></i>
+        </div>
+      </div>
+    <div class="instagram-card shadow-sm p-3 mb-5 bg-white rounded">
+      <div class="instagram-card2">
+        <div class="submitted-issue-img-likes">
+          <div class="intagram-card-image">
+            <% if (problem.image.attached?) %>
+              <%=image_tag(url_for(problem.image))%>
+                <% else %>
+                  <p>no image</p>
+                  <% end %>
+          </div>
+          <div class="category-date">
+            <% @category=Category.where(:id=>problem.category_id)%>
+            <% @category.each do |category| %>
+              <div class="blog-category blog-text-success issue_info_parts">
+                <%= category.name%>
+              </div>
+              <% end %>
+            <div class="issue_date blog-text-success">
+              <span>Date:</span>
+                <%=problem.created_at.to_date%>
+            </div>
+          </div>
+          <div>
+            <div class="accept-show-requested">
+              <div class="accept">
+                <button id="recieve" class="btn btn-primary">Accept Support</button>
+                
+              </div>
+              <div class="show-requested">
+                <button id="show" class="btn btn-primary">Requested Material</button>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="blog-table">
+          <div class="issue-details">
+            <div class="groups-section">
+              <div class="blog-card-caption group-title">Supporters</div>
+              <div class="supporters-list blog-card-description">
+                <div class="suporter">
+                  <div>
+                    <% @submiter = User.where(:id=> problem.user_id)%>
+                    <% @submiter.each do |user| %>
+                      <%if @photos=Photo.where(:user_id=>user.id).present?%>
+                        <%@photos= Photo.where(:user_id=>user.id)%>
+                          <% @photos.each do |photo| %>
+                            <% if (photo.image.attached?) %>
+                              <%=image_tag(url_for(photo.image),class:'instagram-card-user-image')%>
+                            <% else %>
+                              <%=image_tag('avatar.png',class:'instagram-card-user-image')%>
+                            <% end %>
+                          <% end %>
+                      <% else %>
+                        <%=image_tag('avatar.png',class:'instagram-card-user-image')%>
+                      <% end %>
+                        <div class="instagram-card-user-name h5">
+                          <%=user.first_name%>
+                            <%=user.last_name%>
+                        </div>
+                    <%end%>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="groups-section">
+              <div class="blog-card-caption">My Team</div>
+              <div class="blog-card-description">
+                <div class="">
+                  <div>
+                    <% @submiter = User.where(:id=> problem.user_id)%>
+                    <% @submiter.each do |user| %>
+                      <%if @photos=Photo.where(:user_id=>user.id).present?%>
+                        <%@photos= Photo.where(:user_id=>user.id)%>
+                          <% @photos.each do |photo| %>
+                            <% if (photo.image.attached?) %>
+                              <%=image_tag(url_for(photo.image),class:'instagram-card-user-image')%>
+                            <% else %>
+                              <%=image_tag('avatar.png',class:'instagram-card-user-image')%>
+                            <% end %>
+                          <% end %>
+                      <% else %>
+                        <%=image_tag('avatar.png',class:'instagram-card-user-image')%>
+                      <% end %>
+                        <div class="instagram-card-user-name h5">
+                          <%=user.first_name%>
+                            <%=user.last_name%>
+                        </div>
+                    <%end%>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="groups-section">
+                <div class="blog-card-caption">Location:</div>
+                <div class="blog-card-description">
+                  <span>Governorate:</span>
+                  <%@city=City.where(:id=>problem.city_id)%>
+                    <% @city.each do |city| %>
+                      <%@gove=Governorate.where(:id=>city.governorate_id)%>
+                        <% @gove.each do |gove| %>
+                            <span>
+                              <%=gove.name%>
+                            </span>
+                        <% end %>
+                      <% end %>
+                </div>
+                <div class="blog-card-description">
+                    <span>City:</span>
+                    <% @city.each do |city| %>
+                      <span>
+                        <%=city.name%>
+                      </span>
+                      <%end%>
+                </div>
+              
+                <div class="blog-card-caption">Description</div>
+                <p class="blog-card-description">
+                  <%=problem.desciption%>
+                </p>
+                <div class="blog-card-caption">Status</div>
+                <p class="blog-card-description">
+                  <%=problem.status%>
+                </p>
+                <div class="blog-card-caption">Submitted by:</div>
+                <div class="blog-card-description">
+                  <span>user:</span>
+                  <%@submiter=User.where(:id=> problem.user_id)%>
+                    <% @submiter.each do |user| %>
+                      <span>
+                        <%= link_to "#{user.first_name} #{user.last_name}",personal_page_user_path(user),:class=>"link-dark" %>
+                      </span>
+                      <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+      <div class="support-tables">
+        <div class="mat-table">
+          Recieved Materials
+          <table class="table table-bordered text-center">
+            <thead>
+              <tr>
+                <td>Supporter</td>
+                <td>Material</td>
+                <td>Quantity</td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>khalid</td>
+                <td>cement</td>
+                <td>5</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="money-table">
+          Recieved Money
+          <table class="table table-bordered text-center">
+            <thead>
+              <tr>
+                <td>Supporter</td>
+                <td>Amount</td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Ali</td>
+                <td>50000</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  <%end%>
+</div>
+<a class="border rounded d-inline scroll-to-top" href="" style="margin-right: 60px;">
+  <i class="fas fa-angle-up"></i>
+</a>
+<a class="border rounded d-inline scroll-to-top" href="/submit_issue">
+  <button class="btn btn-primary add-issue fa fa-plus" type="button" data-toggle="modal"
+    data-target="#submit_issue">
+  </button>
+<a>
+<script>
+  $(function(){
+    $('#recieve').click(function(){
+      $('.model-container').delay(2000).css('transform',' scale(1)')
+    });
+    $('#show').click(function(){
+      $('.model-container2').delay(2000).css('transform',' scale(1)')
+    });
+    $('body').on('click','.close',function(){
+      $('.model-container').css('transform',' scale(0)')
+    });
+    $('body').on('click','.close',function(){
+      $('.model-container2').css('transform',' scale(0)')
+    });    
+    $('.off').click(function(){
+              $('.money').hide()
+              $('.matt').show()
+              $('.off').delay(2000).css('background','rgb(50, 150, 250)')
+              $('.on').delay(2000).css('background','#fff')
+
+            });
+    $('.on').click(function(){
+      $('.money').show()
+      $('.matt').hide()
+      $('.on').delay(5000).css('background','rgb(50, 150, 250)')
+      $('.off').delay(5000).css('background','#fff')
+    });
+  });
+
+</script>

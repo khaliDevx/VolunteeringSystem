@@ -1,6 +1,7 @@
 class SessionsController < ApplicationController
   layout 'login_signup'
-
+    # before_action :check_status
+    # before_action :check_status,  only: %i[ new log_in]
     #  before_action :confirm, except: [:login, :log_in]
     def new 
         @city=City.all 
@@ -9,7 +10,7 @@ class SessionsController < ApplicationController
         user=User.new(new_params)
 
         user.user_type="Volunteer"
-        
+        user.status=true
             if user.save
                 cookies[:user_type]=user.user_type
                 session[:user_id]=user.id
